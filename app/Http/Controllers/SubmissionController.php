@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubmissionRequest;
 use App\Http\Requests\UpdateSubmissionRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Models\Submission;
 
 class SubmissionController extends Controller
@@ -31,7 +34,23 @@ class SubmissionController extends Controller
      */
     public function store(StoreSubmissionRequest $request)
     {
-        //
+
+        $content = file_get_contents($request->file('attachment'));
+        $fileExtension = $request->file('attachment')->extension();
+        $fileName = Str::random(40) . '.' . $fileExtension;
+        $path = 'attachment/' . $fileName;
+
+        Storage::disk('public')->put($path, $content);
+
+        $submission = Submission::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'attachment' => $path,
+            'user_id' => auth()->id(),
+        ]);
+
+
+        return Redirect::route('submission.create')->with('status', 'file-uploaded');
     }
 
     /**

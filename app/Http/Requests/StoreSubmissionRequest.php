@@ -11,7 +11,7 @@ class StoreSubmissionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreSubmissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            //image or video
+            'attachment' => ['required', 'file', 'mimes:jpg,jpeg,png,mp4,mov,ogg,qt,avi,wmv,flv,mp3,wav' ],
         ];
     }
 }
