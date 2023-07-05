@@ -17,11 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('status')->default(SubmissionStatus::PENDING->value);
+            $table->enum('status', ["pending","approved","rejected"])->default(SubmissionStatus::PENDING->value);
             $table->string('attachment')->nullable();
+            $table->enum('attachment_type', ["video","image"])->nullable();
+
+            $table->boolean('commentable')->default(true);
+            $table->boolean('likeable')->default(true);
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('status_changed_by_id')->nullable()->constrained('users');
 
             $table->timestamps();
         });

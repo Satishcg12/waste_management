@@ -7,7 +7,20 @@
 
     <div class="py-12">
         <x-container-round>
-            {{ __("You're logged in!") }}
+            @foreach ($submission as $item)
+
+            <a href="{{ route('submission.show',$item->id) }}">
+                {{$item->title}}
+                {{$item->description}}
+                {{$item->status}}
+                {{$item->attachment}}
+
+                <img src="{{'storage/'.$item->attachment}}" alt="img not found">
+
+                {{$item->created_at->diffForHumans()}}
+            </a>
+
+            @endforeach
         </x-container-round>
     </div>
 </x-app-layout>

@@ -16,7 +16,7 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        return view('submission.create');
+        return view('submission.index');
 
     }
 
@@ -58,7 +58,7 @@ class SubmissionController extends Controller
      */
     public function show(Submission $submission)
     {
-        //
+        return view('submission.show', compact('submission'));
     }
 
     /**
