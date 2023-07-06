@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,12 @@ require __DIR__.'/auth.php';
 Route::middleware('auth')->group(function(){
 
     Route::resource('submission', SubmissionController::class);
+    // Route::get('/submission/create', [SubmissionController::class, 'create'])->name('submission.create');
+    // Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.store');
+});
+Route::middleware('auth')->group(function(){
+
+    Route::resource('users', UserController::class);
     // Route::get('/submission/create', [SubmissionController::class, 'create'])->name('submission.create');
     // Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.store');
 });

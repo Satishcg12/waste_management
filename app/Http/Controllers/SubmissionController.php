@@ -39,13 +39,21 @@ class SubmissionController extends Controller
         $fileExtension = $request->file('attachment')->extension();
         $fileName = Str::random(40) . '.' . $fileExtension;
         $path = 'attachment/' . $fileName;
+        //get type of content
+        $type = $request->file('attachment')->getMimeType(); //video/mp4 or image
+        //get only type
+        $type = explode('/', $type)[0]; //video or image
+        dd($type);
 
+
+        //store file in storage
         Storage::disk('public')->put($path, $content);
 
         $submission = Submission::create([
             'title' => $request->title,
             'description' => $request->description,
             'attachment' => $path,
+            'attachment_type' => $type,
             'user_id' => auth()->id(),
         ]);
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('status', ["pending","approved","rejected"])->default(SubmissionStatus::PENDING->value);
             $table->string('attachment')->nullable();
-            $table->enum('attachment_type', ["video","image"])->nullable();
+            $table->enum('attachment_type', ["video/mp4","image"])->nullable();
 
             $table->boolean('commentable')->default(true);
             $table->boolean('likeable')->default(true);
