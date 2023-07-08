@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
-use Illuminate\Foundation\Auth\User;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
-class TeacherController extends Controller
+class GradeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,15 +28,13 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $teachter = User::findOneBy('email', $request->email);
 
-        dd($teachter);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Teacher $teacher)
+    public function show(Grade $grade)
     {
         //
     }
@@ -45,7 +42,7 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Teacher $teacher)
+    public function edit(Grade $grade)
     {
         //
     }
@@ -53,7 +50,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, Grade $grade)
     {
         //
     }
@@ -61,7 +58,7 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Teacher $teacher)
+    public function destroy(Grade $grade)
     {
         //
     }

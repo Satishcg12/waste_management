@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'grade_id',
+        'todays_upload_number',
     ];
 
     /**
@@ -44,11 +46,22 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    public function submission()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
+
     protected function isAdmin(): Attribute
     {
-        $admins = ['sung20700@gmail.com','satish@gmail.com'];
+        $admins =  Admin::all()->pluck('email')->toArray();
         return Attribute::make(
-            get:fn($value) => in_array($this->email, $admins)
+            get: fn($value) => in_array($this->email, $admins)
         );
     }
 
@@ -56,7 +69,7 @@ class User extends Authenticatable
     {
         $admins = Teacher::all()->pluck('email')->toArray();
         return Attribute::make(
-            get:fn($value) => in_array($this->email, $admins)
+            get: fn($value) => in_array($this->email, $admins)
         );
     }
 

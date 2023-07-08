@@ -16,4 +16,8 @@ class Submission extends Model
         'attachment_type',
         'user_id',
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

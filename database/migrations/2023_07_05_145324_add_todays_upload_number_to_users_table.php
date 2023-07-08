@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('todays_upload_number', ["0","1","2","3","4","5","6","7","8","9","10"])->default("0");
-            $table->foreignId('grade_id')->nullable()->constrained('grades');
-
+            $table->enum('todays_upload_number', [0,1,2,3,4,5])->default(0);
+            $table->foreignId('grade_id')->constrained('grades');
         });
     }
 

@@ -43,7 +43,6 @@ class SubmissionController extends Controller
         $type = $request->file('attachment')->getMimeType(); //video/mp4 or image
         //get only type
         $type = explode('/', $type)[0]; //video or image
-        dd($type);
 
 
         //store file in storage

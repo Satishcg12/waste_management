@@ -4,31 +4,24 @@
             {{ __('Dashboard') }}
             @if (auth()->user()->isAdmin)
                 (Admin)
-
+            @elseif (auth()->user()->isTeacher)
+                (teacher)
             @endif
-            @if (auth()->user()->isTeacher)
-            (teacher)
-
-        @endif
         </h2>
     </x-slot>
+    <x-container-round>
 
-    <div class="py-12">
-        <x-container-round>
+         {{-- 3 col on larg 2 on medium  1 in small--}}
+        <div class="flex flex-wrap gap-4 justify-around">
+
             @foreach ($submission as $item)
-
-            <a href="{{ route('submission.show',$item->id) }}">
-                {{$item->title}}
-                {{$item->description}}
-                {{$item->status}}
-                {{$item->attachment}}
-
-                <img src="{{'storage/'.$item->attachment}}" alt="img not found">
-
-                {{$item->created_at->diffForHumans()}}
-            </a>
+            <x-item-card :item="$item" />
 
             @endforeach
-        </x-container-round>
-    </div>
+        </div>
+        <div class="pagination">
+
+            {{ $submission->links() }}
+        </div>
+    </x-container-round>
 </x-app-layout>

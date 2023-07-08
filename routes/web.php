@@ -45,9 +45,9 @@ Route::middleware('auth')->group(function(){
     // Route::get('/submission/create', [SubmissionController::class, 'create'])->name('submission.create');
     // Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.store');
 });
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth','teacherAdmin'])->group(function(){
 
-    Route::resource('users', UserController::class);
+    Route::resource('user', UserController::class);
     // Route::get('/submission/create', [SubmissionController::class, 'create'])->name('submission.create');
     // Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.store');
 });
