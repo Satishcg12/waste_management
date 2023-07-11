@@ -13,13 +13,13 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('teacher.user.update', $user) }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('admin.teacher.update', $teacher) }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $teacher->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         {{-- grade --}}
@@ -28,31 +28,20 @@
                 <select id="grade" name="grade_id" class="block mt-1 w-full">
                     <option value="">Select a grade</option>
                     @foreach ($grades as $grade)
-                        <option value="{{ $grade->id }}" {{ old('grade', $user->grade_id) == $grade->id ? 'selected' : '' }}>{{ $grade->name }}</option>
+                        <option value="{{ $grade->id }}" {{ old('grade', $teacher->grade_id) == $grade->id ? 'selected' : '' }}>{{ $grade->name }}</option>
                     @endforeach
                 </select>
                 <x-input-error class="mt-2" :messages="$errors->get('grade_id')" />
             </div>
 
 
-        {{-- number of uploads --}}
-        <div>
-            <x-input-label for="uploads" :value="__('Number of uploads')" />
-            <select name="upload_count" id="uploads" class="mt-1 block w-full">
-                @for ($i = 0; $i <=5; $i++)
-                    <option value="{{ $i }}" {{ old('todays_upload_number', $user->upload_count) == $i ? 'selected' : '' }}>{{ $i }}</option>
-                @endfor
-            </select>
-            <x-input-error class="mt-2" :messages="$errors->get('uploads')" />
-        </div>
-
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $teacher->email)" required autocomplete="teachername" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($teacher instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $teacher->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
                         {{ __('Your email address is unverified.') }}
@@ -74,7 +63,7 @@
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
-            @if (session('status') === 'user-updated')
+            @if (session('status') === 'teacher-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
@@ -83,7 +72,7 @@
                     class="text-sm text-green-600"
                 >{{ __('Update Successful.') }}</p>
             @endif
-            @if (session('status') === 'user-not-updated')
+            @if (session('status') === 'teacher-not-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"

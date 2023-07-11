@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Admin\Auth\PasswordController;
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -43,9 +40,12 @@ require __DIR__.'/auth.php';
 // Submissions routes
 
 Route::middleware('auth')->group(function(){
+    // create,store,show
+    Route::get('submission/create', [SubmissionController::class,'create'])->name('submission.create');
+    Route::post('submission', [SubmissionController::class,'store'])->name('submission.store');
 
-    Route::resource('submission', SubmissionController::class);
 });
+Route::get('submission/{submission}', [SubmissionController::class,'show'])->name('submission.show');
 // Route::middleware(['auth','teacherAdmin'])->group(function(){
 
 //     Route::resource('user', UserController::class)->except(['show','store']);
@@ -59,26 +59,9 @@ Route::middleware(['auth','teacherAdmin'])->group(function(){
 });
 
 // Admin routes
-Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
-
-    Route::namespace('Auth')->middleware('guest:admin')->group(function(){
-        //login routes
-        Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-        Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
-
-    });
-    //dashboard routes
-    Route::middleware('admin')->group(function(){
-        Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
-        Route::resource('user', UserController::class);
-        //password change routes
-        Route::namespace('Auth')->group(function(){
-            Route::put('password', [PasswordController::class, 'update'])->name('password.update');
-        });
-    });
+require __DIR__.'/admin.php';
 
 
 
-    //logout routes
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-});
+// Teacher routes
+require __DIR__.'/teacher.php';

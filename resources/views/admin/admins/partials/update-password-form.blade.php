@@ -9,12 +9,12 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('teacher.password.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('admin.password.admin.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
-        {{-- user id  --}}
-        <input type="hidden" name="id" value="{{ $user->id }}">
+        {{-- admin id  --}}
+        <input type="hidden" name="id" value="{{ $admin->id }}">
 
         <div>
             <x-input-label for="password" :value="__('New Password')" />

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Models\Submission;
@@ -13,6 +13,6 @@ class HomeController extends Controller
         // get Submissions
         $submissions = Submission::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('admin.dashboard', compact('submissions'));
+        return view('teacher.dashboard', compact('submissions'));
     }
 }

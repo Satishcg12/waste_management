@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('teacher.user.update', $user) }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('admin.user.update', $user) }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -31,7 +31,7 @@
                         <option value="{{ $grade->id }}" {{ old('grade', $user->grade_id) == $grade->id ? 'selected' : '' }}>{{ $grade->name }}</option>
                     @endforeach
                 </select>
-                <x-input-error class="mt-2" :messages="$errors->get('grade_id')" />
+                <x-input-error class="mt-2" :messages="$errors->get('grade')" />
             </div>
 
 

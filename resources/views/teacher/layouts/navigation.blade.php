@@ -5,41 +5,24 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('admin.dashboard') }}">
+                    <a href="{{ route('teacher.dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- Admin Navlinks --}}
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{-- teacher Navlinks --}}
+                    <x-nav-link :href="route('teacher.dashboard')" :active="request()->routeIs('teacher.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
+                    <x-nav-link :href="route('teacher.user.index')" :active="request()->routeIs('teacher.user.index')">
                         {{ __('Users') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.user.create')" :active="request()->routeIs('admin.user.create')">
+
+                    <x-nav-link :href="route('teacher.user.create')" :active="request()->routeIs('teacher.user.create')">
                         {{ __('Add User') }}
                     </x-nav-link>
-                {{-- teacher --}}
-                    <x-nav-link :href="route('admin.teacher.index')" :active="request()->routeIs('admin.teacher.index')">
-                        {{ __('Teachers') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('admin.teacher.create')" :active="request()->routeIs('admin.teacher.create')">
-                        {{ __('Add Teacher') }}
-                    </x-nav-link>
-                    {{-- admin --}}
-                    <x-nav-link :href="route('admin.admin.index')" :active="request()->routeIs('admin.admin.index')">
-                        {{ __('Admins') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('admin.admin.create')" :active="request()->routeIs('admin.admin.create')">
-                        {{ __('Add Admin') }}
-                    </x-nav-link>
-
-
                 </div>
             </div>
 
@@ -49,7 +32,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::guard('admin')->user()->name }}</div>
+                            <div>{{ Auth::guard('teacher')->user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -68,10 +51,10 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('admin.logout') }}">
+                        <form method="POST" action="{{ route('teacher.logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('admin.logout')"
+                            <x-dropdown-link :href="route('teacher.logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
@@ -101,40 +84,24 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
 
-                {{-- Admin Navlinks --}}
-                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                {{-- teacher Navlinks --}}
+                <x-responsive-nav-link :href="route('teacher.dashboard')" :active="request()->routeIs('teacher.dashboard')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
+                <x-responsive-nav-link :href="route('teacher.user.index')" :active="request()->routeIs('teacher.user.index')">
                     {{ __('Users') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.user.create')" :active="request()->routeIs('admin.user.create')">
+
+                <x-responsive-nav-link :href="route('teacher.user.create')" :active="request()->routeIs('teacher.user.create')">
                     {{ __('Add User') }}
                 </x-responsive-nav-link>
-            {{-- teacher --}}
-                <x-responsive-nav-link :href="route('admin.teacher.index')" :active="request()->routeIs('teacher.dashboard')">
-                    {{ __('Teachers') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('admin.teacher.create')" :active="request()->routeIs('admin.teacher.create')">
-                    {{ __('Add Teacher') }}
-                </x-responsive-nav-link>
-                {{-- admin --}}
-                <x-responsive-nav-link :href="route('admin.admin.index')" :active="request()->routeIs('admin.admin.index')">
-                    {{ __('Admins') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('admin.admin.create')" :active="request()->routeIs('admin.admin.create')">
-                    {{ __('Add Admin') }}
-                </x-responsive-nav-link>
-
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::guard('admin')->user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::guard('admin')->user()->email }}</div>
+                <div class="font-medium text-base text-gray-800">{{ Auth::guard('teacher')->user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::guard('teacher')->user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
@@ -143,10 +110,10 @@
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('admin.logout') }}">
+                <form method="POST" action="{{ route('teacher.logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('admin.logout')"
+                    <x-responsive-nav-link :href="route('teacher.logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}

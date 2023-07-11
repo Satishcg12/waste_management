@@ -88,10 +88,11 @@ class SubmissionController extends Controller
         // update submission
         $submission->update([
             'status' => $request->status,
-            'status_change_by_id' => auth()->id(),
+            //
+            'status_change_by_id' => auth()->guard('teacher')->user()->id ?? null,
         ]);
         // pending, approved, rejected
-        return Redirect::route('dashboard', $submission)->with('status', 'submission-updated');
+        return back()->with('status', 'submission-updated');
 
     }
 

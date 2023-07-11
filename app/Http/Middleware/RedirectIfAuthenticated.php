@@ -24,6 +24,9 @@ class RedirectIfAuthenticated
                 if ($guard === 'admin') {
                     return redirect(RouteServiceProvider::ADMIN_HOME);
                 }
+                if ($guard === 'teacher') {
+                    return redirect(RouteServiceProvider::TEACHER_HOME);
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }
