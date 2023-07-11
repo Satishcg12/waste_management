@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('todays_upload_number', [0,1,2,3,4,5])->default(0);
-            $table->foreignId('grade_id')->constrained('grades');
+            $table->enum('upload_count', [0,1,2,3,4,5])->default(0);
+            $table->foreignId('grade_id')->constrained('grades')->onDelete('cascade');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('todays_upload_number');
+            $table->dropColumn('upload_count');
         });
     }
 };

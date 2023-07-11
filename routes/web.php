@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\Auth\PasswordController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubmissionController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,12 +45,40 @@ require __DIR__.'/auth.php';
 Route::middleware('auth')->group(function(){
 
     Route::resource('submission', SubmissionController::class);
-    // Route::get('/submission/create', [SubmissionController::class, 'create'])->name('submission.create');
-    // Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.store');
 });
+// Route::middleware(['auth','teacherAdmin'])->group(function(){
+
+//     Route::resource('user', UserController::class)->except(['show','store']);
+// });
+
 Route::middleware(['auth','teacherAdmin'])->group(function(){
 
-    Route::resource('user', UserController::class);
-    // Route::get('/submission/create', [SubmissionController::class, 'create'])->name('submission.create');
-    // Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.store');
+    Route::get('permission', [PermissionController::class,'index'])->name('permission.index');
+
+
+});
+
+// Admin routes
+Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
+
+    Route::namespace('Auth')->middleware('guest:admin')->group(function(){
+        //login routes
+        Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login.store');
+
+    });
+    //dashboard routes
+    Route::middleware('admin')->group(function(){
+        Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+        Route::resource('user', UserController::class);
+        //password change routes
+        Route::namespace('Auth')->group(function(){
+            Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+        });
+    });
+
+
+
+    //logout routes
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

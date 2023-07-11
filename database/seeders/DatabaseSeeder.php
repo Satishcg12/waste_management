@@ -16,15 +16,21 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Grade::factory()->create([
-            'name' => 'BCA',
-        ]);
+        // Grade::factory()->create([
+        //     'name' => 'BCA',
+        // ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('satishCG'),
-            'grade_id' => 1,
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        //     'password' => bcrypt('satishCG'),
+        //     'grade_id' => 1,
+        // ]);
+        $this->call([
+            AdminSeeder::class,
+            GradeSeeder::class,
+            UserSeeder::class,
+            TeacherSeeder::class,
         ]);
     }
 }

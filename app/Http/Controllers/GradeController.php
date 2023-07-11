@@ -28,13 +28,13 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Grade $grade)
+    public function show(grade $grade)
     {
         //
     }

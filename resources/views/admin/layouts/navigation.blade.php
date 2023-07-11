@@ -5,41 +5,24 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{-- Admin Navlinks --}}
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
+                        {{ __('Users') }}
+                    </x-nav-link>
 
-                    @if (auth()->user()->isAdmin)
-                    {{-- Admin Navlinks --}}
-                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                            {{ __('Users') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                            {{ __('Add User') }}
-                        </x-nav-link>
-                    @elseif (auth()->user()->isTeacher)
-                    {{-- Teacher navlink --}}
-                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                            {{ __('Teacher') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                            {{ __('Add Student') }}
-                        </x-nav-link>
-                    @else
-                    {{-- Student navlink --}}
-                        <x-nav-link :href="route('submission.create')" :active="request()->routeIs('submission.create')">
-                            {{ __('Upload') }}
-                        </x-nav-link>
-                    @endif
+                    <x-nav-link :href="route('admin.user.create')" :active="request()->routeIs('admin.user.create')">
+                        {{ __('Add User') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -49,7 +32,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::guard('admin')->user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -68,10 +51,10 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link :href="route('admin.logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
@@ -100,40 +83,25 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            @if (auth()->user()->isAdmin)
-            {{-- Admin Navlinks --}}
-                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+
+                {{-- Admin Navlinks --}}
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
                     {{ __('Users') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
+                <x-responsive-nav-link :href="route('admin.user.create')" :active="request()->routeIs('admin.user.create')">
                     {{ __('Add User') }}
                 </x-responsive-nav-link>
-            @elseif (auth()->user()->isTeacher)
-            {{-- Teacher navlink --}}
-                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                    {{ __('Teacher') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                    {{ __('Add Student') }}
-                </x-responsive-nav-link>
-            @else
-            {{-- Student navlink --}}
-                <x-responsive-nav-link :href="route('submission.create')" :active="request()->routeIs('submission.create')">
-                    {{ __('Upload') }}
-                </x-responsive-nav-link>
-            @endif
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-gray-800">{{ Auth::guard('admin')->user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::guard('admin')->user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
@@ -142,10 +110,10 @@
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-responsive-nav-link :href="route('admin.logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}

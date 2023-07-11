@@ -16,7 +16,6 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        return view('submission.index');
 
     }
 
@@ -53,6 +52,7 @@ class SubmissionController extends Controller
             'description' => $request->description,
             'attachment' => $path,
             'attachment_type' => $type,
+
             'user_id' => auth()->id(),
         ]);
 
@@ -81,7 +81,18 @@ class SubmissionController extends Controller
      */
     public function update(UpdateSubmissionRequest $request, Submission $submission)
     {
-        //
+        // validate
+        request()->validate([
+            'status' => 'required|in:pending,approved,rejected',
+        ]);
+        // update submission
+        $submission->update([
+            'status' => $request->status,
+            'status_change_by_id' => auth()->id(),
+        ]);
+        // pending, approved, rejected
+        return Redirect::route('dashboard', $submission)->with('status', 'submission-updated');
+
     }
 
     /**

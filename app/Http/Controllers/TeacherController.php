@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -29,9 +28,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $teachter = User::findOneBy('email', $request->email);
-
-        dd($teachter);
+        //
     }
 
     /**
