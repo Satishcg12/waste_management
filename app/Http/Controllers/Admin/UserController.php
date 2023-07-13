@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins', 'unique:users', 'unique:teachers'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'grade_id' => ['required', 'integer', 'exists:grades,id']
         ]);

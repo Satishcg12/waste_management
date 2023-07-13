@@ -15,31 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-
-                    @if (auth()->user()->isAdmin)
-                    {{-- Admin Navlinks --}}
-                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                            {{ __('Users') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                            {{ __('Add User') }}
-                        </x-nav-link>
-                    @elseif (auth()->user()->isTeacher)
-                    {{-- Teacher navlink --}}
-                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                            {{ __('Teacher') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                            {{ __('Add Student') }}
-                        </x-nav-link>
-                    @else
-                    {{-- Student navlink --}}
                         <x-nav-link :href="route('submission.create')" :active="request()->routeIs('submission.create')">
                             {{ __('Upload') }}
                         </x-nav-link>
-                    @endif
                 </div>
             </div>
 
@@ -103,30 +81,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if (auth()->user()->isAdmin)
-            {{-- Admin Navlinks --}}
-                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                    {{ __('Users') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                    {{ __('Add User') }}
-                </x-responsive-nav-link>
-            @elseif (auth()->user()->isTeacher)
-            {{-- Teacher navlink --}}
-                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                    {{ __('Teacher') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('user.create')" :active="request()->routeIs('user.create')">
-                    {{ __('Add Student') }}
-                </x-responsive-nav-link>
-            @else
-            {{-- Student navlink --}}
                 <x-responsive-nav-link :href="route('submission.create')" :active="request()->routeIs('submission.create')">
                     {{ __('Upload') }}
                 </x-responsive-nav-link>
-            @endif
+
         </div>
 
         <!-- Responsive Settings Options -->

@@ -8,7 +8,7 @@
 
         <x-container-round>
 
-            <form method="POST" action="{{ route('admin.user.store') }}">
+            <form method="POST" action="{{ route('teacher.user.store') }}">
                 @csrf
 
                 <!-- Name -->
