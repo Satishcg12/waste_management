@@ -8,6 +8,7 @@ use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\Admin\Auth\TeacherPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminPasswordController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\GradeController;
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
@@ -21,6 +22,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
         Route::resource('user', UserController::class);
         Route::resource('teacher', TeacherController::class);
         Route::resource('admin', AdminController::class);
+        Route::resource('grade', GradeController::class);
 
         // submission routes
         //update,destroy

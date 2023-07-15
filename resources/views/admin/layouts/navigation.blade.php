@@ -38,6 +38,15 @@
                     <x-nav-link :href="route('admin.admin.create')" :active="request()->routeIs('admin.admin.create')">
                         {{ __('Add Admin') }}
                     </x-nav-link>
+                    {{-- grade --}}
+                    <x-nav-link :href="route('admin.grade.index')" :active="request()->routeIs('admin.grade.index')">
+                        {{ __('Grades') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('admin.grade.create')" :active="request()->routeIs('admin.grade.create')">
+                        {{ __('Add Grade') }}
+                    </x-nav-link>
+
 
 
                 </div>
@@ -123,6 +132,15 @@
                 <x-responsive-nav-link :href="route('admin.admin.create')" :active="request()->routeIs('admin.admin.create')">
                     {{ __('Add Admin') }}
                 </x-responsive-nav-link>
+                {{-- grade --}}
+                <x-responsive-nav-link :href="route('admin.grade.index')" :active="request()->routeIs('admin.grade.index')">
+                    {{ __('Grades') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.grade.create')" :active="request()->routeIs('admin.grade.create')">
+                    {{ __('Add Grade') }}
+                </x-responsive-nav-link>
+
 
         </div>
 
