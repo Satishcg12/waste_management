@@ -42,6 +42,10 @@ Route::middleware('auth')->group(function(){
     // create,store,show
     Route::get('submission/create', [SubmissionController::class,'create'])->name('submission.create');
     Route::post('submission', [SubmissionController::class,'store'])->name('submission.store');
+    Route::post('temp-upload',[SubmissionController::class,'tempUpload'])->name('upload.tempStore');
+    Route::delete('temp-delete',[SubmissionController::class,'tempDelete'])->name('upload.tempDestroy');
+    Route::get('/attachment/{folder}/{filename}', [SubmissionController::class,'getAttachment'])->name('submission.getAttachment');
+
 
 });
 Route::get('submission/{submission}', [SubmissionController::class,'show'])->name('submission.show');

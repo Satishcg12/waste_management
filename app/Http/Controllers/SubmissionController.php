@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubmissionRequest;
 use App\Http\Requests\UpdateSubmissionRequest;
+use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\Submission;
 
 class SubmissionController extends Controller
@@ -31,33 +33,33 @@ class SubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSubmissionRequest $request)
+    public function store(Request $request)
     {
-
-        $content = file_get_contents($request->file('attachment'));
-        $fileExtension = $request->file('attachment')->extension();
-        $fileName = Str::random(40) . '.' . $fileExtension;
-        $path = 'attachment/' . $fileName;
-        //get type of content
-        $type = $request->file('attachment')->getMimeType(); //video/mp4 or image
-        //get only type
-        $type = explode('/', $type)[0]; //video or image
-
-
-        //store file in storage
-        Storage::disk('public')->put($path, $content);
-
-        $submission = Submission::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'attachment' => $path,
-            'attachment_type' => $type,
-
-            'user_id' => auth()->id(),
+        //validation
+        $validated = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'required|min:3|max:255',
+            'attachment' => 'required',
         ]);
 
+        $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
+        if ($temp_file) {
+            Storage::copy('upload/temp/'. $temp_file->folder . '/' . $temp_file->filename, 'upload/submission/' . $temp_file->folder . '/' . $temp_file->filename);
+            Submission::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'folder' => $temp_file->folder,
+                'filename' => $temp_file->filename,
+                'attachment_type' => $temp_file->type,
+                'user_id' => auth()->id(),
+            ]);
+            Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
+            $temp_file->delete();
+            return back()->with('status', 'file-uploaded');
+        }
 
-        return Redirect::route('submission.create')->with('status', 'file-uploaded');
+
+        // return Redirect::route('submission.create')->with('status', 'file-uploaded');
     }
 
     /**
@@ -102,5 +104,56 @@ class SubmissionController extends Controller
     public function destroy(Submission $submission)
     {
         //
+    }
+
+    public function tempUpload(Request $request)
+    {
+
+        if($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $filename = $file->getClientOriginalName();
+            $folder = uniqid('attachment',true);
+            $file->storeAs('upload/temp/'.$folder, $filename);
+            $type = $file->getMimeType();
+        $type = explode('/', $type)[0];
+
+
+            TemporaryFile::create([
+                'folder' => $folder,
+                'filename' => $filename,
+                'type' => $type,
+            ]);
+            return $folder;
+        }
+        return '';
+
+    }
+
+    public function tempDelete()
+    {
+        $temp_file = TemporaryFile::where('folder', request()->getContent())->first();
+        if ($temp_file) {
+            Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
+            $temp_file->delete();
+        }
+        return '';
+    }
+
+    public function getAttachment(string $folder, string $filename)
+    {
+        // dd(Storage::exists('upload/submission/' . $folder . '/' . $filename));
+        //check if file exists
+        if (!Storage::exists('upload/submission/' . $folder . '/' . $filename)) {
+            abort(404);
+        }
+        //get file
+        $file = Storage::get('upload/submission/' . $folder . '/' . $filename);
+        //get mime type
+        $type = Storage::mimeType('upload/submission/' . $folder . '/' . $filename);
+        //create response
+        $response = response($file, 200)->header('Content-Type', $type);
+        // return response
+        return $response;
+
     }
 }

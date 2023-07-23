@@ -13,13 +13,15 @@
 <section class="text-gray-700 body-font overflow-hidden bg-white">
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        {{explode('/',$submission->attachment)[0]}}
+
         @if ($submission->attachment_type === 'video')
         <video class="lg:w-1/2 w-full object-fill object-center rounded border border-gray-200" controls>
-            <source src="/storage/{{ $submission->attachment }}" type="video/mp4">
+            <source src="{{route('submission.getAttachment', explode('/',$submission->attachment)[0],explode('/',$submission->attachment)[1])}}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         @else
-        <img alt="{{$submission->title}}" class="lg:w-1/2 w-full object-scale-down object-center rounded border border-gray-200" src="/storage/{{ $submission->attachment }}">
+        <img alt="{{$submission->title}}" class="lg:w-1/2 w-full object-scale-down object-center rounded border border-gray-200" src="{{route('submission.getAttachment', $submission->attachment)}}">
 
         @endif
         {{-- <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg"> --}}
