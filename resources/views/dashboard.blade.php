@@ -6,10 +6,18 @@
     </x-slot>
     <div class="holder mx-auto w-10/12 grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-        @foreach ($submission as $item)
+        {{-- @foreach ($submission as $item)
         <x-user-video-card :item="$item" />
 
-        @endforeach
+        @endforeach --}}
+        @forelse ($submission as $item)
+        <x-user-video-card :item="$item" />
+
+        @empty
+        <div class="flex justify-center items-center">
+            <p class="text-2xl text-gray-500">No Submission Yet</p>
+        </div>
+        @endforelse
     </div>
     <div class="pagination">
 

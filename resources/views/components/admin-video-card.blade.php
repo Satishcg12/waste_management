@@ -4,11 +4,11 @@
             <div class="border-b h-40 overflow-hidden">
             @if ($item->attachment_type == 'video')
                 <video class="w-full ">
-                    <source src="{{ asset('storage/' . $item->attachment) }}" type="video/mp4">
+                    <source src="{{route('submission.getAttachment', ['folder'=> $item->folder, 'filename'=> $item->filename])}}" type="video/mp4">
                     Your browser does not support HTML video.
                 </video>
             @else
-                <img class="w-full h-36" src="{{ asset('storage/' . $item->attachment) }}" alt="{{ $item->title }}">
+                <img class="w-full h-36" src="{{route('submission.getAttachment', ['folder'=> $item->folder, 'filename'=> $item->filename])}}" alt="{{ $item->title }}">
             @endif
         </div>
         <div class="desc p-4 text-gray-800">

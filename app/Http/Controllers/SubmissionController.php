@@ -44,7 +44,7 @@ class SubmissionController extends Controller
 
         $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
         if ($temp_file) {
-            Storage::copy('upload/temp/'. $temp_file->folder . '/' . $temp_file->filename, 'upload/submission/' . $temp_file->folder . '/' . $temp_file->filename);
+            Storage::copy('upload/temp/' . $temp_file->folder . '/' . $temp_file->filename, 'upload/submission/' . $temp_file->folder . '/' . $temp_file->filename);
             Submission::create([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -109,13 +109,13 @@ class SubmissionController extends Controller
     public function tempUpload(Request $request)
     {
 
-        if($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
             $filename = $file->getClientOriginalName();
-            $folder = uniqid('attachment',true);
-            $file->storeAs('upload/temp/'.$folder, $filename);
+            $folder = uniqid('attachment', true);
+            $file->storeAs('upload/temp/' . $folder, $filename);
             $type = $file->getMimeType();
-        $type = explode('/', $type)[0];
+            $type = explode('/', $type)[0];
 
 
             TemporaryFile::create([
@@ -146,14 +146,48 @@ class SubmissionController extends Controller
         if (!Storage::exists('upload/submission/' . $folder . '/' . $filename)) {
             abort(404);
         }
+
+        // dd(auth()->guard('admin')->user());
+        //check if user is admin or teacher
+        $submission = Submission::where('folder', $folder)->first();
+        // check submission
+        if (!$submission) {
+            abort(404);
+        }
+        if (auth()->guard('admin')->user()) {
+            //get file
+            $file = Storage::get('upload/submission/' . $folder . '/' . $filename);
+            //get mime type
+            $type = Storage::mimeType('upload/submission/' . $folder . '/' . $filename);
+            //create response
+            $response = response($file, 200)->header('Content-Type', $type);
+        } elseif (auth()->guard('teacher')->user()) {
+            //filter submission by grade
+            //check if teacher is in the same grade as the submission
+            if (auth()->guard('teacher')->user()->grade_id != $submission->user->grade_id) {
+                abort(404);
+            }
+
+
+        } elseif (auth()->user()) {
+            //filter submission by user id
+            //check if user is the owner of the submission
+            if (auth()->id() != $submission->user_id) {
+                abort(404);
+            }
+        } else {
+            //filter submission with status approved
+            //check if submission is approved
+            if ($submission->status != 'approved') {
+                abort(404);
+            }
+        }
         //get file
         $file = Storage::get('upload/submission/' . $folder . '/' . $filename);
         //get mime type
         $type = Storage::mimeType('upload/submission/' . $folder . '/' . $filename);
         //create response
         $response = response($file, 200)->header('Content-Type', $type);
-        // return response
         return $response;
-
     }
 }
