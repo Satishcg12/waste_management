@@ -23,14 +23,15 @@ Route::get('/', function () {
     // return redirect()->route('home');
 })->name('welcome');
 Route::get('/home', [PublicController::class,'index'])->name('home');
+Route::get('submission/{submission}', [SubmissionController::class,'show'])->name('submission.show');
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/submission/{submission}', function (App\Models\Submission $submission) {
+        return view('authorized.submission.show', compact('submission'));
+    })->name('dashboard.submission.show');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,28 +45,13 @@ require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function(){
     // create,store,show
-    Route::get('submission/create', [SubmissionController::class,'create'])->name('submission.create');
+    Route::get('submissions/create', [SubmissionController::class,'create'])->name('submission.create');
     Route::post('submission', [SubmissionController::class,'store'])->name('submission.store');
     Route::post('temp-upload',[SubmissionController::class,'tempUpload'])->name('upload.tempStore');
     Route::delete('temp-delete',[SubmissionController::class,'tempDelete'])->name('upload.tempDestroy');
 });
 Route::get('/attachment/{folder}/{filename}', [SubmissionController::class,'getAttachment'])->name('submission.getAttachment');
 
-
-
-Route::get('submission/{submission}', [SubmissionController::class,'show'])->name('submission.show');
-
-// Route::middleware(['auth','teacherAdmin'])->group(function(){
-
-//     Route::resource('user', UserController::class)->except(['show','store']);
-// });
-
-Route::middleware(['auth','teacherAdmin'])->group(function(){
-
-    Route::get('permission', [PermissionController::class,'index'])->name('permission.index');
-
-
-});
 
 // Admin routes
 require __DIR__.'/admin.php';
