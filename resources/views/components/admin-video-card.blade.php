@@ -1,10 +1,10 @@
-<a href="{{ route('submission.show', $item) }}">
+<a href="{{ route('admin.submission.edit', $item) }}">
     <div class="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative hover:shadow-xl rounded overhi">
 
             <div class="border-b h-40 overflow-hidden">
             @if ($item->attachment_type == 'video')
-                <video class="w-full ">
-                    <source src="{{route('submission.getAttachment', ['folder'=> $item->folder, 'filename'=> $item->filename])}}" type="video/mp4">
+                <video class="w-full" src="{{route('submission.getAttachment', ['folder'=> $item->folder, 'filename'=> $item->filename])}}">
+                    {{-- <source  type="video/mp4"> --}}
                     Your browser does not support HTML video.
                 </video>
             @else
@@ -15,41 +15,37 @@
             <h2 class="title font-bold block cursor-pointer hover:underline capitalize truncate">{{ $item->title }}</h2>
             <div class="flex justify-between items-center mt-2">
                 <div class="flex gap-3">
-                    {{-- if pending --}}
+                    {{-- action accoring to status --}}
                     @if ($item->status == 'pending')
-                        <form action="{{ route('admin.submission.update', $item) }}" method="POST">
+                    {{-- approve --}}
+                        <form action="{{ route('admin.submission.updateStatus', $item) }}" method="post">
                             @csrf
-                            @method('put')
+                            @method('patch')
                             <input type="hidden" name="status" value="approved">
-
-                            {{-- approve icon --}}
-                            <x-approved-button />
+                            <button type="submit" class="text-xs text-green-600">Approve</button>
                         </form>
-                        <form action="{{ route('admin.submission.update', $item) }}" method="POST">
-                            @method('put')
+                        {{-- reject --}}
+                        <form action="{{ route('admin.submission.updateStatus', $item) }}" method="post">
                             @csrf
+                            @method('patch')
                             <input type="hidden" name="status" value="rejected">
-
-                            {{-- reject icon --}}
-                            <x-rejected-button />
+                            <button type="submit" class="text-xs text-red-600">Reject</button>
                         </form>
-                    @elseif ($item->status == 'approved')
-                        <form action="{{ route('admin.submission.update', $item) }}" method="POST">
-                            @method('put')
+                    @elseif($item->status == 'approved')
+                        {{-- reject --}}
+                        <form action="{{ route('admin.submission.updateStatus', $item) }}" method="post">
                             @csrf
+                            @method('patch')
                             <input type="hidden" name="status" value="rejected">
-
-                            {{-- reject icon --}}
-                            <x-rejected-button />
+                            <button type="submit" class="text-xs text-red-600">Reject</button>
                         </form>
-                    @elseif ($item->status == 'rejected')
-                        <form action="{{ route('admin.submission.update', $item) }}" method="POST">
-                            @method('put')
+                    @else
+                        {{-- approve --}}
+                        <form action="{{ route('admin.submission.updateStatus', $item) }}" method="post">
                             @csrf
+                            @method('patch')
                             <input type="hidden" name="status" value="approved">
-
-                            {{-- approve icon --}}
-                            <x-approved-button />
+                            <button type="submit" class="text-xs text-green-600">Approve</button>
                         </form>
                     @endif
                 </div>

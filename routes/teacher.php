@@ -20,8 +20,9 @@ Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teach
 
         // submission routes
         //update,destroy
-        Route::get('submission/{submission}/edit', [SubmissionController::class,'edit'])->name('submission.edit');
-        Route::put('submission/{submission}', [SubmissionController::class,'update'])->name('submission.update');
+        Route::get('submission/{submission}/edit', [SubmissionController::class,'teacherEdit'])->name('submission.edit');
+        Route::put('submission/{submission}', [SubmissionController::class,'teacherUpdate'])->name('submission.update');
+        Route::put('submission/status/{submission}', [SubmissionController::class,'updateStatus'])->name('submission.updateStatus');
 
         //password change routes
         Route::namespace('Auth')->group(function(){

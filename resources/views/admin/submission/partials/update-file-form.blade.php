@@ -9,28 +9,24 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('submission.store') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('admin.submission.update', $submission) }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
+        @method('patch')
 
         <div>
             <x-input-label for="title" :value="__('Title')" />
-            <x-text-input id="title" placeholder="title here..." name="title" type="text" class="mt-1 block w-full" autocomplete="attachment-title" value="{{old('title')}}"/>
+            <x-text-input id="title" placeholder="title here..." name="title" type="text" class="mt-1 block w-full" autocomplete="attachment-title" :value="old('title',$submission->title)" required autofocus />
             <x-input-error :messages="$errors->get('title')" class="mt-2" />
         </div>
 
         <div>
             <x-input-label for="description" :value="__('Description')" />
-            <x-textarea-input id="description" name="description" class="mt-1 block w-full" autocomplete="attachment-description" rows='4'>{{old('description')}}</x-textarea-input>
+            <x-textarea-input id="description" name="description" class="mt-1 block w-full" autocomplete="attachment-description" rows='4' required >{{ old('description', $submission->description) }}</x-textarea-input>
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
 
-        <div>
-            <x-input-label for="attachment" :value="__('Attachment')" />
-            <x-text-input id="attachment" name="attachment" type="file" class="mt-1 block w-full border p-2" data-allow-reorder="true" />
-            <x-input-error :messages="$errors->get('attachment')" class="mt-2" />
-        </div>
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Upload') }}</x-primary-button>
+            <x-primary-button>{{ __('Update') }}</x-primary-button>
 
             @if (session('status') === 'file-uploaded')
                 <p

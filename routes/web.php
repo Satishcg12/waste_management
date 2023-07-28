@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PublicController::class,'index'])->name('home');
+Route::get('/', function () {
+    return view('welcome');
+    // return redirect()->route('home');
+})->name('welcome');
+Route::get('/home', [PublicController::class,'index'])->name('home');
 
 
 Route::middleware('auth')->group(function () {
@@ -38,7 +42,7 @@ require __DIR__.'/auth.php';
 
 // Submissions routes
 
-Route::middleware(['admin'])->group(function(){
+Route::middleware('auth')->group(function(){
     // create,store,show
     Route::get('submission/create', [SubmissionController::class,'create'])->name('submission.create');
     Route::post('submission', [SubmissionController::class,'store'])->name('submission.store');
