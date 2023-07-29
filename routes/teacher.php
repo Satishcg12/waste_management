@@ -23,6 +23,7 @@ Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teach
         Route::get('submissio/{submission}/edit', [SubmissionController::class,'teacherEdit'])->name('submission.edit');
         Route::patch('submission/{submission}', [SubmissionController::class,'teacherUpdate'])->name('submission.update');
         Route::patch('submission/status/{submission}', [SubmissionController::class,'updateStatus'])->name('submission.updateStatus');
+        Route::delete('submission/{submission}', [SubmissionController::class,'teacherDestroy'])->name('submission.destroy');
 
         //password change routes
         Route::namespace('Auth')->group(function(){

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('upload_count', [0,1,2,3,4,5])->default(0);
+            $table->timestamp('last_upload')->default(now());
             $table->foreignId('grade_id')->constrained('grades')->onDelete('cascade');
         });
     }

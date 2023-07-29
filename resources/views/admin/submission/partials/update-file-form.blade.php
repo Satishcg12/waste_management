@@ -24,18 +24,28 @@
             <x-textarea-input id="description" name="description" class="mt-1 block w-full" autocomplete="attachment-description" rows='4' required >{{ old('description', $submission->description) }}</x-textarea-input>
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
+        <div>
+            <x-input-label for="description" :value="__('status')" />
+            <select name="status" id="status" class="mt-1 block w-full">
+                <option value="pending" {{ old('status', $submission->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="approved" {{ old('status', $submission->status) == 'approved' ? 'selected' : '' }}>Approved</option>
+                <option value="rejected" {{ old('status', $submission->status) == 'rejected' ? 'selected' : '' }}>Rejected</option>
+            </select>
+            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Update') }}</x-primary-button>
 
-            @if (session('status') === 'file-uploaded')
+            @if (session('status') === 'submission-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-green-600"
-                >{{ __('File uploaded successfully') }}</p>
+                >{{ __('submission-updated') }}</p>
             @endif
         </div>
     </form>

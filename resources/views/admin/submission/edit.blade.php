@@ -10,24 +10,27 @@
                 <span class="ml-2">Back</span>
             </a>
         </span>
-        <section class="flex flex-col sm:flex-row gap-4 justify-evenly sm:h-[80vh] ">
-            <div>
+        <section class="flex flex-col sm:flex-row gap-4 justify-evenly sm:h-[70vh] ">
+            <div class="h-full w-auto flex justify-center items-center rounded-lg overflow-hidden bg-gray-100">
 
                 @if ($submission->attachment_type == 'video')
-                    <video class="h h-full w-auto rounded-xl bg-gray-200 shadow" controls>
+                    <video class=" h-full w-auto  object-cover object-center " controls>
                         <source
                             src="{{ route('submission.getAttachment', ['folder' => $submission->folder, 'filename' => $submission->filename]) }}"
                             type="video/mp4">
                         Your browser does not support HTML video.
                     </video>
                 @else
-                    <img class="w-full h-36"
+                    <img class=" h-full w-auto  object-cover object-center"
                         src="{{ route('submission.getAttachment', ['folder' => $submission->folder, 'filename' => $submission->filename]) }}"
                         alt="{{ $submission->title }}">
                 @endif
             </div>
-            <div class="sm:w-1/3 w-full">
+            <div class="sm:w-1/3 w-full overflow-auto">
+
                 @include('admin.submission.partials.update-file-form')
+
+                @include('admin.submission.partials.delete-submission')
             </div>
 
         </section>

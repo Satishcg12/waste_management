@@ -46,11 +46,7 @@
                     } else {
                         reject('File size exceeds the allowed limit.');
                     }
-                }),
-                allowImageCrop: true,
-                imageCropAspectRatio: '16:9',
-                allowImageEdit: true,
-
+                })
             };
 
 

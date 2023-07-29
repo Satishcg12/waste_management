@@ -29,6 +29,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
         Route::get('submission/{submission}/edit', [SubmissionController::class,'adminEdit'])->name('submission.edit');
         Route::patch('submission/{submission}', [SubmissionController::class,'adminUpdate'])->name('submission.update');
         Route::patch('submission/status/{submission}', [SubmissionController::class,'updateStatus'])->name('submission.updateStatus');
+        Route::delete('submission/{submission}', [SubmissionController::class,'adminDestroy'])->name('submission.destroy');
         //password change routes
         Route::namespace('Auth')->group(function(){
             Route::put('password/user', [PasswordController::class, 'update'])->name('password.user.update');

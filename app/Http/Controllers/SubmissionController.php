@@ -38,6 +38,12 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
+        //if upload count is greater than 5
+        if (auth()->user()->upload_count >= 5) {
+            return back()->withErrors(['upload_count' => 'You have reached the maximum upload count.']);
+        }
+
+
         //delete temp file if validation fails
 
         $validation= Validator::make($request->all(), [
@@ -45,29 +51,14 @@ class SubmissionController extends Controller
             'description' => 'required|min:3',
             'attachment' => 'required|exists:temporary_files,folder',
         ]);
+        $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
         if ($validation->fails()) {
-            $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
             if ($temp_file) {
                 Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
                 $temp_file->delete();
             }
             return back()->withErrors($validation)->withInput();
         }
-
-        //remove temp file if validation fails
-        if (!$validation) {
-            $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
-            if ($temp_file) {
-                Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
-                $temp_file->delete();
-            }
-            return back()->withErrors($validation);
-        }
-
-
-
-
-        $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
 
         if ($temp_file) {
             //move file from temp to submission
@@ -80,8 +71,6 @@ class SubmissionController extends Controller
                 $thumbnail = null;
             }
 
-
-
             //create submission
             Submission::create([
                 'title' => $request->title,
@@ -92,6 +81,13 @@ class SubmissionController extends Controller
                 'thumbnail_id' => $thumbnail?->id,
                 'user_id' => auth()->id(),
             ]);
+            //increase user upload count
+            auth()->user()->increment('upload_count');
+            // update last upload date
+            auth()->user()->update([
+                'last_upload' => now(),
+            ]);
+
 
             //delete temp file
             Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
@@ -220,21 +216,53 @@ class SubmissionController extends Controller
 
     }
 
-    public function destroy(Submission $submission)
+    public function teacherDestroy(Submission $submission)
     {
-        // delete submission
-        $submission->delete();
-        // delete file
+        // dd(url());
+        //delete submission from storage
         Storage::deleteDirectory('upload/submission/' . $submission->folder);
-        // redirect
-        return back()->with('status', 'submission-deleted');
+
+        //delete thumbnail
+        if ($submission->thumbnail) {
+            $submission->thumbnail->delete();
+        }
+
+        //delete from database
+        $submission->delete();
+        //redirect
+        return redirect()->route('teacher.dashboard')->with('status', 'submission-deleted');
+
+
     }
+
+    public function adminDestroy(Submission $submission)
+    {
+        //delete submission from storage
+        Storage::deleteDirectory('upload/submission/' . $submission->folder);
+
+        //delete thumbnail
+        if ($submission->thumbnail) {
+            $submission->thumbnail->delete();
+        }
+
+        //delete from database
+        $submission->delete();
+        //redirect
+        return redirect()->route('admin.dashboard')->with('status', 'submission-deleted');
+
+    }
+
 
     public function tempUpload(Request $request)
     {
 
         //upload file
         if ($request->hasFile('attachment')) {
+            $temp_file = TemporaryFile::where('user_id', auth()->id())->first();
+            if ($temp_file) {
+                Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
+                $temp_file->delete();
+            }
             $file = $request->file('attachment');
             $filename = $file->getClientOriginalName();
             $folder = uniqid('attachment', true);
@@ -242,14 +270,15 @@ class SubmissionController extends Controller
             $type = $file->getMimeType();
             $type = explode('/', $type)[0];
 
-
             TemporaryFile::create([
                 'folder' => $folder,
                 'filename' => $filename,
+                'user_id' => auth()->id(),
                 'type' => $type,
             ]);
             return $folder;
         }
+
         return '';
 
     }

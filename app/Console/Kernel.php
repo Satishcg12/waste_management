@@ -7,12 +7,21 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    /**
+     * The Artisan commands provided by your application.
+     */
+    protected $commands = [
+        \App\Console\Commands\ResetCount::class,
+    ];
+
+
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('count:reset')->daily();
     }
 
     /**
@@ -25,3 +34,4 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
 }
+// * * * * * cd ~/projects/laravel/waste_management && php artisan schedule:run >> /dev/null 2>&1

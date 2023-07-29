@@ -26,10 +26,11 @@
                         alt="{{ $submission->title }}">
                 @endif
             </div>
-            <div class="sm:w-1/3 w-full">
+            <div class="sm:w-1/3 w-full overflow-auto">
 
                 @include('teacher.submission.partials.update-file-form')
 
+                @include('teacher.submission.partials.delete-submission')
             </div>
 
         </section>
