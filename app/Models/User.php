@@ -51,20 +51,19 @@ class User extends Authenticatable
         return $this->belongsTo(Grade::class);
     }
 
-    protected function isAdmin(): Attribute
+    public function hasExceededSubmissionLimit ()
     {
-        $admins =  Admin::all()->pluck('email')->toArray();
-        return Attribute::make(
-            get: fn($value) => in_array($this->email, $admins)
-        );
-    }
-
-    protected function isTeacher(): Attribute
-    {
-        $admins = Teacher::all()->pluck('email')->toArray();
-        return Attribute::make(
-            get: fn($value) => in_array($this->email, $admins)
-        );
+        // if user has already submitted 5 time within 24 hours
+        //check time of last upload and compare to current time
+        $lastUpload = $this->last_upload;
+        $now = now();
+        $diff = $now->diffInHours($lastUpload);
+        // return $diff;
+        $count = $this->upload_count;
+        if ($diff < 24 && $count >= 5) {
+            return true;
+        }
+        return false;
     }
 
 }

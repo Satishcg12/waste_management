@@ -73,44 +73,60 @@
     <div class="img-container bg-gradient-to-t from-white to-gray-200">
         <div class="md:px-10 py-5 flex flex-wrap justify-center">
 
-            <div class="w-full md:w-1/3 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://plus.unsplash.com/premium_photo-1661476504180-2480927f0959?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-72 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Super Kids Saving the Planet!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-72 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Waste Warriors Assemble: Kids Leading the Eco-Charge!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://images.unsplash.com/photo-1610141160723-d2d346e73766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-                    alt="" class="w-full h-72 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Little Hands, Big Impact: Kids Tackling Waste Management
-                    Challenges</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://images.unsplash.com/photo-1620046315397-ac3195dec719?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-72 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Young Eco-Champions: Kids Sparking a Waste Revolution!</p>
-            </div>
-            <div class="w-full md:w-1/3 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://plus.unsplash.com/premium_photo-1663089569976-f50df94bf1b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-72 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Small hands with big impact</p>
-            </div>
-
             <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 ">
+                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
 
-                    <img src="https://picsum.photos/200/300" alt=""
+                    <img src="https://picsum.photos/200/300" alt="some image"
                     class="hover:scale-110 w-full object-cover transition-all ">
                 </div>
                 <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
             </div>
+
+            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
+                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
+
+                    <img src="https://picsum.photos/200/300" alt="some image"
+                    class="hover:scale-110 w-full object-cover transition-all ">
+                </div>
+                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
+            </div>
+
+            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
+                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
+
+                    <img src="https://picsum.photos/200/300" alt="some image"
+                    class="hover:scale-110 w-full object-cover transition-all ">
+                </div>
+                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
+            </div>
+
+            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
+                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
+
+                    <img src="https://picsum.photos/200/300" alt="some image"
+                    class="hover:scale-110 w-full object-cover transition-all ">
+                </div>
+                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
+            </div>
+
+            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
+                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
+
+                    <img src="https://picsum.photos/200/300" alt="some image"
+                    class="hover:scale-110 w-full object-cover transition-all ">
+                </div>
+                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
+            </div>
+
+            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
+                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
+
+                    <img src="https://picsum.photos/200/300" alt="some image"
+                    class="hover:scale-110 w-full object-cover transition-all ">
+                </div>
+                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
+            </div>
+
 
         </div>
     </div>

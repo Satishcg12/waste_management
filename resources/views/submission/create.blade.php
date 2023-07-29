@@ -1,4 +1,14 @@
 <x-app-layout>
+    {{auth()->user()->hasExceededSubmissionLimit()}}
+    @if (auth()->user()->hasExceededSubmissionLimit())
+        <x-container-round>
+            <div class="text-center">
+                <h1 class="text-2xl font-bold text-red-500">You have exceeded the submission limit</h1>
+                <p class="text-gray-500">You can only submit 5 times within 24 hours</p>
+            </div>
+        </x-container-round>
+    @else
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Upload') }}
@@ -67,5 +77,5 @@
             });
         </script>
     @endsection
-
+    @endif
 </x-app-layout>
