@@ -2,7 +2,7 @@
 
         {{-- video card --}}
         <div class=" group relative  block">
-            <a href="{{ route('submission.show', $submission) }}}">
+            <a href="{{ route('submission.show', ['submission'=> $submission->id]) }}">
                 {{-- thumbnail --}}
                 <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow">
                     @if ($submission->attachment_type == 'video')

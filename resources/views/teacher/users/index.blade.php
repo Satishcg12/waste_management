@@ -1,6 +1,15 @@
 
 <x-teacher-layout>
 
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Users') }}
+            </h2>
+            <a href="{{ route('teacher.user.create') }}"
+                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Add User</a>
+        </div>
+    </x-slot>
     <!-- component -->
     <x-table>
         <x-slot name="head">

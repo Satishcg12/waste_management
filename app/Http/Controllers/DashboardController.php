@@ -11,6 +11,6 @@ class DashboardController extends Controller
     {
         $submission = Submission::where('user_id', '=', auth()->id())->orderByDesc('created_at')->paginate(10);
 
-        return view('authorized.dashboard')->with('submission', $submission);
+        return view('user.dashboard')->with('submission', $submission);
     }
 }

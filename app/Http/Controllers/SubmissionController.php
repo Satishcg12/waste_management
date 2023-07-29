@@ -160,12 +160,13 @@ class SubmissionController extends Controller
         $validated = $request->validate([
             'title' => 'required|min:3|max:255',
             'description' => 'required|min:3',
+            'status' => 'required|in:pending,approved,rejected',
         ]);
         // update submission
         $submission->update([
             'title' => $request->title,
             'description' => $request->description,
-
+            'status' => $request->status,
         ]);
         // redirect
         return back()->with('status', 'submission-updated');
@@ -181,17 +182,20 @@ class SubmissionController extends Controller
      */
     public function teacherUpdate(UpdateSubmissionRequest $request, Submission $submission)
     {
-        // validate
-        request()->validate([
+        // validate and check if the title and description matches previous title and description
+        $validated = $request->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'required|min:3',
             'status' => 'required|in:pending,approved,rejected',
         ]);
         // update submission
         $submission->update([
+            'title' => $request->title,
+            'description' => $request->description,
             'status' => $request->status,
-            //
-            'status_change_by_id' => auth()->guard('teacher')->user()->id ?? null,
+
         ]);
-        // pending, approved, rejected
+        // redirect
         return back()->with('status', 'submission-updated');
 
     }
