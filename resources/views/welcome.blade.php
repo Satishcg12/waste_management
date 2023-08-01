@@ -180,95 +180,60 @@
     </div>
     <span id="contact-us"></span>
     <div class="pt-12">
-
-        <h2 class="font-bold md:px-10 py-10 text-center text-3xl sm:text-2xl lg:text-4xl">Contact Us
-        </h2>
-        <div class="contact-us px-3 md:px-10 py-5 ">
+        <h2 class="font-bold md:px-10 py-10 text-center text-3xl sm:text-2xl lg:text-4xl">Contact Us</h2>
+        <div class="contact-us px-3 md:px-10 py-5">
             <div class="flex justify-between flex-wrap bg-gray-100 rounded-lg">
                 <div class="w-full md:w-1/3 p-3 bg-gray-100 hover:bg-gray-200 duration-300 rounded-lg">
                     <h5 class="text-1.5xl">Location</h5>
-                    <div>
-                        <b><span class="bullet">&#8226;</span> Secondary Wing:</b><br />
-                        Near Banasthali Chowk<br />
-                        Banasthali, Balaju, Kathmandu, Nepal<br />
-                        <b><span class="bullet">&#8226;</span> Pre-School Wing:</b><br />
-                        Opposite to Bhat Bhateni Supermarket, Balaju<br />
-                        Binayak Basti, Kathmandu, Nepal
-                    </div>
+                    <ul class="list-disc list-inside">
+                        <li ><b>Secondary Wing:</b><br>
+                            Near Banasthali Chowk<br>
+                            Banasthali, Balaju, Kathmandu, Nepal</li>
+                        <li><b>Pre-School Wing:</b><br>
+                            Opposite to Bhat Bhateni Supermarket, Balaju<br>
+                            Binayak Basti, Kathmandu, Nepal</li>
+                    </ul>
                 </div>
                 <div class="w-full md:w-1/3 p-3 bg-gray-100 hover:bg-gray-200 duration-300 rounded-lg">
                     <h5 class="text-1.5xl">Phone &amp; E-mail</h5>
-                    <div>
-                        <b><span class="bullet">&#8226;</span> Secondary Wing:</b><br />
-                        Tel:
-                        <a href="tel:014983777">01-4983777</a>,
-                        <a href="tel:014984777">4984777</a><br />
-                        <b><span class="bullet">&#8226;</span> Pre-School Wing:</b><br />
-                        Tel:
-                        <a href="tel:014970590">01-4970590</a>,
-                        <a href="tel:014970591">4970591</a><br />
-                        Email:
-                        <a href="mailto:info@samriddhischool.edu.np">info@samriddhischool.edu.np</a><br />
-                    </div>
+                    <ul class="list-disc list-inside">
+                        <li><b>Secondary Wing:</b><br>
+                            Tel:
+                            <a href="tel:014983777">01-4983777</a>,
+                            <a href="tel:014984777">4984777</a></li>
+                        <li><b>Pre-School Wing:</b><br>
+                            Tel:
+                            <a href="tel:014970590">01-4970590</a>,
+                            <a href="tel:014970591">4970591</a></li>
+                        <li>Email:
+                            <a href="mailto:info@samriddhischool.edu.np">info@samriddhischool.edu.np</a></li>
+                    </ul>
                 </div>
                 <div class="w-full md:w-1/3 p-3 bg-gray-100 hover:bg-gray-200 duration-300 rounded-lg">
                     <h5 class="text-1.5xl">School Hours</h5>
-                    <div>
-                        <span class="bullet">&#8226;</span> Grade XI – XII: 6:30 AM – 10:45 AM<br />
-                        <span class="bullet">&#8226;</span> School Section (I-X): 8:30 AM to 4:30 PM<br />
-                        <span class="bullet">&#8226;</span> Pre-School Section: 9:00 AM to 3:00 PM<br />
-                        <span class="bullet">&#8226;</span> Office Hours: 8:30 AM to 4:30 PM<br />
-                        (Saturday Closed)
-                    </div>
+                    <ul class="list-disc list-inside">
+                        <li>Grade XI – XII: 6:30 AM – 10:45 AM</li>
+                        <li>School Section (I-X): 8:30 AM to 4:30 PM</li>
+                        <li>Pre-School Section: 9:00 AM to 3:00 PM</li>
+                        <li>Office Hours: 8:30 AM to 4:30 PM<br>(Saturday Closed)</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
     <div id="developers" class="md:px-10 py-8 flex justify-center items-center flex-wrap space-x-2">
-        <a href="https://samriddhischool.edu.np" target="_blank"><img src="/samriddhi-logo.jpg" alt="samriddhi school"
+        <a href="https://samriddhischool.edu.np" target="_blank"><img src="/assets/samriddhi-logo.jpg" alt="samriddhi school"
                 class="h-20 cursor-pointer"></a>
-        <a href="https://kbcampus.edu.np" target="_blank"><img src="/kbc-logo.png" alt="Kathmandu-Business-Campus"
+        <a href="https://kbcampus.edu.np" target="_blank"><img src="/assets/kbc-logo.png" alt="Kathmandu-Business-Campus"
                 class="h-20"></a><span> ( Owned & Managed by Samriddhi School
             )</span>
     </div>
     <h2 class="font-bold md:px-10 py-10 text-center text-xl">Developers BCA 3rd SEM Students</h2>
     <div class="dev-container md:px-10">
-        <div class="flex flex-wrap justify-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-4 gap-3">
 
-            <div class="w-1/3 md:w-1/6 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://plus.unsplash.com/premium_photo-1661476504180-2480927f0959?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-60 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Satish Chaudhary</p>
-            </div>
-
-            <div class="w-1/3 md:w-1/6 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://picsum.photos/200/300" alt=""
-                    class="w-full h-60 object-cover rounded-lg hover:scale-105 transition-all duration-300">
-                <p class="text-center mt-3 mb-2 px-2 ">Rayyan Balami</p>
-            </div>
-
-            <div class="w-1/3 md:w-1/6 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-60 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Kelvin Maharjan</p>
-            </div>
-
-            <div class="w-1/3 md:w-1/6 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://images.unsplash.com/photo-1610141160723-d2d346e73766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-                    alt="" class="w-full h-60 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Nishan Mahat</p>
-            </div>
-
-            <div class="w-1/3 md:w-1/6 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://images.unsplash.com/photo-1620046315397-ac3195dec719?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-60 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Saiyam Shrestha</p>
-            </div>
-            <div class="w-1/3 md:w-1/6 p-2 hover:scale-105 transition-all duration-300">
-                <img src="https://plus.unsplash.com/premium_photo-1663089569976-f50df94bf1b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                    alt="" class="w-full h-60 object-cover rounded-lg">
-                <p class="text-center mt-3 mb-2 px-2 ">Riyaz Maharjan</p>
-            </div>
+<x-welcome-person-card name="Aayushma Shrestha" role="Frontend Developer" src="https://picsum.photos/200/300" />
 
 
         </div>

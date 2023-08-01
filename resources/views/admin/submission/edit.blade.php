@@ -27,7 +27,7 @@
                 @endif
             </div>
             <div class="sm:w-1/3 w-full overflow-auto">
-
+                {{-- details --}}
                 @include('admin.submission.partials.update-file-form')
 
                 @include('admin.submission.partials.delete-submission')

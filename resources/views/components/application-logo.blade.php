@@ -5,4 +5,4 @@
 
 {{-- image  --}}
 
-<img src="/logo.png" alt="my college logo" {{ $attributes }} >
+<img src="/assets/logo.png" alt="my college logo" {{ $attributes }} >

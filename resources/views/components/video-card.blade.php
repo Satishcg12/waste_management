@@ -4,15 +4,7 @@
         <div class=" group relative  block">
             <a href="{{ route('submission.show', ['submission'=> $submission->id]) }}">
                 {{-- thumbnail --}}
-                <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow">
-                    @if ($submission->attachment_type == 'video')
-                        <img src="{{route('submission.getAttachment', ['folder'=> $submission->folder, 'filename'=> 'thumbnail.jpg'])}}" alt="Video thumbnail"
-                            class=" aspect-video w-full object-cover group-hover:hover:scale-105 transition-all ">
-                    @else
-                        <img src="{{route('submission.getAttachment', ['folder'=> $submission->folder, 'filename'=> $submission->filename])}}" alt="Video thumbnail"
-                            class=" aspect-video w-full object-cover group-hover:hover:scale-105 transition-all ">
-                    @endif
-                </div>
+                <x-thumbnail :submission="$submission" />
                 {{-- details --}}
                 <div class="p-2 h-24  block">
                     {{-- title --}}
