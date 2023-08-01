@@ -48,7 +48,7 @@ class SubmissionController extends Controller
 
         $validation= Validator::make($request->all(), [
             'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
+            'description' => 'required|min:3|max:255',
             'attachment' => 'required|exists:temporary_files,folder',
         ]);
         $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
