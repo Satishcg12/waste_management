@@ -24,29 +24,29 @@
             height: 100%;
             animation: typing 5s steps(41) alternate infinite, blink .5s step-end infinite alternate;
 
-        white-space: nowrap;
-        overflow: hidden;
-        border-right: 3px solid;
-        font-family: monospace;
-    }
-
-    @keyframes typing {
-        0% {
-            width: 0
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            font-family: monospace;
         }
 
-        50%,
-        100% {
-            width: 41ch
-        }
-    }
+        @keyframes typing {
+            0% {
+                width: 0
+            }
 
-    @keyframes blink {
-        50% {
-            border-color: transparent
+            50%,
+            100% {
+                width: 41ch
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
         }
     }
-}
 </style>
 
 <body>
@@ -57,7 +57,8 @@
         <div class="main text-center p-5 py-52 ">
             <h2 class="font-extrabold text-4xl sm:text-5xl lg:text-6xl">
                 <span class="text-blue-800">"From Waste to Wonder"</span><br>
-                <div class="font-bold text-3xl sm:text-2xl lg:text-4xl typing-text">Transforming the World One Step at a Time</div>
+                <div class="font-bold text-3xl sm:text-2xl lg:text-4xl typing-text">Transforming the World One Step at a
+                    Time</div>
             </h2>
             <p class="mt-6 text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-400">
                 Small Steps, <span class="text-2xl">Big Difference</span>
@@ -70,62 +71,14 @@
         </div>
     </main>
 
-    <div class="img-container bg-gradient-to-t from-white to-gray-200">
+    <div class="img-container bg-gradient-to-t from-white to-gray-200 ">
         <div class="md:px-10 py-5 flex flex-wrap justify-center">
-
-            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
-
-                    <img src="https://picsum.photos/200/300" alt="some image"
-                    class="hover:scale-110 w-full object-cover transition-all ">
-                </div>
-                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
-
-                    <img src="https://picsum.photos/200/300" alt="some image"
-                    class="hover:scale-110 w-full object-cover transition-all ">
-                </div>
-                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
-
-                    <img src="https://picsum.photos/200/300" alt="some image"
-                    class="hover:scale-110 w-full object-cover transition-all ">
-                </div>
-                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
-
-                    <img src="https://picsum.photos/200/300" alt="some image"
-                    class="hover:scale-110 w-full object-cover transition-all ">
-                </div>
-                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
-
-                    <img src="https://picsum.photos/200/300" alt="some image"
-                    class="hover:scale-110 w-full object-cover transition-all ">
-                </div>
-                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
-            </div>
-
-            <div class="w-full md:w-1/3 p-2  transition-all duration-300 ">
-                <div class=" w-full h-72 overflow-hidden rounded-lg bg-gray-200 drop-shadow hover:drop-shadow-lg ">
-
-                    <img src="https://picsum.photos/200/300" alt="some image"
-                    class="hover:scale-110 w-full object-cover transition-all ">
-                </div>
-                <p class="text-center mt-3 mb-2 px-2 ">Watch Waste Management Magic Happen!</p>
-            </div>
+            <x-featured-card src="https://picsum.photos/200/300" title="Title 1" />
+            <x-featured-card src="https://picsum.photos/200/300" title="Title 2" />
+            <x-featured-card src="https://picsum.photos/200/300" title="Title 3" />
+            <x-featured-card src="https://picsum.photos/200/300" title="Title 1" />
+            <x-featured-card src="https://picsum.photos/200/300" title="Title 2" />
+            <x-featured-card src="https://picsum.photos/200/300" title="Title 3" />
 
 
         </div>
@@ -186,7 +139,7 @@
                 <div class="w-full md:w-1/3 p-3 bg-gray-100 hover:bg-gray-200 duration-300 rounded-lg">
                     <h5 class="text-1.5xl">Location</h5>
                     <ul class="list-disc list-inside">
-                        <li ><b>Secondary Wing:</b><br>
+                        <li><b>Secondary Wing:</b><br>
                             Near Banasthali Chowk<br>
                             Banasthali, Balaju, Kathmandu, Nepal</li>
                         <li><b>Pre-School Wing:</b><br>
@@ -200,13 +153,16 @@
                         <li><b>Secondary Wing:</b><br>
                             Tel:
                             <a href="tel:014983777">01-4983777</a>,
-                            <a href="tel:014984777">4984777</a></li>
+                            <a href="tel:014984777">4984777</a>
+                        </li>
                         <li><b>Pre-School Wing:</b><br>
                             Tel:
                             <a href="tel:014970590">01-4970590</a>,
-                            <a href="tel:014970591">4970591</a></li>
+                            <a href="tel:014970591">4970591</a>
+                        </li>
                         <li>Email:
-                            <a href="mailto:info@samriddhischool.edu.np">info@samriddhischool.edu.np</a></li>
+                            <a href="mailto:info@samriddhischool.edu.np">info@samriddhischool.edu.np</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="w-full md:w-1/3 p-3 bg-gray-100 hover:bg-gray-200 duration-300 rounded-lg">
@@ -223,17 +179,22 @@
     </div>
 
     <div id="developers" class="md:px-10 py-8 flex justify-center items-center flex-wrap space-x-2">
-        <a href="https://samriddhischool.edu.np" target="_blank"><img src="/assets/samriddhi-logo.jpg" alt="samriddhi school"
-                class="h-20 cursor-pointer"></a>
-        <a href="https://kbcampus.edu.np" target="_blank"><img src="/assets/kbc-logo.png" alt="Kathmandu-Business-Campus"
-                class="h-20"></a><span> ( Owned & Managed by Samriddhi School
+        <a href="https://samriddhischool.edu.np" target="_blank"><img src="/assets/samriddhi-logo.jpg"
+                alt="samriddhi school" class="h-20 cursor-pointer"></a>
+        <a href="https://kbcampus.edu.np" target="_blank"><img src="/assets/kbc-logo.png"
+                alt="Kathmandu-Business-Campus" class="h-20"></a><span> ( Owned & Managed by Samriddhi School
             )</span>
     </div>
     <h2 class="font-bold md:px-10 py-10 text-center text-xl">Developers BCA 3rd SEM Students</h2>
-    <div class="dev-container md:px-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-4 gap-3">
+    <div class=" max-w-5xl mx-auto dev-container md:px-10">
+        <div class="flex flex-wrap gap-5 justify-center">
 
-<x-welcome-person-card name="Aayushma Shrestha" role="Frontend Developer" src="https://picsum.photos/200/300" />
+            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="https://picsum.photos/200/300" />
+            <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg" />
+            <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="https://picsum.photos/200/300" />
+            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="https://picsum.photos/200/300" />
+            <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator" src="https://picsum.photos/200/300" />
+            <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist" src="https://picsum.photos/200/300" />
 
 
         </div>

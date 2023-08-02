@@ -259,16 +259,27 @@ class SubmissionController extends Controller
         //upload file
         if ($request->hasFile('attachment')) {
             $temp_file = TemporaryFile::where('user_id', auth()->id())->first();
+            //check if user has temp file
             if ($temp_file) {
                 Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
                 $temp_file->delete();
             }
             $file = $request->file('attachment');
+            $type = $file->getMimeType();
+            $type = explode('/', $type)[0];
+
+            // check if file is video or image
+            if ($type != 'video' && $type != 'image') {
+                return response()->json(['error' => 'Invalid file type. Only video and image files are allowed.'], 400);
+            }
+            //check if file size is greater than 500mb
+            if ($file->getSize() > 500000000) {
+                return response()->json(['error' => 'File size is too large.'], 400);
+            }
+
             $filename = $file->getClientOriginalName();
             $folder = uniqid('attachment', true);
             $file->storeAs('upload/temp/' . $folder, $filename);
-            $type = $file->getMimeType();
-            $type = explode('/', $type)[0];
 
             TemporaryFile::create([
                 'folder' => $folder,
@@ -278,8 +289,8 @@ class SubmissionController extends Controller
             ]);
             return $folder;
         }
+        return response()->json(['error' => 'No file attached.'], 400);
 
-        return '';
 
     }
 

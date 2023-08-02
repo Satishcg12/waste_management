@@ -30,7 +30,7 @@
             <x-input-error :messages="$errors->get('attachment')" class="mt-2" />
         </div>
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Upload') }}</x-primary-button>
+            <x-primary-button id="upload-button">{{ __('Upload') }}</x-primary-button>
 
             @if (session('status') === 'file-uploaded')
                 <p
