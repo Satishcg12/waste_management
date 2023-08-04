@@ -13,4 +13,13 @@ class DashboardController extends Controller
 
         return view('user.dashboard')->with('submission', $submission);
     }
+
+    public function agreeToTermsAndConditions()
+    {
+        $user = auth()->user();
+        $user->update([
+            'TermsAndConditions' => true,
+        ]);
+        return redirect()->route('dashboard');
+    }
 }

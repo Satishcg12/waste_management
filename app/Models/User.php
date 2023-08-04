@@ -66,4 +66,13 @@ class User extends Authenticatable
         return false;
     }
 
+    public function hasAgreedToTermsAndConditions ()
+    {
+        if ($this->TermsAndConditions == true) {
+            return true;
+        }
+        return false;
+    }
+
+
 }

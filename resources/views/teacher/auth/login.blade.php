@@ -2,9 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <h1>
-        {{ __('Teacher Login') }}
+    <h1 class=" text-center text-2xl font-bold text-gray-900">
+        Teacher Login
     </h1>
+
     <form method="POST" action="{{ route('teacher.login.store') }}">
         @csrf
 

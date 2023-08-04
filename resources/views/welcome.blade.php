@@ -73,12 +73,12 @@
 
     <div class="img-container bg-gradient-to-t from-white to-gray-200 ">
         <div class="md:px-10 py-5 flex flex-wrap justify-center">
-            <x-featured-card src="https://picsum.photos/200/300" title="Title 1" />
-            <x-featured-card src="https://picsum.photos/200/300" title="Title 2" />
-            <x-featured-card src="https://picsum.photos/200/300" title="Title 3" />
-            <x-featured-card src="https://picsum.photos/200/300" title="Title 1" />
-            <x-featured-card src="https://picsum.photos/200/300" title="Title 2" />
-            <x-featured-card src="https://picsum.photos/200/300" title="Title 3" />
+            <x-featured-card src="/assets/featured/1.jpg" title="From Scraps to Soil: The Art of Composting" />
+            <x-featured-card src="/assets/featured/2.jpg" title="Nurturing Nature: Harnessing the Power of Compost" />
+            <x-featured-card src="/assets/featured/3.jpg" title="Compost Magic: Transforming Waste into Fertile Soil" />
+            <x-featured-card src="/assets/featured/4.jpg" title="The Circle of Life: Composting for a Sustainable Future" />
+            <x-featured-card src="/assets/featured/5.jpg" title="Composting Revolution: Reducing Waste, Enriching Soil" />
+            <x-featured-card src="/assets/featured/6.jpg" title="Compost Chronicles: A Journey Towards Zero Waste" />
 
 
         </div>
@@ -189,7 +189,7 @@
     <div class=" max-w-5xl mx-auto dev-container md:px-10">
         <div class="flex flex-wrap gap-5 justify-center">
 
-            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="https://picsum.photos/200/300" />
+            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg" href="" />
             <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg" />
             <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="https://picsum.photos/200/300" />
             <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="https://picsum.photos/200/300" />

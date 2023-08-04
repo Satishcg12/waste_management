@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         return view('user.submission.show', compact('submission'));
     })->name('dashboard.submission.show');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('/agree-to-terms-and-conditions', [DashboardController::class, 'agreeToTermsAndConditions'])->name('terms-and-conditions.agree');
 });
 
 Route::middleware('auth')->group(function () {

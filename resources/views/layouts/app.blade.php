@@ -25,7 +25,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased min-h-screen bg-gray-100">
+<body class="font-sans antialiased  bg-gray-100">
+
+    @if(!(auth()->user() && auth()->user()->hasAgreedToTermsAndConditions()))
+    <x-terms-and-conditions />
+    @else
 
     @include('layouts.navigation')
 
@@ -39,9 +43,14 @@
     @endif
 
     <!-- Page Content -->
+{{-- tearm and condition pop up --}}
+
+
+
     <main>
         {{ $slot }}
     </main>
+    @endif
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>

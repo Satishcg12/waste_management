@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->boolean('TermsAndConditions')->default(false);
             $table->enum('upload_count', [0,1,2,3,4,5])->default(0);
             $table->timestamp('last_upload')->default(now());
             $table->foreignId('grade_id')->constrained('grades')->onDelete('cascade');
