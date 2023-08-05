@@ -276,8 +276,9 @@ class SubmissionController extends Controller
             if ($file->getSize() > 500000000) {
                 return response()->json(['error' => 'File size is too large.'], 400);
             }
+            // time statmp and random file name
 
-            $filename = $file->getClientOriginalName();
+            $filename = time() . Str::random(10) . '.' . $file->getClientOriginalExtension();
             $folder = uniqid('attachment', true);
             $file->storeAs('upload/temp/' . $folder, $filename);
 

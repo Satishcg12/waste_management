@@ -22,9 +22,9 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt('satishCG'),
+            'password' => bcrypt('12345678'),
 
-            'grade_id' => random_int(1,5),
+            'grade_id' => random_int(1,15),
         ];
     }
 
