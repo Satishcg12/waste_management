@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('admin.user.update', $user) }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('teacher.user.update', $user) }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -22,17 +22,6 @@
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-        {{-- grade --}}
-            <div>
-                <x-input-label for="grade" :value="__('Grade')" />
-                <select id="grade" name="grade_id" class="block mt-1 w-full">
-                    <option value="">Select a grade</option>
-                    @foreach ($grades as $grade)
-                        <option value="{{ $grade->id }}" {{ old('grade', $user->grade_id) == $grade->id ? 'selected' : '' }}>{{ $grade->name }}</option>
-                    @endforeach
-                </select>
-                <x-input-error class="mt-2" :messages="$errors->get('grade')" />
-            </div>
 
 
         {{-- number of uploads --}}

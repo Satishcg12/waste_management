@@ -27,7 +27,7 @@
             </p>
     </header>
 
-    <form method="post" action="{{ route('teacher.submission.update', $submission) }}" enctype="multipart/form-data" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('teacher.submission.update', ['submission' => $submission->id]) }}" class="mt-5 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
