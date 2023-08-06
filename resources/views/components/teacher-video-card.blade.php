@@ -2,8 +2,9 @@
 
         {{-- video card --}}
         <div class=" group relative  block">
-            <a href="{{ route('teacher.submission.edit',[ 'submission'=> $submission->id]) }}">
+            <a href="{{ route('teacher.submission.edit',[ 'submission'=> $submission->id ]) }}">
                 {{-- thumbnail --}}
+
                 <x-thumbnail :submission="$submission" />
                 {{-- details --}}
                 <div class="p-2 h-24  block">

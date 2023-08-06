@@ -14,6 +14,10 @@ class Submission extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function grade(){
+        return $this->belongsTo(Grade::class);
+    }
+
     public function thumbnail(){
         return $this->belongsTo(Thumbnail::class);
     }
