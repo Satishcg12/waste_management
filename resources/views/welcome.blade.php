@@ -189,12 +189,12 @@
     <div class=" max-w-5xl mx-auto dev-container md:px-10">
         <div class="flex flex-wrap gap-5 justify-center">
 
-            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg" href="" />
-            <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg" />
-            <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png" />
-            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/default.png" />
-            <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg" />
-            <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist" src="/assets/team/default.png" />
+            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg" href="https://github.com/Satishcg12" />
+            <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg" href="https://github.com/Rayyan-Balami"/>
+            <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png" href="#"/>
+            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/nishan.jpeg" href="#"/>
+            <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg" href="#"/>
+            <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist" src="/assets/team/default.png" href="#"/>
 
 
         </div>
