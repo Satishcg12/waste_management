@@ -84,6 +84,37 @@
                         </div>
                         {{-- time --}}
                         <span class="text-xs text-gray-600">{{ $submission->updated_at->diffForHumans() }}</span>
+                        {{-- Reject Button --}}
+<button type="button" class="reject-button" data-toggle="modal" data-target="#rejectModal{{ $submission->id }}">
+    Reject
+</button>
+
+{{-- Reject Modal --}}
+<div class="modal fade" id="rejectModal{{ $submission->id }}" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel{{ $submission->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectModalLabel{{ $submission->id }}">Reject Submission</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('teacher.submission.updateStatus', $submission) }}" method="post">
+                    @csrf
+                    @method('patch')
+                    <input type="hidden" name="status" value="rejected">
+                    <div class="form-group">
+                        <label for="reason">Reason for Rejection</label>
+                        <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
                     </div>
                 </div>
             </a>

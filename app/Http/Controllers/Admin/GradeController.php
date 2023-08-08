@@ -13,10 +13,14 @@ class GradeController extends Controller
      */
     public function index()
     {
-        // dd('Hello World');
-        $grades = Grade::orderBy('id', 'asc')->paginate(10);
-
-        // dd($grades);
+        //search
+        if (request()->has('search')) {
+            $grades = Grade::where('name', 'like', '%' . request('search') . '%')
+                ->orderBy('id', 'asc')
+                ->paginate(10);
+        } else {
+            $grades = Grade::orderBy('id', 'asc')->paginate(10);
+        }
         return view('admin.grades.index', compact('grades'));
     }
 

@@ -13,8 +13,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
-
+        //search
+        if (request()->has('search')) {
+            $admins = Admin::where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('email', 'like', '%' . request('search') . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
+        }
         return view('admin.admins.index', compact('admins'));
     }
 

@@ -12,14 +12,22 @@
             <div class="flex justify-between items-center">
                 {{-- update video status --}}
                 <div class="flex justify-center items-center space-x-4">
-                    {{-- status --}}
-                    <span class="text-xs text-gray-600 font-bold">Status:
-                        <span
-                            class="font-normal {{ $submission->status == 'pending' ? 'text-yellow-500' : '' }} {{ $submission->status == 'approved' ? 'text-green-500' : '' }} {{ $submission->status == 'rejected' ? 'text-red-500' : '' }} ">
-                            {{-- status --}}
-                            {{ $submission->status }}
+                    {{-- user name --}}
+                    <div class="flex flex-col">
+
+                        <span class="text-xs text-gray-600 font-bold">By:
+                            <span class="font-normal">{{ $submission->user->name }}</span>
                         </span>
-                    </span>
+
+                        {{-- status --}}
+                        <span class="text-xs text-gray-600 font-bold">Status:
+                            <span
+                                class="font-normal {{ $submission->status == 'pending' ? 'text-yellow-500' : '' }} {{ $submission->status == 'approved' ? 'text-green-500' : '' }} {{ $submission->status == 'rejected' ? 'text-red-500' : '' }} ">
+                                {{-- status --}}
+                                {{ $submission->status }}
+                            </span>
+                        </span>
+                    </div>
                     {{-- approve/reject --}}
                     @if ($submission->status == 'pending')
                         {{-- approve --}}

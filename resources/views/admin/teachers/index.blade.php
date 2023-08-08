@@ -2,15 +2,38 @@
 <x-admin-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Teachers') }}
-            </h2>
-            <a href="{{ route('admin.teacher.create') }}"
+            <div>
+
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Teachers') }}
+                </h2>
+                <p>
+                    {{-- if search --}}
+                    @if (request()->query('search'))
+                    <span class="text-gray-500 text-sm">Search results for "{{ request()->query('search') }}"</span>
+                    @endif
+                </p>
+            </div>
+                <a href="{{ route('admin.teacher.create') }}"
                 class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Add Teacher</a>
 
         </div>
 
     </x-slot>
+
+    @if (!$teachers->count())
+        <div class="w-full text-center text-gray-500 col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 h-[80vh] flex justify-center items-center">
+            <h1 class="text-3xl font-bold">
+                {{-- if search --}}
+                @if (request()->query('search'))
+                    No Results Found
+                @else
+                    No Teachers Yet
+                @endif
+            </h1>
+        </div>
+
+    @else
 
     <!-- component -->
     <x-table>
@@ -81,4 +104,5 @@
             </tr>
         </x-slot>
     </x-table>
+    @endif
 </x-admin-layout>

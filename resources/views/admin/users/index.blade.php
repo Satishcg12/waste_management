@@ -3,14 +3,43 @@
 
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Users') }}
-            </h2>
+            <div>
+
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Users') }}
+                </h2>
+                <p>
+                    {{-- if search --}}
+                    @if (request()->query('search'))
+                    <span class="text-gray-500 text-sm">Search results for "{{ request()->query('search') }}"</span>
+                    @endif
+                </p>
+            </div>
+            @if (session('status') === 'user-deleted')
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-red-600">
+                    {{ __('user deleted') }}</p>
+            @endif
             <a href="{{ route('admin.user.create') }}"
                 class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Add User</a>
         </div>
     </x-slot>
     <!-- component -->
+
+    @if (!$users->count())
+        <div class="w-full text-center text-gray-500 col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 h-[80vh] flex justify-center items-center">
+            <h1 class="text-3xl font-bold">
+                {{-- if search --}}
+                @if (request()->query('search'))
+                    No Results Found
+                @else
+                    No Users Yet
+                @endif
+            </h1>
+        </div>
+
+    @else
+
     <x-table>
         <x-slot name="head">
             @if (session('status') === 'user-not-deleted')
@@ -85,4 +114,5 @@
             </tr>
         </x-slot>
     </x-table>
+    @endif
 </x-admin-layout>

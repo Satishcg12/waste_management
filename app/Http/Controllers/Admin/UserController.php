@@ -16,7 +16,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('grade_id', 'asc')->orderBy('name', 'asc')->paginate(10);
+        //search
+        if (request()->has('search')) {
+            $users = User::join('grades', 'grades.id', '=', 'users.grade_id')
+                ->select('users.*', 'grades.name as grade_name')
+                ->where('users.name', 'like', '%' . request('search') . '%')
+                ->orWhere('grades.name', 'like', '%' . request('search') . '%')
+                ->orWhere('users.email', 'like', '%' . request('search') . '%')
+                ->orderBy('grade_id', 'asc')
+                ->orderBy('name', 'asc')
+                ->paginate(10);
+        } else{
+
+            $users = User::orderBy('grade_id', 'asc')->orderBy('name', 'asc')->paginate(10);
+        }
 
 
         return view('admin.users.index', compact('users'));

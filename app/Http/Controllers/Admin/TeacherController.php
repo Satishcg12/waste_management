@@ -17,9 +17,19 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        // $users = User::orderBy('grade_id', 'asc')->orderBy('name', 'asc')->paginate(10);
-        $teachers = Teacher::orderBy('grade_id', 'asc')->orderBy('name', 'asc')->paginate(10);
-
+        //search
+        if (request()->has('search')) {
+            $teachers = Teacher::join('grades', 'grades.id', '=', 'teachers.grade_id')
+                ->select('teachers.*', 'grades.name as grade_name')
+                ->where('teachers.name', 'like', '%' . request('search') . '%')
+                ->orWhere('grades.name', 'like', '%' . request('search') . '%')
+                ->orWhere('teachers.email', 'like', '%' . request('search') . '%')
+                ->orderBy('grade_id', 'asc')
+                ->orderBy('name', 'asc')
+                ->paginate(10);
+        } else {
+            $teachers = Teacher::orderBy('grade_id', 'asc')->orderBy('name', 'asc')->paginate(10);
+        }
         return view('admin.teachers.index', compact('teachers'));
 
     }
