@@ -1,33 +1,37 @@
-@if (request()->routeIs('admin.dashboard') || request()->routeIs('admin.user.index') || request()->routeIs('admin.teacher.index') || request()->routeIs('admin.admin.index') || request()->routeIs('admin.grade.index'))
+@if (request()->routeIs('admin.dashboard') ||
+        request()->routeIs('admin.user.index') ||
+        request()->routeIs('admin.teacher.index') ||
+        request()->routeIs('admin.admin.index') ||
+        request()->routeIs('admin.grade.index'))
+    <script>
+        function toggleSearchMenu() {
+            var searchMenu = document.getElementById("search-menu");
+            var searchBtn = document.getElementById("search-btn");
 
-
-<script>
-    function toggleSearchMenu() {
-        var searchMenu = document.getElementById("search-menu");
-        var searchBtn = document.getElementById("search-btn");
-
-        if (searchMenu.style.maxHeight == "0px") {
-            searchMenu.style.maxHeight = "200px";
-            searchBtn.classList.add('bg-blue-500');
-            searchBtn.classList.remove('bg-orange-500');
-        } else {
-            searchMenu.style.maxHeight = "0px";
-            searchBtn.classList.add('bg-orange-500');
-            searchBtn.classList.remove('bg-blue-500');
+            if (searchMenu.style.maxHeight == "0px") {
+                searchMenu.style.maxHeight = "200px";
+                searchBtn.classList.add('bg-blue-500');
+                searchBtn.classList.remove('bg-orange-500');
+            } else {
+                searchMenu.style.maxHeight = "0px";
+                searchBtn.classList.add('bg-orange-500');
+                searchBtn.classList.remove('bg-blue-500');
+            }
         }
-    }
-</script>
+    </script>
 
-{{-- search --}}
-<div id="search-menu" class="justify-center items-center overflow-hidden transition-all duration-500" style="max-height: 0px;">
-    <form action="{{ url()->current() }}" method="GET">
-        <div class="flex justify-center items-center">
-            <input type="search" name="search" id="search" class="border border-gray-300 rounded-md p-2 m-2 w-full max-w-xl"
-                placeholder="Search" value="{{ request()->query('search') }}">
-            <button type="submit" class="bg-orange-500 text-white rounded-md p-2 m-2">Search</button>
-        </div>
-    </form>
-</div>
+    {{-- search --}}
+    <div id="search-menu" class="justify-center items-center overflow-hidden transition-all duration-500"
+        style="max-height: 0px;">
+        <form action="{{ url()->current() }}" method="GET">
+            <div class="flex justify-center items-center">
+                <input type="search" name="search" id="search"
+                    class="border border-gray-300 rounded-md p-2 m-2 w-full max-w-xl" placeholder="Search"
+                    value="{{ request()->query('search') }}">
+                <button type="submit" class="bg-orange-500 text-white rounded-md p-2 m-2">Search</button>
+            </div>
+        </form>
+    </div>
 @endif
 
 <nav x-data="{ open: false }" class="sticky top-0 z-10 backdrop-blur bg-opacity-75 bg-white ">
@@ -75,17 +79,20 @@
             <div class="flex justify-center items-center">
 
                 {{-- search visible in needed routes --}}
-                @if (request()->routeIs('admin.dashboard') || request()->routeIs('admin.user.index') || request()->routeIs('admin.teacher.index') || request()->routeIs('admin.admin.index') || request()->routeIs('admin.grade.index'))
-
-
-                <!-- search -->
-                <button id="search-btn" type="button" class="bg-orange-500 rounded-full p-2 " onclick="toggleSearchMenu()">
-                    <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" height="1em"
-                        viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <path
-                            d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
-                    </svg>
-                </button>
+                @if (request()->routeIs('admin.dashboard') ||
+                        request()->routeIs('admin.user.index') ||
+                        request()->routeIs('admin.teacher.index') ||
+                        request()->routeIs('admin.admin.index') ||
+                        request()->routeIs('admin.grade.index'))
+                    <!-- search -->
+                    <button id="search-btn" type="button" class="bg-orange-500 rounded-full p-2 "
+                        onclick="toggleSearchMenu()">
+                        <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                            viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path
+                                d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
+                        </svg>
+                    </button>
                 @endif
                 <!-- Settings Dropdown -->
                 <div class="hidden md:flex sm:items-center sm:ml-6">

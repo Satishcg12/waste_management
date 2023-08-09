@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\TeacherController;
-use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\Admin\AdminSubmissionController;
 use App\Http\Controllers\Admin\Auth\TeacherPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminPasswordController;
 use App\Http\Controllers\Admin\AdminController;
@@ -26,10 +26,11 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
 
         // submission routes
         //update,destroy
-        Route::get('submission/{submission}/edit', [SubmissionController::class,'adminEdit'])->name('submission.edit');
-        Route::patch('submission/{submission}', [SubmissionController::class,'adminUpdate'])->name('submission.update');
-        Route::patch('submission/status/{submission}', [SubmissionController::class,'updateStatus'])->name('submission.updateStatus');
-        Route::delete('submission/{submission}', [SubmissionController::class,'adminDestroy'])->name('submission.destroy');
+        Route::get('submission/{submission}/edit', [AdminSubmissionController::class,'adminEdit'])->name('submission.edit');
+        Route::patch('submission/{submission}', [AdminSubmissionController::class,'adminUpdate'])->name('submission.update');
+        Route::patch('submission/approve/{submission}', [AdminSubmissionController::class,'approve'])->name('submission.approve');
+        Route::patch('submission/reject/{submission}', [AdminSubmissionController::class,'reject'])->name('submission.reject');
+        Route::delete('submission/{submission}', [AdminSubmissionController::class,'adminDestroy'])->name('submission.destroy');
         //password change routes
         Route::namespace('Auth')->group(function(){
             Route::put('password/user', [PasswordController::class, 'update'])->name('password.user.update');

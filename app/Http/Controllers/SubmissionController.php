@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSubmissionRequest;
 use App\Http\Requests\UpdateSubmissionRequest;
 use App\Models\TemporaryFile;
 use App\Models\Thumbnail;
 use Illuminate\Support\Facades\Validator;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -16,13 +14,6 @@ use App\Models\Submission;
 
 class SubmissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -130,126 +121,6 @@ class SubmissionController extends Controller
     public function show(Submission $submission)
     {
         return view('submission.show', compact('submission'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function adminEdit(Submission $submission)
-    {
-        return view('admin.submission.edit', compact('submission'));
-    }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function teacherEdit(Submission $submission)
-    {
-        return view('teacher.submission.edit', compact('submission'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function adminUpdate(UpdateSubmissionRequest $request, Submission $submission)
-    {
-        // validate and check if the title and description matches previous title and description
-        $validated = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
-            'status' => 'required|in:pending,approved,rejected',
-        ]);
-        // update submission
-        $submission->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => $request->status,
-        ]);
-        // redirect
-        return back()->with('status', 'submission-updated');
-
-
-
-
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function teacherUpdate(UpdateSubmissionRequest $request, Submission $submission)
-    {
-        // validate and check if the title and description matches previous title and description
-        $validated = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
-            'status' => 'required|in:pending,approved,rejected',
-        ]);
-        // update submission
-        $submission->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => $request->status,
-
-        ]);
-        // redirect
-        return back()->with('status', 'submission-updated');
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function updateStatus(UpdateSubmissionRequest $request, Submission $submission)
-    {
-        // validate
-        request()->validate([
-            'status' => 'required|in:pending,approved,rejected',
-        ]);
-        // update submission
-        $submission->update([
-            'status' => $request->status,
-            //
-            'status_change_by_id' => auth()->guard('teacher')->user()->id ?? null,
-        ]);
-        // pending, approved, rejected
-        return back()->with('status', 'submission-updated');
-
-    }
-
-    public function teacherDestroy(Submission $submission)
-    {
-        // dd(url());
-        //delete submission from storage
-        Storage::deleteDirectory('upload/submission/' . $submission->folder);
-
-        //delete thumbnail
-        if ($submission->thumbnail) {
-            $submission->thumbnail->delete();
-        }
-
-        //delete from database
-        $submission->delete();
-        //redirect
-        return redirect()->route('teacher.dashboard')->with('status', 'submission-deleted');
-
-
-    }
-
-    public function adminDestroy(Submission $submission)
-    {
-        //delete submission from storage
-        Storage::deleteDirectory('upload/submission/' . $submission->folder);
-
-        //delete thumbnail
-        if ($submission->thumbnail) {
-            $submission->thumbnail->delete();
-        }
-
-        //delete from database
-        $submission->delete();
-        //redirect
-        return redirect()->route('admin.dashboard')->with('status', 'submission-deleted');
-
     }
 
 

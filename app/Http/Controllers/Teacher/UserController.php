@@ -16,8 +16,19 @@ class UserController extends Controller
      */
     public function index()
     {
-        //user with same grade as teacher
-        $users = User::where('grade_id', auth()->guard('teacher')->user()->grade_id)->orderBy('name', 'asc')->paginate(10);
+        // search
+        if (request()->has('search') && request()->get('search') != '') {
+            $users = User::where('grade_id', auth()->guard('teacher')->user()->grade_id)
+                ->where(function ($query) {
+                    $query->where('name', 'like', '%' . request()->get('search') . '%')
+                        ->orWhere('email', 'like', '%' . request()->get('search') . '%');
+                })
+                ->orderBy('name', 'asc')
+                ->paginate(10);
+                // dd($users);
+        } else {
+            $users = User::where('grade_id', auth()->guard('teacher')->user()->grade_id)->orderBy('name', 'asc')->paginate(10);
+        }
 
 
         return view('teacher.users.index', compact('users'));
@@ -70,8 +81,11 @@ class UserController extends Controller
     public function edit(User $user)
     {
 
-        $grades = Grade::all();
-        return view('teacher.users.edit', compact('user', 'grades'));
+        // filter by grade
+        if ($user->grade_id != auth()->guard('teacher')->user()->grade_id) {
+            return redirect()->route('teacher.user.index')->with('status', 'user-not-found');
+        }
+        return view('teacher.users.edit', compact('user'));
     }
 
     /**
@@ -81,18 +95,15 @@ class UserController extends Controller
     {
         //validate the request
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255|min:3',
             'email' => 'required|email',
-            'upload_count' => 'required|integer|between:0,5',
-            'grade_id' => 'required',
-
+            'upload_count' => 'required|integer|between:0,5'
         ]);
 
         $user->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'upload_count' => $request['upload_count'],
-            'grade_id' => $request['grade_id'],
 
         ]);
         return redirect()->route('teacher.user.edit', $user)->with('status', 'user-updated')->with('user', $user);

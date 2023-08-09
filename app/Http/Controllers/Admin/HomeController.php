@@ -27,6 +27,12 @@ class HomeController extends Controller
         else {
             $submissions = Submission::orderBy('created_at', 'desc')->paginate(10);
         }
+
+
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('admin.dashboard', compact('submissions'));
     }
 }

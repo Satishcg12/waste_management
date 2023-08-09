@@ -34,5 +34,43 @@
         </div>
     </section>
 
+    <script>
+        function rejectConfirmation(event, id) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Reject Product',
+                html: '<textarea id="reject-reason" class="w-full h-24" placeholder="Enter a reason for rejection"></textarea>',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Reject',
+                preConfirm: () => {
+                    const rejectReason = Swal.getPopup().querySelector('#reject-reason').value;
+                    if (!rejectReason) {
+                        Swal.showValidationMessage('Please enter a reason for rejection');
+                    }
+                    return {
+                        rejectReason: rejectReason
+                    };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const rejectReason = result.value.rejectReason;
+                    // Perform the reject operation with the reason
+                    rejectSubmission(id, rejectReason);
+                }
+            });
+        }
 
+        function rejectSubmission(id, rejectReason) {
+            const form = document.getElementById(`update-form-${id}`);
+            const rejectReasonInput = document.createElement('input');
+            rejectReasonInput.setAttribute('type', 'hidden');
+            rejectReasonInput.setAttribute('name', 'reject_reason');
+            rejectReasonInput.setAttribute('value', rejectReason);
+            form.appendChild(rejectReasonInput);
+            form.submit();
+        }
+    </script>
 </x-admin-layout>

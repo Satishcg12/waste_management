@@ -3,7 +3,7 @@ use App\Http\Controllers\Teacher\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Teacher\Auth\PasswordController;
 use App\Http\Controllers\Teacher\UserController;
 use App\Http\Controllers\Teacher\HomeController;
-use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\Teacher\TeacherSubmissionController;
 
 Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teacher.')->group(function(){
 
@@ -20,10 +20,11 @@ Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teach
 
         // submission routes
         //update,destroy
-        Route::get('submissio/{submission}/edit', [SubmissionController::class,'teacherEdit'])->name('submission.edit');
-        Route::patch('submission/{submission}', [SubmissionController::class,'teacherUpdate'])->name('submission.update');
-        Route::patch('submission/status/{submission}', [SubmissionController::class,'updateStatus'])->name('submission.updateStatus');
-        Route::delete('submission/{submission}', [SubmissionController::class,'teacherDestroy'])->name('submission.destroy');
+        Route::get('submissio/{submission}/edit', [TeacherSubmissionController::class,'teacherEdit'])->name('submission.edit');
+        Route::patch('submission/{submission}', [TeacherSubmissionController::class,'teacherUpdate'])->name('submission.update');
+        Route::patch('submission/approve/{submission}', [TeacherSubmissionController::class,'approve'])->name('submission.approve');
+        Route::patch('submission/reject/{submission}', [TeacherSubmissionController::class,'reject'])->name('submission.reject');
+        Route::delete('submission/{submission}', [TeacherSubmissionController::class,'teacherDestroy'])->name('submission.destroy');
 
         //password change routes
         Route::namespace('Auth')->group(function(){

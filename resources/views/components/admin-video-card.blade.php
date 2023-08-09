@@ -31,80 +31,15 @@
                     {{-- approve/reject --}}
                     @if ($submission->status == 'pending')
                         {{-- approve --}}
-                        <form action="{{ route('admin.submission.updateStatus', $submission) }}" method="post">
-                            @csrf
-                            @method('patch')
-                            <input type="hidden" name="status" value="approved">
-                            <button type="submit" class="">
-                                <svg class="fill-green-500 h-6 w-6 " xmlns="http://www.w3.org/2000/svg" height="1em"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-                                </svg>
-                            </button>
-                        </form>
+                        <x-approve-btn :action="route('admin.submission.approve', $submission)" />
                         {{-- reject --}}
-                        <form action="{{ route('admin.submission.updateStatus', $submission) }}" method="post">
-                            @csrf
-                            @method('patch')
-                            <input type="hidden" name="status" value="rejected">
-                            <button type="submit" class="">
-                                {{-- cross svg  --}}
-                                <svg class="fill-red-500 h-6 w-6 " xmlns="http://www.w3.org/2000/svg" height="1em"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
-                                </svg>
-                            </button>
-
-                        </form>
+                        <x-reject-btn :action="route('admin.submission.reject', $submission)" :id="$submission->id" />
                     @elseif($submission->status == 'approved')
                         {{-- reject --}}
-                        <form action="{{ route('admin.submission.updateStatus', $submission) }}" method="post">
-                            @csrf
-                            @method('patch')
-                            <input type="hidden" name="status" value="rejected">
-                            <button type="submit" class="">
-                                {{-- cross svg  --}}
-                                <svg class="fill-red-500 h-6 w-6 " xmlns="http://www.w3.org/2000/svg" height="1em"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023
-                                        Fonticons, Inc. -->
-                                    <path
-                                        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0
-                                        464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4
-                                        9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0
-                                        33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9
-                                        0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9
-                                        0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
-                                </svg>
-                            </button>
-                        </form>
+                        <x-reject-btn :action="route('admin.submission.reject', $submission)" :id="$submission->id" />
                     @else
                         {{-- approve --}}
-                        <form action="{{ route('admin.submission.updateStatus', $submission) }}" method="post">
-                            @csrf
-                            @method('patch')
-                            <input type="hidden" name="status" value="approved">
-                            <button type="submit" class="">
-                                {{-- check svg --}}
-                                <svg class="fill-green-500 h-6 w-6 " xmlns="http://www.w3.org/2000/svg" height="1em"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com
-                                        License - https://fontawesome.com/license (Commercial License) -->
-                                    <path
-                                        d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1
-                                        0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0
-                                        0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9
-                                        0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4
-                                        24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369
-                                        209z" />
-                                </svg>
-
-                            </button>
-                        </form>
+                        <x-approve-btn :action="route('admin.submission.approve', $submission)" />
                     @endif
                 </div>
                 {{-- time --}}
