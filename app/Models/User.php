@@ -60,7 +60,7 @@ class User extends Authenticatable
         $diff = $now->diffInHours($lastUpload);
         // return $diff;
         $count = $this->upload_count;
-        if ($diff < 24 && $count >= 5) {
+        if ($diff < 12 && $count >= 5) {
             return true;
         }
         return false;

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateSubmissionRequest;
+use App\Http\Requests\StoreSubmissionRequest;
+use App\Jobs\CreaateThumbnailJob;
+use App\Models\Teacher;
 use App\Models\TemporaryFile;
 use App\Models\Thumbnail;
-use Illuminate\Support\Facades\Validator;
+use App\Notifications\teacher\SubmissionCreated as TeacherSubmissionCreated;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Submission;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SubmissionController extends Controller
 {
@@ -27,66 +30,63 @@ class SubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSubmissionRequest $request)
     {
-        //if upload count is greater than 5
-        if (auth()->user()->upload_count >= 5) {
-            return back()->withErrors(['upload_count' => 'You have reached the maximum upload count.']);
-        }
 
-
-        //delete temp file if validation fails
-
-        $validation= Validator::make($request->all(), [
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3|max:255',
-            'attachment' => 'required|exists:temporary_files,folder',
-        ]);
+        // get temp file
         $temp_file = TemporaryFile::where('folder', $request->attachment)->first();
-        if ($validation->fails()) {
-            if ($temp_file) {
-                Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
-                $temp_file->delete();
-            }
-            return back()->withErrors($validation)->withInput();
+        //check if user has temp file
+        Storage::copy('upload/temp/' . $temp_file->folder . '/' . $temp_file->filename, 'upload/submission/' . $temp_file->folder . '/' . $temp_file->filename);
+
+        //create thumbnail
+        if ($temp_file->type == 'video') {
+            // $thumbnail = $this->createThumbnail($temp_file->folder, $temp_file->filename);
+            //create thumbnail job
+            CreaateThumbnailJob::dispatch($temp_file->folder, $temp_file->filename);
         }
 
-        if ($temp_file) {
-            //move file from temp to submission
-            Storage::copy('upload/temp/' . $temp_file->folder . '/' . $temp_file->filename, 'upload/submission/' . $temp_file->folder . '/' . $temp_file->filename);
-
-            //create thumbnail
-            if ($temp_file->type == 'video') {
-                $thumbnail = $this->createThumbnail($temp_file->folder, $temp_file->filename);
-            } else {
-                $thumbnail = null;
-            }
-
-            //create submission
-            Submission::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'folder' => $temp_file->folder,
-                'filename' => $temp_file->filename,
-                'attachment_type' => $temp_file->type,
-                'thumbnail_id' => $thumbnail?->id,
-                'user_id' => auth()->id(),
-            ]);
-            //increase user upload count
-            auth()->user()->increment('upload_count');
-            // update last upload date
+        //create submission
+        $submission = Submission::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'folder' => $temp_file->folder,
+            'filename' => $temp_file->filename,
+            'attachment_type' => $temp_file->type,
+            'user_id' => auth()->id(),
+        ]);
+        //increase user upload count by 1 if 5 uploads then reset to 0
+        if (auth()->user()->upload_count == 5) {
             auth()->user()->update([
-                'last_upload' => now(),
+                'upload_count' => 1,
             ]);
-
-
-            //delete temp file
-            Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
-            $temp_file->delete();
-
-            // redirect
-            return back()->with('status', 'file-uploaded');
+        } else {
+            auth()->user()->increment('upload_count');
         }
+        // update last upload date
+        auth()->user()->update([
+            'last_upload' => now(),
+        ]);
+
+
+
+        // delete temp file
+        Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
+        $temp_file->delete();
+
+        // create submission job
+        // CreateSubmissionJob::dispatch($request);
+
+        // find teacher with same grade
+        $teachers = Teacher::where('grade_id', auth()->user()->grade_id)->get();
+        //send email to teachers
+        foreach ($teachers as $teacher) {
+            $teacher->notify(new TeacherSubmissionCreated($submission));
+        }
+
+        Alert::success('Success', 'Submission Created Successfully');
+        // redirect
+        return back()->with('status', 'file-uploaded');
+
 
 
     }
@@ -107,11 +107,11 @@ class SubmissionController extends Controller
             ->toDisk('local')
             ->save('upload/submission/' . $folder . '/thumbnail.jpg');
 
-            //return
-            return Thumbnail::create([
-                'folder' => $folder,
-                'filename' => 'thumbnail.jpg',
-            ]);
+        //return
+        return Thumbnail::create([
+            'folder' => $folder,
+            'filename' => 'thumbnail.jpg',
+        ]);
 
     }
 
@@ -178,7 +178,6 @@ class SubmissionController extends Controller
 
     public function getAttachment(string $folder, string $filename)
     {
-        // dd(Storage::exists('upload/submission/' . $folder . '/' . $filename));
         //check if file exists
         if (!Storage::exists('upload/submission/' . $folder . '/' . $filename)) {
             abort(404);
@@ -190,14 +189,6 @@ class SubmissionController extends Controller
         // check submission
         if (!$submission) {
             abort(404);
-        }
-        if (auth()->guard('admin')->user()) {
-            //get file
-            $file = Storage::get('upload/submission/' . $folder . '/' . $filename);
-            //get mime type
-            $type = Storage::mimeType('upload/submission/' . $folder . '/' . $filename);
-            //create response
-            $response = response($file, 200)->header('Content-Type', $type);
         } elseif (auth()->guard('teacher')->user()) {
             //filter submission by grade
             //check if teacher is in the same grade as the submission
@@ -223,8 +214,25 @@ class SubmissionController extends Controller
         $file = Storage::get('upload/submission/' . $folder . '/' . $filename);
         //get mime type
         $type = Storage::mimeType('upload/submission/' . $folder . '/' . $filename);
-        //create response
-        $response = response($file, 200)->header('Content-Type', $type);
+
+        //if file is video stream it
+        if (Str::startsWith($type, 'video')) {
+            $response = response()->stream(function () use ($file) {
+                echo $file;
+            }, 200, [
+                'Content-Type' => $type,
+                'Accept-Ranges' => 'bytes',
+                'Content-Length' => Storage::size('upload/submission/' . $folder . '/' . $filename),
+            ]);
+        } else {
+            //if file is image return it
+            $response = response($file, 200, [
+                'Content-Type' => $type,
+                'Accept-Ranges' => 'bytes',
+                'Content-Length' => Storage::size('upload/submission/' . $folder . '/' . $filename),
+            ]);
+        }
+
         return $response;
     }
 }

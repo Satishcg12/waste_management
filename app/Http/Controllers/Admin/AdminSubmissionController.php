@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSubmissionRequest;
 use App\Models\Submission;
+use App\Notifications\user\SubmissionReject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminSubmissionController extends Controller
@@ -19,7 +21,7 @@ class AdminSubmissionController extends Controller
         return view('admin.submission.edit', compact('submission'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      */
     public function adminUpdate(UpdateSubmissionRequest $request, Submission $submission)
@@ -36,6 +38,7 @@ class AdminSubmissionController extends Controller
             'description' => $request->description,
             'status' => $request->status,
         ]);
+        Alert::success('Success', 'Submission Updated Successfully');
         // redirect
         return back()->with('status', 'submission-updated');
 
@@ -53,8 +56,7 @@ class AdminSubmissionController extends Controller
         ]);
 
 
-            Alert::success('Success', 'Submission Approved Successfully');
-            Alert::toast($submission->title.' Approved Successfully', 'success');
+        Alert::success('Success', 'Submission Approved Successfully');
 
         // redirect
         return back()->with('status', 'submission-approved');
@@ -64,13 +66,18 @@ class AdminSubmissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function reject(Submission $submission)
+    public function reject(Submission $submission, Request $request)
     {
+        // dd($submission->user);
         // update submission
         $submission->update([
             'status' => 'rejected',
         ]);
+
+        // send email to user
+        $submission->user->notify(new SubmissionReject($submission, $request->reject_reason));
         // redirect
+        Alert::success('Success', 'Submission Rejected Successfully');
         return back()->with('status', 'submission-rejected');
 
     }
@@ -88,6 +95,7 @@ class AdminSubmissionController extends Controller
 
         //delete from database
         $submission->delete();
+        Alert::success('Success', 'Submission Deleted Successfully');
         //redirect
         return redirect()->route('admin.dashboard')->with('status', 'submission-deleted');
 

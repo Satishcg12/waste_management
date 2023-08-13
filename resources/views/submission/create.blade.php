@@ -1,5 +1,6 @@
 <x-app-layout>
-    {{ auth()->user()->hasExceededSubmissionLimit() }}
+
+
     @if (auth()->user()->hasExceededSubmissionLimit())
         <x-container-round>
             <div class="text-center">
@@ -72,8 +73,6 @@
 
                 // Listen for initfile event
                 pond.on('initfile', (file) => {
-                    //disable upload button
-                    uploadButton.disabled = true;
                     // loading animation
                     uploadButton.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24">
@@ -91,8 +90,6 @@
 
                 // Listen for processfile event
                 pond.on('processfile', (error, file) => {
-                    //enable upload button
-                    uploadButton.disabled = false;
                     // loading animation
                     uploadButton.innerHTML = `Upload`;
 
@@ -100,12 +97,12 @@
 
                 // listen for error event
                 pond.on('error', (error, file) => {
-                    //enable upload button
-                    uploadButton.disabled = false;
                     // loading animation
                     uploadButton.innerHTML = `Upload`;
 
                 });
+
+
 
 
 
@@ -120,6 +117,7 @@
                         }
                     },
                 });
+
             </script>
         @endsection
     @endif

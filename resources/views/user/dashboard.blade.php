@@ -16,7 +16,7 @@
         <h1 class="text-3xl font-bold">No Submissions Yet</h1>
     </div>
         @endforelse
-        <div class="pagination">
+        <div class="pagination col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3  mb-5">
 
             {{ $submission->links() }}
         </div>

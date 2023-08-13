@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TemporaryFile;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StoreSubmissionRequest extends FormRequest
 {
@@ -22,10 +25,32 @@ class StoreSubmissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            //image or video
-            'attachment' => ['required', 'file', 'mimes:jpg,jpeg,png,mp4,mov,ogg,qt,avi,wmv,flv,mp3,wav' ],
+            'title' => ['required', 'string', 'max:255', 'min:3'],
+            'description' => ['required', 'string', 'max:255', 'min:3'],
+            'attachment' => ['required', 'string', 'exists:temporary_files,folder'],
+            'areyousure' => ['required', 'accepted'],
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        if ($this->user()->upload_count >= 5) {
+            $validator->errors()->add('upload_count', 'You have reached the maximum upload count.');
+        }
+
+        if ($validator->fails()) {
+            $tempFile = TemporaryFile::where('folder', $this->attachment)->first();
+            if ($tempFile) {
+                Storage::deleteDirectory('upload/temp/' . $tempFile->folder);
+                $tempFile->delete();
+            }
+
+            $error = $validator->errors()->first();
+            // Aleart error message
+            Alert::error('Error', $error);
+
+            return back()->with('status', 'file-upload-failed');
+        }
+
     }
 }
