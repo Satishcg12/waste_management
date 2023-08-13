@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,11 @@ class AdminController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         } else {
-            $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
+            // except super admin and current admin
+            $admins = Admin::where('id', '!=', 1)
+            ->where('id', '!=', auth()->guard('admin')->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         }
         return view('admin.admins.index', compact('admins'));
     }
@@ -52,6 +57,7 @@ class AdminController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        Alert::success('Success', 'Admin Created Successfully');
         return back()->with('status', 'success');
 
     }
@@ -90,6 +96,7 @@ class AdminController extends Controller
             //hash password
         ]);
 
+        Alert::success('Success', 'Admin Updated Successfully');
         return back()->with('status', 'success');
 
     }
@@ -99,8 +106,17 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
+        if ($admin->id == 1) {
+            Alert::error('Error', 'You Cannot Delete Super Admin');
+            return back()->with('status', 'error');
+        }
+        if ($admin->id == auth()->guard('admin')->user()->id) {
+            Alert::error('Error', 'You Cannot Delete Yourself');
+            return back()->with('status', 'error');
+        }
         $admin->delete();
 
+        Alert::success('Success', 'Admin Deleted Successfully');
         return back()->with('status', 'success');
     }
 }

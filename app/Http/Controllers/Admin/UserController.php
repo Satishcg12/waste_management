@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -67,6 +68,7 @@ class UserController extends Controller
         ]);
 
 
+        Alert::success('Success', 'User Created Successfully');
         return redirect()->route('admin.user.create')->with('status', 'success');
     }
 
@@ -94,9 +96,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //validate the request
-        $request->validate([
+        $validation=$request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'upload_count' => 'required|integer|between:0,5',
             'grade_id' => 'required',
 
@@ -108,6 +110,8 @@ class UserController extends Controller
             'upload_count' => $request['upload_count'],
             'grade_id' => $request['grade_id'],
         ]);
+
+        Alert::success('Success', $user->name . ' Updated Successfully');
         return redirect()->route('admin.user.edit', $user)->with('status', 'user-updated')->with('user', $user);
 
     }
@@ -118,6 +122,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        Alert::success('Success', $user->name . ' Deleted Successfully');
         return redirect()->route('admin.user.index')->with('status', 'user-deleted')->with('user', $user);
 
     }

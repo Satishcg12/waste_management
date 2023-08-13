@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
@@ -63,6 +64,7 @@ class TeacherController extends Controller
             'grade_id' => $request->grade_id,
         ]);
 
+        Alert::success('Success', 'Teacher Created Successfully');
         return redirect()->route('admin.teacher.create')->with('status', 'success');
     }
 
@@ -93,7 +95,7 @@ class TeacherController extends Controller
         //validate the request
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => ['required', 'email', 'unique:teachers', 'unique:users', 'unique:admins'],
             'grade_id' => 'required',
 
         ]);
@@ -105,6 +107,7 @@ class TeacherController extends Controller
             'grade_id' => $request->grade_id,
         ]);
 
+        Alert::success('Success', 'Teacher Updated Successfully');
         return back()->with('status', 'teacher-updated');
     }
 
@@ -114,6 +117,7 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();
+        Alert::success('Success', 'Teacher Deleted Successfully');
         return redirect()->route('admin.teacher.index')->with('status', 'user-deleted');
 
     }

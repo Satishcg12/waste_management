@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GradeController extends Controller
 {
@@ -46,6 +47,7 @@ class GradeController extends Controller
             'name' => $request->name,
         ]);
 
+        Alert::success('Success', 'Grade Created Successfully');
         return redirect()->route('admin.grade.create')->with('status', 'success');
     }
 
@@ -78,6 +80,7 @@ class GradeController extends Controller
             'name' => $request->name,
         ]);
 
+        Alert::success('Success', 'Grade Updated Successfully');
         return back()->with('status', 'success');
     }
 
@@ -88,6 +91,7 @@ class GradeController extends Controller
     {
         $grade->delete();
 
+        Alert::success('Success', $grade->name . ' Deleted Successfully');
         return redirect()->route('admin.grade.index')->with('status', 'success');
     }
 }

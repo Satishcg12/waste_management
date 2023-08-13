@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PasswordController extends Controller
 {
@@ -23,6 +24,8 @@ class PasswordController extends Controller
         User::find($request->id)->update([
             'password' => Hash::make($validated['password']),
         ]);
+
+        Alert::success('Success', 'Password Updated Successfully');
 
         return back()->with('status', 'password-updated');
 

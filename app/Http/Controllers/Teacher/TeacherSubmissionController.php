@@ -106,6 +106,8 @@ class TeacherSubmissionController extends Controller
 
         //delete from database
         $submission->delete();
+
+        Alert::success('Success', 'Submission Deleted Successfully');
         //redirect
         return redirect()->route('teacher.dashboard')->with('status', 'submission-deleted');
 

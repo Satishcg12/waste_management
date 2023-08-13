@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherPasswordController extends Controller
 {
@@ -26,6 +27,7 @@ class TeacherPasswordController extends Controller
             'password' => bcrypt($validated['password']),
         ]);
 
+        Alert::success('Success', 'Password Updated Successfully');
         return back()->with('status', 'password-updated');
 
     }

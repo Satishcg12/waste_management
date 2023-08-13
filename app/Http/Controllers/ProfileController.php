@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
@@ -35,6 +36,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        Alert::success('Success', 'Profile Updated Successfully');
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
@@ -63,6 +65,8 @@ class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        Alert::success('Success', 'Account Deleted Successfully');
 
         return Redirect::to('/');
     }

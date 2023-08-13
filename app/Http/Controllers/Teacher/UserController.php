@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -63,6 +64,7 @@ class UserController extends Controller
 
         ]);
 
+        Alert::success('Success', 'User Created Successfully');
 
         return redirect()->route('teacher.user.create')->with('status', 'success');
     }
@@ -106,6 +108,8 @@ class UserController extends Controller
             'upload_count' => $request['upload_count'],
 
         ]);
+
+        Alert::success('Success', 'User Updated Successfully');
         return redirect()->route('teacher.user.edit', $user)->with('status', 'user-updated')->with('user', $user);
 
     }
@@ -116,6 +120,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        Alert::success('Success', 'User Deleted Successfully');
         return redirect()->route('teacher.user.index')->with('status', 'user-deleted')->with('user', $user);
 
     }

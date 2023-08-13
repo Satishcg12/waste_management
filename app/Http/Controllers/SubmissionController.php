@@ -120,6 +120,10 @@ class SubmissionController extends Controller
      */
     public function show(Submission $submission)
     {
+        // if not approved and user is not admin or teacher or owner of submission
+        if ($submission->status != 'approved' && !auth()->guard('admin')->user() && !auth()->guard('teacher')->user() && auth()->id() != $submission->user_id) {
+            abort(404);
+        }
         return view('submission.show', compact('submission'));
     }
 
@@ -189,6 +193,9 @@ class SubmissionController extends Controller
         // check submission
         if (!$submission) {
             abort(404);
+        }
+        if (auth()->guard('admin')->user()) {
+
         } elseif (auth()->guard('teacher')->user()) {
             //filter submission by grade
             //check if teacher is in the same grade as the submission
