@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSubmissionRequest;
 use App\Models\Submission;
+use App\Notifications\user\SubmissionAccepted;
 use App\Notifications\user\SubmissionReject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -63,13 +64,15 @@ class TeacherSubmissionController extends Controller
     {
 
         if (auth()->guard('teacher')->user()->grade_id != $submission->user->grade_id) {
-            Alert::error('Error', 'Submission Not Found');
-            return redirect()->route('teacher.dashboard')->with('status', 'submission-not-found');
+            return redirect()->route('teacher.dashboard')->withError('Submission Not Found');
         }
         // update submission
         $submission->update([
             'status' => 'approved',
         ]);
+
+        // notify user
+        $submission->user->notify(new SubmissionAccepted($submission));
         // redirect
         return back()->withSuccess('Submission Approved Successfully');
 

@@ -2,25 +2,22 @@
 
 namespace App\Notifications\user;
 
-use App\Models\Submission;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SubmissionReject extends Notification implements ShouldQueue
+class SubmissionAccepted extends Notification implements ShouldQueue
 {
     use Queueable;
-    public $submission;
-    public $reject_reason;
 
+    public $submission;
     /**
      * Create a new notification instance.
      */
-    public function __construct(Submission $submission, string $reject_reason)
+    public function __construct($submission)
     {
         $this->submission = $submission;
-        $this->reject_reason = $reject_reason;
     }
 
     /**
@@ -39,17 +36,14 @@ class SubmissionReject extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->level('error')
-                    ->subject('Submission Rejected')
+        ->level('success')
+                    ->subject('Submission Accepted')
                     ->greeting('Hello ' . $this->submission->user->name)
-                    ->line('Your submission with title ' . $this->submission->title . ' has been rejected.')
-                    ->line('Reason: ' . $this->reject_reason)
-                    ->line('Please contact your teacher for more information.')
+                    ->line('Your Video/image with title ' . $this->submission->title . ' has been accepted.')
+                    ->action('View Submission', route('submission.show', $this->submission->id))
                     ->line('Thank you for your participation.')
                     ->line('Regards,')
                     ->line(config('app.name') . ' Team');
-
-
     }
 
     /**

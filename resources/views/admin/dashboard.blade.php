@@ -1,15 +1,47 @@
 <x-admin-layout>
     <x-slot name="header">
-        <h2 class="flex items-center gap-4 font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin Dashboard') }}
 
-        </h2>
-        <p>
-            {{-- if search --}}
-            @if (request()->query('search'))
-                <span class="text-gray-500 text-sm">Search results for "{{ request()->query('search') }}"</span>
-            @endif
-        </p>
+        <div class="flex justify-between items-center">
+
+            <span>
+
+                <h2 class="flex flex-col gap-4 font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Admin Dashboard') }}
+
+                </h2>
+                <p>
+                    {{-- if search --}}
+                    @if (request()->query('search'))
+                        <span class="text-gray-500 text-sm">Search results for "{{ request()->query('search') }}"</span>
+                    @endif
+                </p>
+            </span>
+            <span>
+                {{-- filter --}}
+                <form action="{{ route('admin.dashboard') }}" method="GET">
+                    {{-- status --}}
+                    <select name="status" id="status" class="rounded-lg border border-gray-300 px-4 py-2" onchange="this.form.submit()">
+                        <option value="" {{ request()->query('status') == '' ? 'selected' : '' }}>-- Select Status
+                            --</option>
+                        <option value="pending" {{ request()->query('status') == 'pending' ? 'selected' : '' }}>Pending
+                        </option>
+                        <option value="approved" {{ request()->query('status') == 'approved' ? 'selected' : '' }}>
+                            Approved</option>
+                        <option value="rejected" {{ request()->query('status') == 'rejected' ? 'selected' : '' }}>
+                            Rejected</option>
+                    </select>
+                    {{-- grades --}}
+                    <select name='grade' id='grade' class="rounded-lg border border-gray-300 px-4 py-2" onchange="this.form.submit()">
+                        <option value="">-- Select Grade --</option>
+                        @foreach ($grades as  $grade)
+                            <option value="{{ $grade->name }}" {{ request()->query('grade') == $grade->id ? 'selected' : '' }}>
+                                {{ $grade->name }}</option>
+
+                        @endforeach
+                    </select>
+                </form>
+            </span>
+        </div>
     </x-slot>
     <section
         class=" mt-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3  ">

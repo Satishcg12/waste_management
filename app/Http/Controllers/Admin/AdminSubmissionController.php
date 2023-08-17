@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSubmissionRequest;
 use App\Models\Submission;
+use App\Notifications\user\SubmissionAccepted;
 use App\Notifications\user\SubmissionReject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -31,9 +32,8 @@ class AdminSubmissionController extends Controller
             'title' => $request->title,
             'description' => $request->description,
         ]);
-        Alert::success('Success', 'Submission Updated Successfully');
         // redirect
-        return back()->with('status', 'submission-updated');
+        return back()->withSuccess('Submission Updated Successfully');
 
     }
 
@@ -49,10 +49,10 @@ class AdminSubmissionController extends Controller
         ]);
 
 
-        Alert::success('Success', 'Submission Approved Successfully');
-
+        // send email to user
+        $submission->user->notify(new SubmissionAccepted($submission));
         // redirect
-        return back()->with('status', 'submission-approved');
+        return back()->withSuccess('Submission Approved Successfully');
 
     }
 
@@ -70,8 +70,7 @@ class AdminSubmissionController extends Controller
         // send email to user
         $submission->user->notify(new SubmissionReject($submission, $request->reject_reason));
         // redirect
-        Alert::success('Success', 'Submission Rejected Successfully');
-        return back()->with('status', 'submission-rejected');
+        return back()->withSuccess('Submission Rejected Successfully');
 
     }
 

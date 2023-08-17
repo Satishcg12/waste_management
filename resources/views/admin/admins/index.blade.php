@@ -85,14 +85,11 @@
                         @endif
                     </x-table-column>
                     <x-table-column>
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 items-center">
                             <a href="{{ route('admin.admin.edit', $admin->id) }}"
-                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            <form action="{{ route('admin.admin.destroy', $admin->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
-                            </form>
+                                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+                                Edit</a>
+                            <x-delete-btn :href="route('admin.admin.destroy', $admin->id)" />
                         </div>
                     </x-table-column>
                 </tr>

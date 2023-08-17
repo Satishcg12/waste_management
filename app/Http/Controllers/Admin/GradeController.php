@@ -22,6 +22,11 @@ class GradeController extends Controller
         } else {
             $grades = Grade::orderBy('id', 'asc')->paginate(10);
         }
+        //alert
+        $title = 'Grades';
+        $message = 'Are you sure you want to delete this Grade?';
+        confirmDelete($title, $message );
+
         return view('admin.grades.index', compact('grades'));
     }
 
@@ -47,8 +52,8 @@ class GradeController extends Controller
             'name' => $request->name,
         ]);
 
-        Alert::success('Success', 'Grade Created Successfully');
-        return redirect()->route('admin.grade.create')->with('status', 'success');
+
+        return redirect()->route('admin.grade.create')->withSuccess('Grade Created Successfully');
     }
 
     /**
@@ -80,8 +85,7 @@ class GradeController extends Controller
             'name' => $request->name,
         ]);
 
-        Alert::success('Success', 'Grade Updated Successfully');
-        return back()->with('status', 'success');
+        return back()->withSuccess('Grade Updated Successfully');
     }
 
     /**
@@ -90,8 +94,6 @@ class GradeController extends Controller
     public function destroy(Grade $grade)
     {
         $grade->delete();
-
-        Alert::success('Success', $grade->name . ' Deleted Successfully');
-        return redirect()->route('admin.grade.index')->with('status', 'success');
+        return redirect()->route('admin.grade.index')->withSuccess('Grade Deleted Successfully');
     }
 }

@@ -31,6 +31,12 @@ class TeacherController extends Controller
         } else {
             $teachers = Teacher::orderBy('grade_id', 'asc')->orderBy('name', 'asc')->paginate(10);
         }
+
+        //alert confirm
+        $title = "Delete Teacher";
+        $message = "Are you sure you want to delete this teacher?";
+        confirmDelete($title, $message);
+
         return view('admin.teachers.index', compact('teachers'));
 
     }
@@ -64,8 +70,8 @@ class TeacherController extends Controller
             'grade_id' => $request->grade_id,
         ]);
 
-        Alert::success('Success', 'Teacher Created Successfully');
-        return redirect()->route('admin.teacher.create')->with('status', 'success');
+
+        return redirect()->route('admin.teacher.create')->withSuccess('Teacher Created Successfully');
     }
 
     /**
@@ -95,7 +101,7 @@ class TeacherController extends Controller
         //validate the request
         $request->validate([
             'name' => 'required',
-            'email' => ['required', 'email', 'unique:teachers', 'unique:users', 'unique:admins'],
+            'email' => 'required|email|unique:teachers,email,' . $teacher->id,
             'grade_id' => 'required',
 
         ]);
@@ -107,8 +113,7 @@ class TeacherController extends Controller
             'grade_id' => $request->grade_id,
         ]);
 
-        Alert::success('Success', 'Teacher Updated Successfully');
-        return back()->with('status', 'teacher-updated');
+        return back()->withSuccess('Teacher Updated Successfully');
     }
 
     /**
@@ -117,8 +122,7 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();
-        Alert::success('Success', 'Teacher Deleted Successfully');
-        return redirect()->route('admin.teacher.index')->with('status', 'user-deleted');
+        return redirect()->route('admin.teacher.index')->withSuccess('Teacher Deleted Successfully');
 
     }
 }

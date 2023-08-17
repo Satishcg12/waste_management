@@ -27,6 +27,12 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
         }
+
+        //confirm alert
+        $title = 'Admins';
+        $message = 'Are you sure you want to delete this Admin?';
+        confirmDelete($title, $message);
+
         return view('admin.admins.index', compact('admins'));
     }
 
@@ -44,10 +50,10 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => 'required|string|max:255',
             //unique in admins, users, and teachers table
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins', 'unique:users', 'unique:teachers'],
-            'password' => ['required', 'confirmed', 'min:8'],
+            'email' => 'required|string|email|max:255|unique:admins|unique:users|unique:teachers',
+            'password' => 'required|string|min:8|confirmed'
         ]);
 
         $admin = Admin::create([
@@ -56,9 +62,7 @@ class AdminController extends Controller
             //hash password
             'password' => bcrypt($request->password),
         ]);
-
-        Alert::success('Success', 'Admin Created Successfully');
-        return back()->with('status', 'success');
+        return back()->withSuccess('Admin Created Successfully');
 
     }
 
@@ -96,8 +100,7 @@ class AdminController extends Controller
             //hash password
         ]);
 
-        Alert::success('Success', 'Admin Updated Successfully');
-        return back()->with('status', 'success');
+        return back()->withSuccess('Admin Updated Successfully');
 
     }
 
@@ -107,16 +110,13 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         if ($admin->id == 1) {
-            Alert::error('Error', 'You Cannot Delete Super Admin');
-            return back()->with('status', 'error');
+            return back()->withError('You Cannot Delete Super Admin');
         }
         if ($admin->id == auth()->guard('admin')->user()->id) {
-            Alert::error('Error', 'You Cannot Delete Yourself');
-            return back()->with('status', 'error');
+            return back()->withError('You Cannot Delete Current Admin');
         }
         $admin->delete();
 
-        Alert::success('Success', 'Admin Deleted Successfully');
-        return back()->with('status', 'success');
+        return back()->withSuccess('Admin Deleted Successfully');
     }
 }

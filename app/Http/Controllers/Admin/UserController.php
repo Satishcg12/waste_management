@@ -33,6 +33,11 @@ class UserController extends Controller
         }
 
 
+        //alert confirm
+        $title = "Delete User";
+        $message = "Are you sure you want to delete this user?";
+        confirmDelete($title, $message);
+
         return view('admin.users.index', compact('users'));
 
     }
@@ -68,8 +73,7 @@ class UserController extends Controller
         ]);
 
 
-        Alert::success('Success', 'User Created Successfully');
-        return redirect()->route('admin.user.create')->with('status', 'success');
+        return redirect()->route('admin.user.create')->withSuccess('User Created Successfully');
     }
 
     /**
@@ -110,9 +114,7 @@ class UserController extends Controller
             'upload_count' => $request['upload_count'],
             'grade_id' => $request['grade_id'],
         ]);
-
-        Alert::success('Success', $user->name . ' Updated Successfully');
-        return redirect()->route('admin.user.edit', $user)->with('status', 'user-updated')->with('user', $user);
+        return redirect()->route('admin.user.edit', $user)->withSuccess('User Updated Successfully');
 
     }
 
@@ -122,8 +124,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        Alert::success('Success', $user->name . ' Deleted Successfully');
-        return redirect()->route('admin.user.index')->with('status', 'user-deleted')->with('user', $user);
+        return redirect()->route('admin.user.index')->withSuccess('User Deleted Successfully');
 
     }
 }
