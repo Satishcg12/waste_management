@@ -1,7 +1,7 @@
-<form action="{{$action}}" method="post">
+<form action="{{$action}}" method="post" data-confirm-delete="true">
     @csrf
     @method('patch')
-    <button type="submit" class="">
+    <button type="submit" class="" >
         <svg class="fill-green-500 h-6 w-6 " xmlns="http://www.w3.org/2000/svg" height="1em"
             viewBox="0 0 512 512">
             <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -10,3 +10,4 @@
         </svg>
     </button>
 </form>
+

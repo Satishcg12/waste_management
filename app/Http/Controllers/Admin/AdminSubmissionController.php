@@ -26,17 +26,10 @@ class AdminSubmissionController extends Controller
      */
     public function adminUpdate(UpdateSubmissionRequest $request, Submission $submission)
     {
-        // validate and check if the title and description matches previous title and description
-        $validated = $request->validate([
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
-            'status' => 'required|in:pending,approved,rejected',
-        ]);
         // update submission
         $submission->update([
             'title' => $request->title,
             'description' => $request->description,
-            'status' => $request->status,
         ]);
         Alert::success('Success', 'Submission Updated Successfully');
         // redirect

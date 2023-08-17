@@ -36,14 +36,14 @@ class SubmissionCreated extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-        ->level('success')
-        ->subject('Submission Created')
-        ->greeting('Hello!')
-        ->line('Your submission has been created.')
-        ->line('Title: ' . $this->submission->title)
-        ->line('Description: ' . $this->submission->description)
-        ->action('Review Summission', route('teacher.submission.edit', $this->submission->id))
-        ->line('Thank you for using our application!');
+                    ->subject('New Submission')
+                    ->greeting('Hello ' . $notifiable->name)
+                    ->line('You have a new submission with title ' . $this->submission->title . '.')
+                    ->line('Please check your dashboard for more information.')
+                    ->action('View', route('teacher.submission.edit', $this->submission->id))
+                    ->line('Thank you for your participation.');
+
+
 
     }
 

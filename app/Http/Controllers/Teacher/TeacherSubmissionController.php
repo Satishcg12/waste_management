@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateSubmissionRequest;
 use App\Models\Submission;
+use App\Notifications\user\SubmissionReject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,6 +21,13 @@ class TeacherSubmissionController extends Controller
         if (auth()->guard('teacher')->user()->grade_id != $submission->user->grade_id) {
             return redirect()->route('teacher.dashboard')->with('status', 'submission-not-found');
         }
+
+
+        $title = 'Delete Submission!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+
         return view('teacher.submission.edit', compact('submission'));
     }
 
@@ -35,17 +43,15 @@ class TeacherSubmissionController extends Controller
         $validated = $request->validate([
             'title' => 'required|min:3|max:255',
             'description' => 'required|min:3',
-            'status' => 'required|in:pending,approved,rejected',
         ]);
         // update submission
         $submission->update([
             'title' => $request->title,
             'description' => $request->description,
-            'status' => $request->status,
 
         ]);
         // redirect
-        return back()->with('status', 'submission-updated');
+        return back()->withSuccess('Submission Updated Successfully');
 
     }
 
@@ -64,31 +70,31 @@ class TeacherSubmissionController extends Controller
         $submission->update([
             'status' => 'approved',
         ]);
-        Alert::success('Success', 'Submission Approved Successfully');
         // redirect
-        return back()->with('status', 'submission-approved');
+        return back()->withSuccess('Submission Approved Successfully');
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function reject(Submission $submission)
+    public function reject(Submission $submission, Request $request)
     {
 
         // dd($submission);
         if (auth()->guard('teacher')->user()->grade_id != $submission->user->grade_id) {
-            Alert::error('Error', 'Submission Not Found');
-            return redirect()->route('teacher.dashboard')->with('status', 'submission-not-found');
+            return redirect()->route('teacher.dashboard')->with('error', 'Submission Not Found');
         }
         // update submission
         $submission->update([
             'status' => 'rejected',
         ]);
 
-        Alert::success('Success', 'Submission Rejected Successfully');
+        // notify user
+        $submission->user->notify(new SubmissionReject($submission, $request->reject_reason));
+
         // redirect
-        return back()->with('status', 'submission-rejected');
+        return back()->withSuccess('Submission Rejected Successfully');
 
     }
 

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Teacher;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class UpdateSubmissionRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +24,16 @@ class UpdateSubmissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => ['required', 'confirmed', Password::defaults()],
+            'grade_id' => 'required|exists:grades,id',
         ];
     }
 
+    /**
+     * Get the error messages for the defined validation rules.
+     */
     public function withValidator($validator)
     {
         if ($validator->fails()) {
@@ -37,6 +43,5 @@ class UpdateSubmissionRequest extends FormRequest
 
             return back()->with('status', 'submission-update-failed');
         }
-
     }
 }

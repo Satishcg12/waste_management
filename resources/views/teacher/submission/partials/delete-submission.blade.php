@@ -12,12 +12,5 @@
 
     </header>
 
-    <form method="post" action="{{ route('teacher.submission.destroy', [ 'submission' => $submission->id ]) }}" class="">
-        @csrf
-        @method('delete')
-
-        <div class="flex items-center">
-            <x-danger-button>{{ __('Delete') }}</x-danger-button>
-        </div>
-    </form>
+    <x-delete-btn :href="route('teacher.submission.destroy', [ 'submission' => $submission->id ])" class="my-4" />
 </section>

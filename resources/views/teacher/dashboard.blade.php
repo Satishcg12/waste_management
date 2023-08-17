@@ -1,6 +1,6 @@
 <x-teacher-layout>
     <x-slot name="header">
-        <div class="felx">
+        <div class="flex justify-between items-center">
 
             <div>
                 <h2 class="flex items-center gap-4 font-semibold text-xl text-gray-800 leading-tight">
@@ -15,6 +15,21 @@
                 </p>
             </div>
 
+
+            {{-- filter --}}
+            <div class="flex items-center gap-4">
+                <form action="{{ route('teacher.dashboard') }}" method="GET">
+                    <select name="filter" id="filter" class="form-select rounded-md shadow-sm border-gray-300" onchange="this.form.submit()">
+                        <option value="" {{ request()->query('filter') == 'all' ? 'selected' : '' }}>All</option>
+                        <option value="pending" {{ request()->query('filter') == 'pending' ? 'selected' : '' }}>
+                            Pending</option>
+                        <option value="approved" {{ request()->query('filter') == 'approved' ? 'selected' : '' }}>
+                            Approved</option>
+                        <option value="rejected" {{ request()->query('filter') == 'rejected' ? 'selected' : '' }}>
+                            Rejected</option>
+                    </select>
+                </form>
+            </div>
         </div>
     </x-slot>
 
@@ -43,15 +58,16 @@
             </div>
         @endforelse
 
-        <div class="pagination col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3  ">
+        <div class="pagination col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3  mb-5">
             {{ $submissions->links() }}
         </div>
     </section>
 
 
-    @endif
 
+@endif
 
+@section('scripts')
     <script>
         function rejectConfirmation(event, id) {
             event.preventDefault();
@@ -92,4 +108,5 @@
         }
     </script>
 
+@endsection
 </x-teacher-layout>

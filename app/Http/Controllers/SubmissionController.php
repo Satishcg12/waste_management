@@ -83,35 +83,10 @@ class SubmissionController extends Controller
             $teacher->notify(new TeacherSubmissionCreated($submission));
         }
 
-        Alert::success('Success', 'Submission Created Successfully');
         // redirect
-        return back()->with('status', 'file-uploaded');
+        return back()->withSuccess('Submission created successfully.');
 
 
-
-    }
-
-    private function createThumbnail(string $folder, string $filename)
-    {
-        //thumbnail path
-        $thumbnail_path = 'upload/submission/' . $folder . '/thumbnail.jpg';
-
-        //create thumbnail of 16:9 with full width
-        FFMpeg::fromDisk('local')
-            ->open('upload/submission/' . $folder . '/' . $filename)
-            ->getFrameFromSeconds(1)
-            ->addFilter(function ($filters) {
-                $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 360));
-            })
-            ->export()
-            ->toDisk('local')
-            ->save('upload/submission/' . $folder . '/thumbnail.jpg');
-
-        //return
-        return Thumbnail::create([
-            'folder' => $folder,
-            'filename' => 'thumbnail.jpg',
-        ]);
 
     }
 
@@ -122,7 +97,7 @@ class SubmissionController extends Controller
     {
         // if not approved and user is not admin or teacher or owner of submission
         if ($submission->status != 'approved' && !auth()->guard('admin')->user() && !auth()->guard('teacher')->user() && auth()->id() != $submission->user_id) {
-            abort(404);
+            return back()->withError('You are not allowed to view this submission');
         }
         return view('submission.show', compact('submission'));
     }

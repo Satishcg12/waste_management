@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Teacher\StoreUserRequest;
 use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Validator;
 
 class UserController extends Controller
 {
@@ -32,6 +34,12 @@ class UserController extends Controller
         }
 
 
+
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+
         return view('teacher.users.index', compact('users'));
 
     }
@@ -47,15 +55,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins', 'unique:users', 'unique:teachers'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'grade_id' => ['required', 'integer', 'exists:grades,id']
-        ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -64,9 +65,7 @@ class UserController extends Controller
 
         ]);
 
-        Alert::success('Success', 'User Created Successfully');
-
-        return redirect()->route('teacher.user.create')->with('status', 'success');
+        return redirect()->route('teacher.user.create')->withSuccess('User Created Successfully');
     }
 
     /**
@@ -85,7 +84,7 @@ class UserController extends Controller
 
         // filter by grade
         if ($user->grade_id != auth()->guard('teacher')->user()->grade_id) {
-            return redirect()->route('teacher.user.index')->with('status', 'user-not-found');
+            return redirect()->route('teacher.user.index')->withError('You are not allowed to edit this user');
         }
         return view('teacher.users.edit', compact('user'));
     }
@@ -96,11 +95,15 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //validate the request
-        $request->validate([
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255|min:3',
             'email' => 'required|email',
             'upload_count' => 'required|integer|between:0,5'
         ]);
+
+        if ($validate->fails()) {
+            return back()->withErrors($validate);
+        }
 
         $user->update([
             'name' => $request['name'],
@@ -109,8 +112,7 @@ class UserController extends Controller
 
         ]);
 
-        Alert::success('Success', 'User Updated Successfully');
-        return redirect()->route('teacher.user.edit', $user)->with('status', 'user-updated')->with('user', $user);
+        return redirect()->route('teacher.user.edit', $user)->with('user', $user)->withSuccess('User Updated Successfully');
 
     }
 
@@ -119,10 +121,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        // filter by grade
+        if ($user->grade_id != auth()->guard('teacher')->user()->grade_id) {
+            return redirect()->route('teacher.user.index')->withError('User Not Found');
+        }
         $user->delete();
 
-        Alert::success('Success', 'User Deleted Successfully');
-        return redirect()->route('teacher.user.index')->with('status', 'user-deleted')->with('user', $user);
+        return redirect()->route('teacher.user.index')->withSuccess('User Deleted Successfully');
 
     }
 }

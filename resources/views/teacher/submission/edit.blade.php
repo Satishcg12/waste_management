@@ -14,7 +14,7 @@
             <div class="h-full w-auto flex justify-center items-center rounded-lg overflow-hidden bg-gray-100">
 
                 @if ($submission->attachment_type == 'video')
-                    <video class=" h-full w-auto  object-cover object-center " controls>
+                    <video class=" h-full w-auto  object-cover object-center z-10" controls>
                         <source
                             src="{{ route('submission.getAttachment', ['folder' => $submission->folder, 'filename' => $submission->filename]) }}"
                             type="video/mp4">

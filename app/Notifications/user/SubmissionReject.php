@@ -39,10 +39,15 @@ class SubmissionReject extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line($this->submission->user->name . ', Your submission has been rejected.')
-                    ->line('Title: ' . $this->submission->title)
+                    ->subject('Submission Rejected')
+                    ->greeting('Hello ' . $this->submission->user->name)
+                    ->line('Your submission with title ' . $this->submission->title . ' has been rejected.')
                     ->line('Reason: ' . $this->reject_reason)
-                    ->level('error');
+                    ->line('Please contact your teacher for more information.')
+                    ->line('Thank you for your participation.')
+                    ->line('Regards,')
+                    ->line(config('app.name') . ' Team');
+
 
     }
 
