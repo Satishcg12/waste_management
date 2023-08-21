@@ -5,7 +5,7 @@
         <img src="{{$src}}"
         alt="{{$name}}" class=" object-cover hover:scale-105 transition-all">
     </div>
-    <p class="text-center mt-3 mb-2 px-2 ">{{$name}}</p>
+    <p class="text-center pt-3 mb-2 px-2 ">{{$name}}</p>
     <p class="text-center text-gray-500 text-sm px-2">{{$role}}</p>
 </div>
 

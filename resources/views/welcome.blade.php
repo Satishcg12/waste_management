@@ -49,7 +49,7 @@
     }
 </style>
 
-<body>
+<body >
     <div id="top"></div>
     @include('layouts.publicNavigation')
 
@@ -71,7 +71,7 @@
         </div>
     </main>
 
-    <div class="img-container bg-gradient-to-t from-white to-gray-200 ">
+    {{-- <div class="img-container bg-gradient-to-t from-white to-gray-200 ">
         <div class="md:px-10 py-5 flex flex-wrap justify-center">
             <x-featured-card src="/assets/featured/1.jpg" title="From Scraps to Soil: The Art of Composting" />
             <x-featured-card src="/assets/featured/2.jpg" title="Nurturing Nature: Harnessing the Power of Compost" />
@@ -82,7 +82,55 @@
 
 
         </div>
+    </div> --}}
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-10 ">
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
+        </div>
     </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
+        </div>
+    </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
+        </div>
+    </div>
+    <div class="grid gap-4">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
+        </div>
+    </div>
+</div>
+
     <span id="about-us"></span>
     <div class="pt-14">
 
@@ -192,7 +240,7 @@
             <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg" href="https://github.com/Satishcg12" />
             <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg" href="https://github.com/Rayyan-Balami"/>
             <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png" href="#"/>
-            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/nishan.jpeg" href="#"/>
+            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/nishan.jpeg" href="https://github.com/Nishanmahat8"/>
             <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg" href="#"/>
             <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist" src="/assets/team/default.png" href="#"/>
 
@@ -201,26 +249,7 @@
     </div>
 
 
-    <footer class="p-5 text-center bg-gradient-to-b from-white to-gray-200">
-        <p class="my-5">© 2021 Samriddhi School, Binayak Basti, Balaju, Kathmandu | Tel: Primary Wing - 01-4970590/
-            4970591,
-            Secondary Wing - 01-4983777/ 4984777
-        </p>
-        <div class="fixed bottom-3 right-3 bg-blue-500 rounded-full text-white hover:bg-blue-600" title="go to top">
-            {{-- go to top svg --}}
-            <a href="#top">
-                <svg xmlns="http://www.w3.org/2000/svg" class="rotate-180 h-10 w-10 transition-all duration-300"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0
-                        111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0
-                        010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
-            </a>
-        </div>
-    </footer>
-
+    @include('layouts.footer')
 
 </body>
 

@@ -37,6 +37,11 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
             Route::put('password/teacher', [TeacherPasswordController::class, 'update'])->name('password.teacher.update');
             Route::put('password/admin', [AdminPasswordController::class, 'update'])->name('password.admin.update');
         });
+        //editors routes
+        Route::get('terms-editor',function () {
+            return view('admin.MDEditor.terms');
+        })->name('terms-editor');
+
     });
 
 

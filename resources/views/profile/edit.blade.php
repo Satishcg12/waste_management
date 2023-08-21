@@ -5,10 +5,17 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
+        <x-container-round>
+            @include('profile.partials.user-information')
+        </x-container-round>
+
+    </div>
+    <div class="py-5">
         <x-container-round>
             @include('profile.partials.update-password-form')
         </x-container-round>
 
     </div>
+
 </x-app-layout>

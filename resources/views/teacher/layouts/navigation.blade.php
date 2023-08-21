@@ -1,167 +1,150 @@
-@if (request()->routeIs('teacher.dashboard') || request()->routeIs('teacher.user.index'))
-    {{-- search button --}}
-    <script>
-        function toggleSearchMenu() {
-            var searchMenu = document.getElementById("search-menu");
-            var searchBtn = document.getElementById("search-btn");
-
-            if (searchMenu.style.maxHeight == "0px") {
-                searchMenu.style.maxHeight = "200px";
-                searchBtn.classList.add('bg-blue-500');
-                searchBtn.classList.remove('bg-orange-500');
-            } else {
-                searchMenu.style.maxHeight = "0px";
-                searchBtn.classList.add('bg-orange-500');
-                searchBtn.classList.remove('bg-blue-500');
-            }
-        }
-    </script>
-
-    {{-- search --}}
-    <div id="search-menu" class="justify-center items-center overflow-hidden transition-all duration-500"
-        style="max-height: 0px;">
-        <form action="{{ url()->current() }}" method="GET">
-            <div class="flex justify-center items-center">
-                <input type="search" name="search" id="search"
-                    class="border border-gray-300 rounded-md p-2 m-2 w-full max-w-xl" placeholder="Search"
-                    value="{{ request()->query('search') }}">
-                <button type="submit" class="bg-orange-500 text-white rounded-md p-2 m-2">Search</button>
-            </div>
-        </form>
-    </div>
-@endif
 
 
-<nav x-data="{ open: false }" class="sticky top-0 z-10 backdrop-blur bg-opacity-60 bg-white">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('teacher.dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- teacher Navlinks --}}
-                    <x-nav-link :href="route('teacher.dashboard')" :active="request()->routeIs('teacher.dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('teacher.user.index')" :active="request()->routeIs('teacher.user.index')">
-                        {{ __('Users') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('teacher.user.create')" :active="request()->routeIs('teacher.user.create')">
-                        {{ __('Add User') }}
-                    </x-nav-link>
-                </div>
-            </div>
+<div class="grid sm:hidden grid-cols-3 justify-center items-center">
+    <span>
 
-            <div class="flex items-center justify-center">
+        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+            type="button"
+            class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                </path>
+            </svg>
+        </button>
+    </span>
+
+    <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+
+
+
+    @if (request()->routeIs('teacher.dashboard') || request()->routeIs('teacher.user.index'))
+        <!-- search -->
+        <span class="flex justify-end mr-3">
+            <button type="button"
+                class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-white bg-orange-500 rounded-lg sm:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                onclick="toggleSearch()">
+
+                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 512 512"
+                    xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                        d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
+                </svg>
+            </button>
+        </span>
+    @endif
+
+</div>
+
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-lg"
+    aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
+        <ul class="space-y-2 font-medium">
+
+            <div class="flex items-center justify-around my-5">
+
+                <a href="{{ route('dashboard') }}" class="flex items-center pl-2.5">
+                    <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+
+                </a>
                 @if (request()->routeIs('teacher.dashboard') || request()->routeIs('teacher.user.index'))
-                    <!-- search -->
-                    <button id="search-btn" type="button" class="bg-orange-500 rounded-full p-2 "
-                        onclick="toggleSearchMenu()">
-                        <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+                    <button type="button" class="bg-orange-500 text-white p-2 rounded-lg" onclick="toggleSearch()">
+                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg" height="1em"
                             viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                             <path
                                 d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
                         </svg>
                     </button>
                 @endif
-                <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::guard('teacher')->user()->name }}</div>
 
-                                <div class="ml-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
-
-                        <x-slot name="content">
-
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('teacher.logout') }}">
-                                @csrf
-
-                                <x-dropdown-link :href="route('teacher.logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-                    </x-dropdown>
-                </div>
-
-                <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-
-            {{-- teacher Navlinks --}}
-            <x-responsive-nav-link :href="route('teacher.dashboard')" :active="request()->routeIs('teacher.dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('teacher.user.index')" :active="request()->routeIs('teacher.user.index')">
-                {{ __('Users') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('teacher.user.create')" :active="request()->routeIs('teacher.user.create')">
-                {{ __('Add User') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::guard('teacher')->user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::guard('teacher')->user()->email }}</div>
             </div>
 
-            <div class="mt-3 space-y-1">
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('teacher.logout') }}">
+            <li>
+                <a href="{{ route('teacher.dashboard') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('teacher.dashboard') ? ' bg-orange-500 text-white hover:bg-orange-600' : '' }}">
+
+                    <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('teacher.dashboard') ? ' fill-white ' : '' }}"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 22 21">
+                        <path
+                            d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                        <path
+                            d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                    </svg>
+                    <span class="ml-3">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('teacher.user.index') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('teacher.user.index') ? ' bg-orange-500 text-white hover:bg-orange-600' : '' }}">
+
+                    <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('teacher.user.index') ? ' fill-white ' : '' }}"
+                        xmlns="http://www.w3.org/2000/svg" height="1em"
+                        viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
+                    </svg>
+                    <span class="ml-3">Students</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('teacher.user.create') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ request()->routeIs('teacher.user.create') ? ' bg-orange-500 text-white hover:bg-orange-600' : '' }}">
+
+                    <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white {{ request()->routeIs('teacher.user.create') ? ' fill-white ' : '' }}"
+                    xmlns="http://www.w3.org/2000/svg" height="1em"
+                        viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                    </svg>
+                    <span class="ml-3">Add Student</span>
+                </a>
+            </li>
+        </ul>
+        <ul class=" font-medium bg-gray-100 drop-shadow divide-y rounded-md overflow-hidden">
+
+            <li>
+                <form method="POST" action="{{ route('teacher.logout') }}" class="">
                     @csrf
+                    <button type="submit"
+                        class="flex items-center w-full p-2 text-gray-900  dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
 
-                    <x-responsive-nav-link :href="route('teacher.logout')"
-                        onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 18 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                        </svg>
+                        <span class="ml-3">Logout</span>
+                    </button>
                 </form>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
-</nav>
+</aside>
+
+
+
+
+@push('scripts')
+    <script>
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search');
+
+        function toggleSearch() {
+            searchForm.classList.toggle('hidden');
+            searchInput.focus();
+        }
+    </script>
+@endpush

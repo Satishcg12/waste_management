@@ -14,7 +14,7 @@
                 {{ __('Upload') }}
             </h2>
         </x-slot>
-        <div class="py-12">
+        <div class="py-5">
 
             <x-container-round>
                 @include('submission.partials.upload-file-form')
@@ -66,6 +66,7 @@
                 // Create a FilePond instance
                 const pond = FilePond.create(inputElement, filePondOptions);
 
+                uploadButton.disabled = true;
                 // Listen for init event
                 pond.on('init', () => {
                     console.log('FilePond is ready to receive files!');
@@ -92,6 +93,8 @@
                 pond.on('processfile', (error, file) => {
                     // loading animation
                     uploadButton.innerHTML = `Upload`;
+                    uploadButton.disabled = false;
+
 
                 });
 
@@ -99,12 +102,10 @@
                 pond.on('error', (error, file) => {
                     // loading animation
                     uploadButton.innerHTML = `Upload`;
+                    uploadButton.disabled = true;
+
 
                 });
-
-
-
-
 
 
 
@@ -117,7 +118,6 @@
                         }
                     },
                 });
-
             </script>
         @endsection
     @endif

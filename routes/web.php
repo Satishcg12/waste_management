@@ -22,6 +22,13 @@ Route::get('/', function () {
     return view('welcome');
     // return redirect()->route('home');
 })->name('welcome');
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions');
+})->name('terms-and-conditions');
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
 Route::get('/home', [PublicController::class,'index'])->name('home');
 Route::get('submission/{submission}', [SubmissionController::class,'show'])->name('submission.show');
 

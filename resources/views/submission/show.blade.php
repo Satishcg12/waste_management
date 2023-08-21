@@ -1,5 +1,5 @@
 <x-public-layout>
-    <x-container-round>
+    <x-container-round class="m-5 drop-shadow-lg">
         {{-- back button --}}
         <span class="inline-block">
             <a href="{{ route('home') }}"

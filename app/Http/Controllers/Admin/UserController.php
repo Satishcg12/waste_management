@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CascadeSubmissoinOnUserDelete;
 use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Validation\Rules;
@@ -123,6 +124,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        //delete all submissions of this user using job
+        foreach ($user->submission as $submission) {
+            CascadeSubmissoinOnUserDelete::dispatch($submission);
+        }
         $user->delete();
         return redirect()->route('admin.user.index')->withSuccess('User Deleted Successfully');
 

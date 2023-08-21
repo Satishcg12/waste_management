@@ -34,7 +34,7 @@
 
                 <input type="checkbox" id="areyousure" name="areyousure" class="form-checkbox h-5 w-5 text-gray-600" required />
                 <label for="areyousure" class="ml-2 block text-sm text-gray-500">
-                    {{ __('I am sure I want to upload this file') }}
+                    I accept the <a href="{{route('terms-and-conditions')}}" class="underline">terms and conditions</a> and have read the <a href="{{route('privacy-policy')}}" class="underline">privacy policy</a>.
                 </label>
             </div>
             <x-input-error :messages="$errors->get('areyousure')" class="mt-2" />

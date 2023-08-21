@@ -1,6 +1,6 @@
 <x-public-layout>
     <section
-        class=" mt-5 max-w-xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  ">
+        class=" mt-5  px-4 sm:px-6 lg:px-8 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  ">
         @forelse ($submissions as $submission)
             <x-video-card :submission="$submission" />
         @empty
