@@ -51,15 +51,15 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            //unique in admins, users, and teachers table
             'email' => 'required|string|email|max:255|unique:admins|unique:users|unique:teachers',
+            'phone' => 'required|numeric|unique:admins|unique:users|unique:teachers|digits:10',
             'password' => 'required|string|min:8|confirmed'
         ]);
 
         $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
-            //hash password
+            'phone' => $request->phone,
             'password' => bcrypt($request->password),
         ]);
         return back()->withSuccess('Admin Created Successfully');
@@ -89,15 +89,15 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            //unique in admins, users, and teachers table
+            'phone' => ['required', 'numeric', 'digits:10', 'unique:admins,phone,' . $admin->id, 'unique:users,phone,' . $admin->id, 'unique:teachers,phone,' . $admin->id],
             'email' => ['required', 'string', 'email', 'max:255'],
 
         ]);
 
         $admin->update([
             'name' => $request->name,
+            'phone' => $request->phone,
             'email' => $request->email,
-            //hash password
         ]);
 
         return back()->withSuccess('Admin Updated Successfully');

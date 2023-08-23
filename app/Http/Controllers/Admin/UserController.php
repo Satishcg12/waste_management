@@ -59,15 +59,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins', 'unique:users', 'unique:teachers'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'grade_id' => ['required', 'integer', 'exists:grades,id']
+            'name' => 'required|string|max:255',
+            'email' => 'required|unique:users|email|max:255|unique:admins|unique:teachers',
+            'phone' => 'required|numeric|digits:10|unique:users|unique:admins|unique:teachers',
+            'password' => 'required|confirmed|min:8',
+            'grade_id' => 'required|integer|exists:grades,id'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone'=> $request->phone,
             'password' => Hash::make($request->password),
             'grade_id' => $request->grade_id,
 
@@ -104,8 +106,9 @@ class UserController extends Controller
         $validation=$request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
+            'phone' => 'required|numeric|digits:10|unique:users,phone,'.$user->id.'|unique:admins,phone|unique:teachers,phone',
             'upload_count' => 'required|integer|between:0,5',
-            'grade_id' => 'required',
+            'grade_id' => 'required|integer|exists:grades,id'
 
         ]);
 
@@ -113,6 +116,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'upload_count' => $request['upload_count'],
+            'phone' => $request['phone'],
             'grade_id' => $request['grade_id'],
         ]);
         return redirect()->route('admin.user.edit', $user)->withSuccess('User Updated Successfully');

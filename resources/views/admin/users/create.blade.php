@@ -26,6 +26,14 @@
                         :value="old('email')" required autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
+                <!-- phone -->
+                <div class="mt-4">
+                    <x-input-label for="phone" :value="__('Phone')" />
+                    <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone"
+                        :value="old('phone')" required autocomplete="phone" />
+                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                </div>
+
 
                     {{-- Grades --}}
                     <div class="mt-4">
@@ -34,7 +42,8 @@
                         <select id="grade" name="grade_id" class="block mt-1 w-full">
                             <option value="">Select a grade</option>
                             @foreach ($grades as $grade)
-                                <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                                <option value="{{ $grade->id }}" {{ old('grade_id') == $grade->id ? 'selected' : '' }}
+                                    >{{ $grade->name }}</option>
                             @endforeach
                         </select>
                     </div>

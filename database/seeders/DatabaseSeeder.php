@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             AdminSeeder::class,
-            GradeSeeder::class,
-            UserSeeder::class,
-            TeacherSeeder::class,
+            // GradeSeeder::class,
+            // UserSeeder::class,
+            // TeacherSeeder::class,
         ]);
     }
 }

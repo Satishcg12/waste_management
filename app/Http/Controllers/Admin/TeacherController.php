@@ -59,6 +59,7 @@ class TeacherController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins', 'unique:users', 'unique:teachers'],
+            'phone' => ['required', 'numeric', 'unique:admins', 'unique:users', 'unique:teachers', 'digits:10'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'grade_id' => ['required', 'integer', 'exists:grades,id']
         ]);
@@ -66,6 +67,7 @@ class TeacherController extends Controller
         $user = Teacher::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'grade_id' => $request->grade_id,
         ]);
@@ -102,7 +104,8 @@ class TeacherController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:teachers,email,' . $teacher->id,
-            'grade_id' => 'required',
+            'phone' => 'required|numeric|digits:10|unique:teachers,phone,' . $teacher->id. '|unique:users,phone,' . $teacher->id,
+            'grade_id' => 'required|integer|exists:grades,id'
 
         ]);
 
@@ -110,6 +113,7 @@ class TeacherController extends Controller
         $teacher->update([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'grade_id' => $request->grade_id,
         ]);
 

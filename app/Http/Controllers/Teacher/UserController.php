@@ -60,6 +60,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'grade_id' => $request->grade_id,
 
@@ -97,7 +98,8 @@ class UserController extends Controller
         //validate the request
         $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255|min:3',
-            'email' => 'required|email',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'required|numeric|digits:10|unique:users,phone,' . $user->id,
             'upload_count' => 'required|integer|between:0,5'
         ]);
 
@@ -108,6 +110,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request['name'],
             'email' => $request['email'],
+            'phone' => $request['phone'],
             'upload_count' => $request['upload_count'],
 
         ]);
