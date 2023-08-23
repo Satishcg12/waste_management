@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="flex items-center gap-4 font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Teacher Dashboard') }}
+                    Welcome {{ auth()->guard('teacher')->user()->name }}
 
                 </h2>
                 <p>

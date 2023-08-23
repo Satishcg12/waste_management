@@ -49,7 +49,7 @@
     }
 </style>
 
-<body >
+<body>
     <div id="top"></div>
     @include('layouts.publicNavigation')
 
@@ -83,53 +83,67 @@
 
         </div>
     </div> --}}
+    <section class="md:px-10 py-5 bg-gradient-to-t from-white to-gray-200">
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-10 ">
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
+            <div class="grid gap-4">
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
+                </div>
+            </div>
+            <div class="grid gap-4">
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
+                </div>
+            </div>
+            <div class="grid gap-4">
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
+                </div>
+            </div>
+            <div class="grid gap-4">
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
+                </div>
+                <div>
+                    <img class="h-auto max-w-full rounded-lg"
+                        src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
+                </div>
+            </div>
         </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
-        </div>
-    </div>
-</div>
+    </section>
 
     <span id="about-us"></span>
     <div class="pt-14">
@@ -237,12 +251,18 @@
     <div class=" max-w-5xl mx-auto dev-container md:px-10">
         <div class="flex flex-wrap gap-5 justify-center">
 
-            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg" href="https://github.com/Satishcg12" />
-            <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg" href="https://github.com/Rayyan-Balami"/>
-            <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png" href="#"/>
-            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/nishan.jpeg" href="https://github.com/Nishanmahat8"/>
-            <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg" href="#"/>
-            <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist" src="/assets/team/default.png" href="#"/>
+            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg"
+                href="https://github.com/Satishcg12" />
+            <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg"
+                href="https://github.com/Rayyan-Balami" />
+            <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png"
+                href="#" />
+            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst"
+                src="/assets/team/nishan.jpeg" href="https://github.com/Nishanmahat8" />
+            <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator"
+                src="/assets/team/saiyam.jpg" href="#" />
+            <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist"
+                src="/assets/team/default.png" href="#" />
 
 
         </div>

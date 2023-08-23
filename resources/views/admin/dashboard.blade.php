@@ -6,7 +6,7 @@
             <span>
 
                 <h2 class="flex flex-col gap-4 font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Admin Dashboard') }}
+                    Welcome {{ auth()->guard('admin')->user()->name }}!
 
                 </h2>
                 <p>
