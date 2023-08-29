@@ -4,8 +4,8 @@
         @forelse ($submissions as $submission)
             <x-video-card :submission="$submission" />
         @empty
-            <div class="w-full text-center text-gray-500 col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-3 h-[80vh] flex justify-center items-center">
-                <h1 class="text-3xl font-bold">No Submissions Yet</h1>
+            <div class="w-full text-center text-gray-500 col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-4 h-[80vh] flex justify-center items-center">
+                <h1 class="text-3xl font-bold ">No Submissions Yet</h1>
             </div>
         @endforelse
 

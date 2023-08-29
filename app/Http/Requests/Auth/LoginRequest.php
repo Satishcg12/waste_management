@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
         //         'email' => trans('auth.failed'),
         //     ]);
         // }
-        $user = User::where('email', $this->username)->orWhere('phone', $this->username)->first();
+        $user = User::where('username',$this->username)->first();
         if(!$user || !Hash::check($this->password,$user->password)){
             throw ValidationException::withMessages([
                 'username' => 'Please enter correct username or password',

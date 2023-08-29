@@ -36,8 +36,6 @@ class HomeController extends Controller
                 ->where('submissions.status', 'like', '%' . request('status') . '%')
                 ->orderBy('updated_at', 'desc')
                 ->paginate(10);
-
-
         }
         else {
             $submissions = Submission::orderBy('updated_at', 'desc')->paginate(10);

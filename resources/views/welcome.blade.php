@@ -64,26 +64,16 @@
                 Small Steps, <span class="text-2xl">Big Difference</span>
             </p>
             <div class="buttons mt-5 ">
+                <a href="{{ route('home') }}">
                 <button
-                    class="text-white text-light px-6 py-4 rounded-lg bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl font-bold transition-all duration-300"><a
-                        href="{{ route('home') }}">Get Started</a></button>
+                    class="text-white text-light px-6 py-4 rounded-lg bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl font-bold transition-all duration-300">
+                        Our Contribution
+                    </button>
+                </a>
             </div>
         </div>
     </main>
-
-    {{-- <div class="img-container bg-gradient-to-t from-white to-gray-200 ">
-        <div class="md:px-10 py-5 flex flex-wrap justify-center">
-            <x-featured-card src="/assets/featured/1.jpg" title="From Scraps to Soil: The Art of Composting" />
-            <x-featured-card src="/assets/featured/2.jpg" title="Nurturing Nature: Harnessing the Power of Compost" />
-            <x-featured-card src="/assets/featured/3.jpg" title="Compost Magic: Transforming Waste into Fertile Soil" />
-            <x-featured-card src="/assets/featured/4.jpg" title="The Circle of Life: Composting for a Sustainable Future" />
-            <x-featured-card src="/assets/featured/5.jpg" title="Composting Revolution: Reducing Waste, Enriching Soil" />
-            <x-featured-card src="/assets/featured/6.jpg" title="Compost Chronicles: A Journey Towards Zero Waste" />
-
-
-        </div>
-    </div> --}}
-    <section class="md:px-10 py-5 bg-gradient-to-t from-white to-gray-200">
+    <section class="md:px-10 px-3 py-5 bg-gradient-to-t from-white to-gray-200">
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
             <div class="grid gap-4">
@@ -109,10 +99,50 @@
         </div>
     </section>
 
+    <!-- Container for demo purpose -->
+    <div class="container md:px-10 px-3 mx-auto">
+        <!-- Section: Design Block -->
+        <h2 class="my-12 text-3xl font-bold text-center">Testimonials</h2>
+        <section class="mb-24 text-center md:text-left">
+            <x-large-testimonial-card name="Prayas Dhakal" role="Class 5 – Sagittarius" src="/assets/testimonials/principal.jpg">
+                For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
+            </x-large-testimonial-card>
+        </section>
+        <section class=" text-center">
+
+            <div class="grid gap-x-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-6">
+                <x-small-testimonial-card id="testimonia1" name="Mayara Thapa" role="Class 3 Silver" src="/assets/testimonials/mayara.jpeg">
+                    The zero-waste project is all about recycling, reusing, and reducing waste materials into something useful. I learned to separate the non-biodegradable and biodegradable waste. As a zero-waste leader, I check if my friends are not wasting their food and make sure that they leave with a clean plate. I never waste my food or dirty my surroundings. I also shared with my family members the importance of keeping our environment clean. At home, I help my mom make manure out of our kitchen waste.
+                </x-small-testimonial-card>
+                <x-small-testimonial-card id="testimonial2" name="Yushan Shrestha" role="Class 4 - Gemini" src="/assets/testimonials/yushan.jpeg">
+                    The zero-waste project is one of the most important projects we are implementing at the school. It is an activity to protect our environment. I learned that we can create useful things out of waste, even kitchen waste. As a leader, I don’t allow anyone to waste their food. At home, I also encourage my siblings not to waste whatever they have on their plate. We also separate the biodegradable and non-biodegradable wastes at home. Out of the biodegradable waste, we produced manure and used it on our farm.
+                </x-small-testimonial-card>
+
+                <x-small-testimonial-card id="testimonial3" name="Prayas Dhakal" role="Class 5 - Sagittarius" src="/assets/testimonials/prayas.jpeg">
+                    For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
+                </x-small-testimonial-card>
+
+                <x-small-testimonial-card id="testimonial4" name="John Doe" role="Web Developer" src="/assets/testimonials/principal.jpg">
+                    Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat vulputate. Ut vulputate est non
+                    quam dignissim elementum. Donec a ullamcorper
+                </x-small-testimonial-card>
+                <x-small-testimonial-card id="testimonial5" name="John Doe" role="Web Developer" src="/assets/testimonials/principal.jpg">
+                    Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat vulputate. Ut vulputate est non
+                    quam dignissim elementum. Donec a ullamcorper diam.
+                </x-small-testimonial-card>
+
+            </div>
+        </section>
+        <!-- Section: Design Block -->
+    </div>
+    <!-- Container for demo purpose -->
+
+
     <span id="about-us"></span>
     <div class="pt-14">
 
-        <h2 class="about-us font-bold md:px-10 py-10 text-center text-3xl sm:text-2xl lg:text-4xl" id="about-us">About
+        <h2 class="about-us font-bold md:px-10 py-10 text-center text-3xl sm:text-2xl lg:text-4xl" id="about-us">
+            About
             Us</h2>
         <div class="px-3 md:px-10 py-5 flex flex-wrap">
             <div class="about-college w-full md:w-1/2 md:pr-5">
@@ -215,17 +245,17 @@
     <div class=" max-w-5xl mx-auto dev-container md:px-10">
         <div class="flex flex-wrap gap-5 justify-center">
 
-            <x-welcome-person-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg"
+            <x-developer-card name="Satish Chaudhary" role="Backend Developer" src="/assets/team/satish.jpg"
                 href="https://github.com/Satishcg12" />
-            <x-welcome-person-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg"
+            <x-developer-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg"
                 href="https://github.com/Rayyan-Balami" />
-            <x-welcome-person-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png"
+            <x-developer-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png"
                 href="#" />
-            <x-welcome-person-card name="Nishan Mahat" role="Quality Assurance Analyst"
-                src="/assets/team/nishan.jpeg" href="https://github.com/Nishanmahat8" />
-            <x-welcome-person-card name="Saiyam Shrestha" role="Presentation Coordinator"
-                src="/assets/team/saiyam.jpg" href="#" />
-            <x-welcome-person-card name="Riyaz Bajracharya" role="Visual Content Specialist"
+            <x-developer-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/nishan.jpeg"
+                href="https://github.com/Nishanmahat8" />
+            <x-developer-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg"
+                href="#" />
+            <x-developer-card name="Riyaz Bajracharya" role="Visual Content Specialist"
                 src="/assets/team/default.png" href="#" />
 
 
@@ -236,5 +266,6 @@
     @include('layouts.footer')
 
 </body>
+
 
 </html>

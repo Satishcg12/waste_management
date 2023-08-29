@@ -74,5 +74,21 @@ class User extends Authenticatable
         return false;
     }
 
+    public function totalNumberOfSubmissions ()
+    {
+        return $this->submission()->count();
+    }
+
+    public function numberOfVideos ()
+    {
+        return $this->submission()->where('attachment_type', 'video')->count();
+    }
+
+    public function numberOfImages ()
+    {
+        return $this->submission()->where('attachment_type', 'image')->count();
+    }
+
+
 
 }

@@ -66,12 +66,19 @@ class UserController extends Controller
             'grade_id' => 'required|integer|exists:grades,id'
         ]);
 
+        //generate username
+       do{
+            $username = strtolower(str_replace(' ', '_', $request->name)).'_'.rand(1000, 9999);
+        }while(User::where('username', $username)->exists());
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone'=> $request->phone,
             'password' => Hash::make($request->password),
             'grade_id' => $request->grade_id,
+            'username' => $username,
 
         ]);
 

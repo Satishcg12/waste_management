@@ -28,7 +28,7 @@ class UserController extends Controller
                 })
                 ->orderBy('name', 'asc')
                 ->paginate(10);
-                // dd($users);
+            // dd($users);
         } else {
             $users = User::where('grade_id', auth()->guard('teacher')->user()->grade_id)->orderBy('name', 'asc')->paginate(10);
         }
@@ -57,13 +57,20 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+
+        do {
+            $username = strtolower(str_replace(' ', '_', $request->name)).'_'.rand(1000, 9999);
+
+        } while (User::where('username', $username)->exists());
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'grade_id' => $request->grade_id,
-
+            'username' => $username,
         ]);
 
         return redirect()->route('teacher.user.create')->withSuccess('User Created Successfully');
