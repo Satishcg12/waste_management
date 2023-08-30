@@ -73,16 +73,6 @@ class SubmissionController extends Controller
         Storage::deleteDirectory('upload/temp/' . $temp_file->folder);
         $temp_file->delete();
 
-        // create submission job
-        // CreateSubmissionJob::dispatch($request);
-
-        // find teacher with same grade
-        $teachers = Teacher::where('grade_id', auth()->user()->grade_id)->get();
-        //send email to teachers
-        foreach ($teachers as $teacher) {
-            $teacher->notify(new TeacherSubmissionCreated($submission));
-        }
-
         // redirect
         return back()->withSuccess('Submission created successfully.');
 

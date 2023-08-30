@@ -106,7 +106,7 @@ class TeacherSubmissionController extends Controller
     {
         // dd(url());
         //delete submission from storage
-        Storage::deleteDirectory('upload/submission/' . $submission->folder);
+        // Storage::deleteDirectory('upload/submission/' . $submission->folder);
 
         //delete thumbnail
         if ($submission->thumbnail) {

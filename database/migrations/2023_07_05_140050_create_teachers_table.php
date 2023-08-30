@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');;
             $table->rememberToken();
 
-            $table->foreignId('grade_id')->constrained('grades')->nullOnDelete();
+            $table->foreignId('grade_id')->constrained('grades')->cascadeOnDelete();
 
             $table->timestamps();
         });

@@ -48,6 +48,9 @@
                     Name
                 </x-table-column>
                 <x-table-column>
+                    UserName
+                </x-table-column>
+                <x-table-column>
                     Grade
                 </x-table-column>
                 <x-table-column>
@@ -73,6 +76,9 @@
                                 <div class="font-medium text-gray-700">{{ $user->name }}</div>
                                 <div class="text-gray-500">{{ $user->email }}</div>
                             </div>
+                        </x-table-column>
+                        <x-table-column>
+                            {{ $user->username }}
                         </x-table-column>
                         <x-table-column>
                             {{ $user->grade->name }}

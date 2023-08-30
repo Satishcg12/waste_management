@@ -15,7 +15,7 @@ return new class extends Migration
             $table->boolean('TermsAndConditions')->default(false);
             $table->enum('upload_count', [0,1,2,3,4,5])->default(0);
             $table->timestamp('last_upload')->default(now());
-            $table->foreignId('grade_id')->constrained('grades')->nullOnDelete();
+            $table->foreignId('grade_id')->constrained('grades')->cascadeOnDelete();
         });
     }
 

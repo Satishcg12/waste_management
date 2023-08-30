@@ -76,7 +76,7 @@
     <section class="md:px-10 px-3 py-5 bg-gradient-to-t from-white to-gray-200">
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
-            <div class="grid gap-4">
+            <div class="grid gap-4 ">
                 <x-featured-card src="/assets/featured/1.jpg" />
                 <x-featured-card src="/assets/featured/2.jpg" />
                 <x-featured-card src="/assets/featured/3.jpg" />

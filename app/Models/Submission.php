@@ -23,17 +23,8 @@ class Submission extends Model
         return $this->belongsTo(Thumbnail::class);
     }
 
-    public function deleteFile(){
-
-
-        if (Storage::exists('upload/submission/' . $this->folder . '/' . $this->filename)) {
-            Storage::deleteDirectory('upload/submission/' . $this->folder);
-            return true;
-        }
-        return false;
-
-
-
+    public function deleteFolder(){
+        Storage::deleteDirectory('upload/submission/'.$this->folder);
     }
 
 }

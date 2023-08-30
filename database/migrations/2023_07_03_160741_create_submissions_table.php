@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('likeable')->default(true);
 
             //cascade delete
-            $table->foreignId('user_id')->constrained()->nullOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
         });
