@@ -122,11 +122,50 @@
                     For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
                 </x-small-testimonial-card>
 
-                <x-small-testimonial-card id="testimonial4" name="Comming soon..." role="comming soon" src="/assets/testimonials/user.jpg">
-                   comming soon...
+                <x-small-testimonial-card id="testimonial4" name="Aman Sitaula" role="Class 8" src="/assets/testimonials/aman.jpeg">
+                    &quot;Greetings! I&#39;m Aman Sitaula, an 8th-grade student at Manaslu, and I
+                    proudly serve as a Zero Waste Leader. Today, I&#39;m excited to provide you
+                    with insights into the remarkable Zero Waste Project.
+                    The Zero Waste Project is a pioneering initiative undertaken by
+                    Samriddhi School, renowned for its excellence in daily waste
+                    management. This project draws its inspiration from the noble cause of
+                    environmental conservation. We take the leftover food from our
+                    school&#39;s canteen, and under the guidance of our dedicated Zero Waste
+                    Leaders, we ensure that this waste is thoughtfully disposed of in
+                    designated pits.
+                    We are passionate about spreading the concept of zero waste at home,
+                    highlighting the significance of organic waste, which is a boon for the
+                    health of plants and flowers, among other things. Thanks to these
+                    initiatives, our school has made impressive strides in effectively
+                    handling the everyday kitchen waste. The compost generated from this
+                    project finds a valuable purpose in nurturing plants and vegetables,
+                    fostering the protection of our environment and, in turn, contributing
+                    to the preservation of our precious Earth.
+                    Join us on this journey to a greener, more sustainable future. Together,
+                    we can make a lasting impact!&quot;
                 </x-small-testimonial-card>
-                <x-small-testimonial-card id="testimonial5" name="Comming soon..." role="comming soon" src="/assets/testimonials/user.jpg">
-                   comming soon...
+                <x-small-testimonial-card id="testimonial5" name="Satkar Sapkota" role="Class 10" src="/assets/testimonials/satkar.jpeg">
+                    &quot;Hello, I&#39;m Satkar Sapkota, a current 10th-grade student at Samriddhi
+                    School, and I&#39;m excited to share my experiences with the Zero Waste
+                    Project. First, let me introduce what the Zero Waste Project entails.
+                    Zero waste involves efficiently managing the waste produced in our
+                    daily lives, including kitchen scraps like vegetable peels, unwanted parts
+                    of vegetables or fruits, and dried leaves from trees. Kitchen waste and
+                    dried leaves are categorized as &#39;greens&#39; and &#39;browns,&#39; which are rich in
+                    nitrogen, essential for promoting healthy plant growth.
+                    However, the Zero Waste Project is not just about managing waste that
+                    can be converted into valuable compost. It also requires proper
+                    guidance and support from dedicated leaders in the zero-waste
+                    movement. Our school&#39;s principal, Mr. Naresh Prasad Shrestha,
+                    introduced this initiative to all students. We were encouraged to
+                    segregate waste into degradable and non-degradable categories in our
+                    homes, and whenever possible, to compost the waste ourselves.
+                    The Zero Waste Project isn&#39;t solely focused on creating compost and
+                    distributing it to consumers; it&#39;s also designed to protect the
+                    environment. By reducing waste at its source, we contribute to a
+                    significant decrease in pollution.
+                    Through this project, students have discovered the hidden value in
+                    everyday waste and its crucial role in environmental conservation.
                 </x-small-testimonial-card>
 
             </div>
