@@ -112,8 +112,8 @@ class UserController extends Controller
         //validate the request
         $validation=$request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'phone' => 'required|numeric|digits:10|unique:users,phone,'.$user->id.'|unique:admins,phone|unique:teachers,phone',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:10',
             'upload_count' => 'required|integer|between:0,5',
             'grade_id' => 'required|integer|exists:grades,id'
 

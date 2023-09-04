@@ -25,8 +25,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'email' => 'required|email|unique:users,email|unique:admins|unique:teachers',
-            'phone' => 'required|numeric|unique:users,phone|digits:10|unique:admins|unique:teachers',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:10',
             'password' => ['required', 'confirmed', Password::defaults()],
             'grade_id' => 'required|exists:grades,id',
         ];
