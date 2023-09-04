@@ -46,9 +46,33 @@ class Teacher extends Authenticatable
     {
         return $this->belongsTo(Grade::class);
     }
+
     public function students()
     {
-        return $this->hasMany(User::class);
+        return User::where('grade_id', $this->grade_id)->get();
     }
+    public function totalNumberOfStudents()
+    {
+        return $this->students()->count();
+    }
+    public function totalNumberOfSubmissions()
+    {
+        return $this->submission()->count();
+    }
+    public function submission()
+    {
+        return $this->students()->map(function ($student) {
+            return $student->submission;
+        })->flatten();
+    }
+    public function numberOfVideos()
+    {
+        return $this->submission()->where('attachment_type', 'video')->count();
+    }
+    public function numberOfImages()
+    {
+        return $this->submission()->where('attachment_type', 'image')->count();
+    }
+
 
 }

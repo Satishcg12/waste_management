@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\TeacherPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminPasswordController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\AdminProfileController;
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
@@ -37,6 +38,17 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
             Route::put('password/teacher', [TeacherPasswordController::class, 'update'])->name('password.teacher.update');
             Route::put('password/admin', [AdminPasswordController::class, 'update'])->name('password.admin.update');
         });
+
+        //admin profile routes
+        Route::get('profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('profile', [AdminProfileController::class, 'update'])->name('profile.update');
+
+         //password change routes
+         Route::namespace('Auth')->group(function(){
+            Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+        });
+
+
         //editors routes
         Route::get('terms-editor',function () {
             return view('admin.MDEditor.terms');

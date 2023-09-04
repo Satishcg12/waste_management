@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,20 +18,22 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-
         $validated = Validator::make($request->all(), [
-            'id' => 'required|exists:users,id',
-            'password' => 'required|string|confirmed|min:8',
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'confirmed', Password::defaults()],
         ]);
-
+        //check if the current password matches the one in the database
         //error validation
         if ($validated->fails()) {
             return back()->withErrors($validated->errors());
+        }elseif (!Hash::check($request->current_password, auth()->guard('teacher')->user()->password)) {
+            return back()->withErrors(['current_password' => 'The provided password does not match your current password.']);
         }
 
+
         //update password
-        User::find($request->id)->update([
-            'password' => Hash::make($validated->validated()['password']),
+       Teacher::where('id', auth()->guard('teacher')->user()->id)->update([
+            'password' => Hash::make($request->password),
         ]);
 
 

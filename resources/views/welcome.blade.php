@@ -104,7 +104,7 @@
         <!-- Section: Design Block -->
         <h2 class="my-12 text-3xl font-bold text-center">Testimonials</h2>
         <section class="mb-24 text-center md:text-left">
-            <x-large-testimonial-card name="Prayas Dhakal" role="Class 5 – Sagittarius" src="/assets/testimonials/principal.jpg">
+            <x-large-testimonial-card name="Naresh Prasad Shrestha" role="CEO/Principal" src="/assets/testimonials/principal.jpg">
                 For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
             </x-large-testimonial-card>
         </section>
@@ -122,13 +122,11 @@
                     For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
                 </x-small-testimonial-card>
 
-                <x-small-testimonial-card id="testimonial4" name="John Doe" role="Web Developer" src="/assets/testimonials/principal.jpg">
-                    Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat vulputate. Ut vulputate est non
-                    quam dignissim elementum. Donec a ullamcorper
+                <x-small-testimonial-card id="testimonial4" name="Comming soon..." role="comming soon" src="/assets/testimonials/user.jpg">
+                   comming soon...
                 </x-small-testimonial-card>
-                <x-small-testimonial-card id="testimonial5" name="John Doe" role="Web Developer" src="/assets/testimonials/principal.jpg">
-                    Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat vulputate. Ut vulputate est non
-                    quam dignissim elementum. Donec a ullamcorper diam.
+                <x-small-testimonial-card id="testimonial5" name="Comming soon..." role="comming soon" src="/assets/testimonials/user.jpg">
+                   comming soon...
                 </x-small-testimonial-card>
 
             </div>

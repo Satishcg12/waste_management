@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Validator;
 
 class PasswordController extends Controller
 {
@@ -16,25 +17,18 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-        if(auth()->user()->isTeacher || auth()->user()->isAdmin){
-            $validated =$request->validateWithBag('updatePassword', [
-                //check if the password fied matches "CONFIREM"
-                'password' => ['required', 'confirmed', Password::defaults()],
-            ]);
-            User::find($request->id)->update([
-                'password' => Hash::make($validated['password']),
-            ]);
-
-            return back()->with('status', 'password-updated');
-        }else{
-            $validated = $request->validateWithBag('updatePassword', [
-                'current_password' => ['required', 'current_password'],
-                'password' => ['required', Password::defaults(), 'confirmed'],
-            ]);
-            $request->user()->update([
-                'password' => Hash::make($validated['password']),
-            ]);
-            return back()->with('status', 'password-updated');
+        $validate = Validator::make($request->all(), [
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ]);
+        if ($validate->fails()) {
+            return back()->withErrors($validate);
         }
+        $user = User::find(auth()->user()->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->withSuccess('Password Updated Successfully');
+
     }
 }

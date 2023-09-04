@@ -4,8 +4,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3">
         <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
             <div>
-                <p class="font-bold text-gray-700 text-xl">{{ $user->totalNumberOfSubmissions() }}</p>
-                <p class="text-gray-400">Uploads</p>
+                <p class="font-bold text-gray-700 text-xl">{{ $user->totalNumberOfStudents() }}</p>
+                <p class="text-gray-400">Your Students</p>
             </div>
             <div>
                 <p class="font-bold text-gray-700 text-xl">{{ $user->numberOfVideos() }}</p>
@@ -25,9 +25,9 @@
             </div>
         </div>
         <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-            <button onclick="window.location.href='{{ route('submission.create') }}'"
+            <button onclick="window.location.href='{{ route('teacher.user.create') }}'"
                 class="text-white py-2 px-4 uppercase rounded bg-orange-500 hover:bg-orange-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                Upload
+                Add User
             </button>
             <a href="#change-password"
                 class="text-white py-2 px-4 uppercase rounded bg-blue-500 hover:bg-blue-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 grid place-content-center ">
@@ -38,7 +38,6 @@
     </div>
     <div class="mt-20 text-center">
         <h1 class="text-4xl font-medium text-gray-700">{{ $user->name }}</h1>
-        <p class="font-light text-gray-600 mt-3 select-text">{{ '@' . $user->username }}</p>
         <p class="mt-8 text-gray-500">{{ $user->email }} - {{ $user->phone }}</p>
         <p class="mt-2 text-gray-500">{{ $user->grade->name }}</p>
     </div>

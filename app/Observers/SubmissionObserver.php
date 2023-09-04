@@ -36,6 +36,7 @@ class SubmissionObserver
     public function deleted(Submission $submission): void
     {
         DeleteSubmissionFromStorage::dispatch($submission);
+        dd('deleted');
     }
 
     /**

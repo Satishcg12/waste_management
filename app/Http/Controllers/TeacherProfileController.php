@@ -11,15 +11,16 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ProfileController extends Controller
+class TeacherProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+
+        return view('teacher.profile.edit', [
+            'user' => auth()->guard('teacher')->user(),
         ]);
     }
 
@@ -39,5 +40,6 @@ class ProfileController extends Controller
         Alert::success('Success', 'Profile Updated Successfully');
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
 
 }

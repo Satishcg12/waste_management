@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ProfileController extends Controller
+class AdminProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        return view('admin.profile.edit', [
+            'user' => auth()->guard('admin')->user(),
         ]);
     }
 
@@ -28,16 +28,14 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->guard('admin')->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($request->guard('admin')->user()->isDirty('email')) {
+            $request->guard('admin')->user()->email_verified_at = null;
         }
 
         $request->user()->save();
 
-        Alert::success('Success', 'Profile Updated Successfully');
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->withSuccess('Profile updated.');
     }
-
 }

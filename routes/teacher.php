@@ -4,6 +4,7 @@ use App\Http\Controllers\Teacher\Auth\PasswordController;
 use App\Http\Controllers\Teacher\UserController;
 use App\Http\Controllers\Teacher\HomeController;
 use App\Http\Controllers\Teacher\TeacherSubmissionController;
+use App\Http\Controllers\TeacherProfileController;
 
 Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teacher.')->group(function(){
 
@@ -30,6 +31,11 @@ Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teach
         Route::namespace('Auth')->group(function(){
             Route::put('password', [PasswordController::class, 'update'])->name('password.update');
         });
+
+        //profile routes
+        Route::get('profile', [TeacherProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('profile', [TeacherProfileController::class, 'update'])->name('profile.update');
+
     });
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 

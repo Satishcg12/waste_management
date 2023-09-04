@@ -11,6 +11,14 @@ class Submission extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected static function boot(){
+        parent::boot();
+
+        static::deleting(function($submission){
+            $submission->deleteFolder();
+        });
+    }
     public function user(){
         return $this->belongsTo(User::class);
     }

@@ -42,4 +42,24 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function totalNumberOfTeachers()
+    {
+        return Teacher::count();
+    }
+
+    public function totalNumberOfStudents()
+    {
+        return User::count();
+    }
+
+    public function totalNumberOfGrades()
+    {
+        return Grade::count();
+    }
+
+    public function totalNumberOfSubmissions()
+    {
+        return Submission::count();
+    }
+
 }

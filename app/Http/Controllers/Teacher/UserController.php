@@ -24,7 +24,9 @@ class UserController extends Controller
             $users = User::where('grade_id', auth()->guard('teacher')->user()->grade_id)
                 ->where(function ($query) {
                     $query->where('name', 'like', '%' . request()->get('search') . '%')
-                        ->orWhere('email', 'like', '%' . request()->get('search') . '%');
+                        ->orWhere('email', 'like', '%' . request()->get('search') . '%')
+                        ->orWhere('phone', 'like', '%' . request()->get('search') . '%')
+                        ->orWhere('username', 'like', '%' . request()->get('search') . '%');
                 })
                 ->orderBy('name', 'asc')
                 ->paginate(10);
