@@ -6,7 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Zero Waste Project - Samriddhi School" />
+    <meta property="og:description"
+        content="Samriddhi School offers dedicated K-12 education, catering to each student's unique needs. We celebrate diversity, fostering a passion for learning and creativity." />
+    <meta property="og:image" content="/assets/websiteThumbnail.png" />
+    <meta property="og:url" content="{{config('app.url')}}" />
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -65,8 +70,8 @@
             </p>
             <div class="buttons mt-5 ">
                 <a href="{{ route('home') }}">
-                <button
-                    class="text-white text-light px-6 py-4 rounded-lg bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl font-bold transition-all duration-300">
+                    <button
+                        class="text-white text-light px-6 py-4 rounded-lg bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl font-bold transition-all duration-300">
                         Our Contribution
                     </button>
                 </a>
@@ -104,25 +109,45 @@
         <!-- Section: Design Block -->
         <h2 class="my-12 text-3xl font-bold text-center">Testimonials</h2>
         <section class="mb-24 text-center md:text-left">
-            <x-large-testimonial-card name="Naresh Prasad Shrestha" role="CEO/Principal" src="/assets/testimonials/principal.jpg">
-                For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
+            <x-large-testimonial-card name="Naresh Prasad Shrestha" role="CEO/Principal"
+                src="/assets/testimonials/principal.jpg">
+                For me, a zero-waste project is an environmentally friendly project that would help our community be
+                free from waste. I learned that this is one of the most effective methods of waste management. And I am
+                happy that we are learning this at school because even at home we started segregating our waste into
+                biodegradable and non-biodegradable.
             </x-large-testimonial-card>
         </section>
         <section class=" text-center">
 
             <div class="grid gap-x-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-6">
-                <x-small-testimonial-card id="testimonia1" name="Mayara Thapa" role="Class 3 Silver" src="/assets/testimonials/mayara.jpeg">
-                    The zero-waste project is all about recycling, reusing, and reducing waste materials into something useful. I learned to separate the non-biodegradable and biodegradable waste. As a zero-waste leader, I check if my friends are not wasting their food and make sure that they leave with a clean plate. I never waste my food or dirty my surroundings. I also shared with my family members the importance of keeping our environment clean. At home, I help my mom make manure out of our kitchen waste.
+                <x-small-testimonial-card id="testimonia1" name="Mayara Thapa" role="Class 3 Silver"
+                    src="/assets/testimonials/mayara.jpeg">
+                    The zero-waste project is all about recycling, reusing, and reducing waste materials into something
+                    useful. I learned to separate the non-biodegradable and biodegradable waste. As a zero-waste leader,
+                    I check if my friends are not wasting their food and make sure that they leave with a clean plate. I
+                    never waste my food or dirty my surroundings. I also shared with my family members the importance of
+                    keeping our environment clean. At home, I help my mom make manure out of our kitchen waste.
                 </x-small-testimonial-card>
-                <x-small-testimonial-card id="testimonial2" name="Yushan Shrestha" role="Class 4 - Gemini" src="/assets/testimonials/yushan.jpeg">
-                    The zero-waste project is one of the most important projects we are implementing at the school. It is an activity to protect our environment. I learned that we can create useful things out of waste, even kitchen waste. As a leader, I don’t allow anyone to waste their food. At home, I also encourage my siblings not to waste whatever they have on their plate. We also separate the biodegradable and non-biodegradable wastes at home. Out of the biodegradable waste, we produced manure and used it on our farm.
+                <x-small-testimonial-card id="testimonial2" name="Yushan Shrestha" role="Class 4 - Gemini"
+                    src="/assets/testimonials/yushan.jpeg">
+                    The zero-waste project is one of the most important projects we are implementing at the school. It
+                    is an activity to protect our environment. I learned that we can create useful things out of waste,
+                    even kitchen waste. As a leader, I don’t allow anyone to waste their food. At home, I also encourage
+                    my siblings not to waste whatever they have on their plate. We also separate the biodegradable and
+                    non-biodegradable wastes at home. Out of the biodegradable waste, we produced manure and used it on
+                    our farm.
                 </x-small-testimonial-card>
 
-                <x-small-testimonial-card id="testimonial3" name="Prayas Dhakal" role="Class 5 - Sagittarius" src="/assets/testimonials/prayas.jpeg">
-                    For me, a zero-waste project is an environmentally friendly project that would help our community be free from waste. I learned that this is one of the most effective methods of waste management. And I am happy that we are learning this at school because even at home we started segregating our waste into biodegradable and non-biodegradable.
+                <x-small-testimonial-card id="testimonial3" name="Prayas Dhakal" role="Class 5 - Sagittarius"
+                    src="/assets/testimonials/prayas.jpeg">
+                    For me, a zero-waste project is an environmentally friendly project that would help our community be
+                    free from waste. I learned that this is one of the most effective methods of waste management. And I
+                    am happy that we are learning this at school because even at home we started segregating our waste
+                    into biodegradable and non-biodegradable.
                 </x-small-testimonial-card>
 
-                <x-small-testimonial-card id="testimonial4" name="Aman Sitaula" role="Class 8" src="/assets/testimonials/aman.jpeg">
+                <x-small-testimonial-card id="testimonial4" name="Aman Sitaula" role="Class 8"
+                    src="/assets/testimonials/aman.jpeg">
                     &quot;Greetings! I&#39;m Aman Sitaula, an 8th-grade student at Manaslu, and I
                     proudly serve as a Zero Waste Leader. Today, I&#39;m excited to provide you
                     with insights into the remarkable Zero Waste Project.
@@ -144,7 +169,8 @@
                     Join us on this journey to a greener, more sustainable future. Together,
                     we can make a lasting impact!&quot;
                 </x-small-testimonial-card>
-                <x-small-testimonial-card id="testimonial5" name="Satkar Sapkota" role="Class 10" src="/assets/testimonials/satkar.jpeg">
+                <x-small-testimonial-card id="testimonial5" name="Satkar Sapkota" role="Class 10"
+                    src="/assets/testimonials/satkar.jpeg">
                     &quot;Hello, I&#39;m Satkar Sapkota, a current 10th-grade student at Samriddhi
                     School, and I&#39;m excited to share my experiences with the Zero Waste
                     Project. First, let me introduce what the Zero Waste Project entails.
@@ -286,8 +312,8 @@
                 href="https://github.com/Satishcg12" />
             <x-developer-card name="Rayyan Balami" role="Frontend Developer" src="/assets/team/rynb_hir000.jpeg"
                 href="https://github.com/Rayyan-Balami" />
-            <x-developer-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/default.png"
-                href="#" />
+            <x-developer-card name="Kelvin Maharjan" role="Technical Writer" src="/assets/team/kelvin.jpg"
+                href="https://www.facebook.com/profile.php?id=100004868089200&mibextid=LQQJ4d" />
             <x-developer-card name="Nishan Mahat" role="Quality Assurance Analyst" src="/assets/team/nishan.jpeg"
                 href="https://github.com/Nishanmahat8" />
             <x-developer-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg"

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\DeleteSubmissionFromStorage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class Submission extends Model
         parent::boot();
 
         static::deleting(function($submission){
-            $submission->deleteFolder();
+            DeleteSubmissionFromStorage::dispatch($submission);
         });
     }
     public function user(){
