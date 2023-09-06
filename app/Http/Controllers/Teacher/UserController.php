@@ -142,4 +142,24 @@ class UserController extends Controller
         return redirect()->route('teacher.user.index')->withSuccess('User Deleted Successfully');
 
     }
+
+    public function download()
+    {
+        if(!auth()->guard('teacher')->user()->grade_id){
+            //unauthorized access
+            return redirect()->route('teacher.dashboard')->withError('You are not allowed to download user data');
+        }
+        $users = User::where('grade_id', auth()->guard('teacher')->user()->grade_id)->get();
+        $filename = 'users.csv';
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('Name', 'Username', 'Grade', 'Email', 'Phone'));
+        foreach ($users as $user) {
+            fputcsv($handle, array($user->name, $user->username, $user->grade->name, $user->email, $user->phone));
+        }
+        fclose($handle);
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        return response()->download($filename, 'users.csv', $headers);
+    }
 }

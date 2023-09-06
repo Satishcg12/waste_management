@@ -13,8 +13,16 @@
                     @endif
                 </p>
             </div>
-            <a href="{{ route('teacher.user.create') }}"
+            <div>
+
+                <a href="{{ route('teacher.user.create') }}"
                 class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Add User</a>
+                {{-- download user data --}}
+                <a href="{{ route('teacher.user.download') }}"
+                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Download Student Data</a>
+            </div>
+
+
         </div>
     </x-slot>
 
@@ -29,87 +37,88 @@
                 @endif
             </h1>
         </div>
-        @else
-    <!-- component -->
-    <x-table>
-        <x-slot name="head">
-            @if (session('status') === 'user-not-deleted')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-red-600">
-                    {{ __('cannot delete user') }}</p>
-            @endif
-            <x-table-column>
-                Name
-            </x-table-column>
+    @else
+        <!-- component -->
+        <x-table>
+            <x-slot name="head">
+                @if (session('status') === 'user-not-deleted')
+                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm text-red-600">
+                        {{ __('cannot delete user') }}</p>
+                @endif
+                <x-table-column>
+                    Name
+                </x-table-column>
 
-            <x-table-column>
-                UserName
-            </x-table-column>
+                <x-table-column>
+                    UserName
+                </x-table-column>
 
-            <x-table-column>
-                Grade
-            </x-table-column>
-            <x-table-column>
-                Role
-            </x-table-column>
-            <x-table-column>
-                Upload Count
-            </x-table-column>
-            <x-table-column>
-                Last Update
-            </x-table-column>
-            <x-table-column>
-                Action
-            </x-table-column>
-        </x-slot>
-        <x-slot name="body">
+                <x-table-column>
+                    Grade
+                </x-table-column>
+                <x-table-column>
+                    Role
+                </x-table-column>
+                <x-table-column>
+                    Upload Count
+                </x-table-column>
+                <x-table-column>
+                    Last Update
+                </x-table-column>
+                <x-table-column>
+                    Action
+                </x-table-column>
+            </x-slot>
+            <x-slot name="body">
 
-            @foreach ($users as $user)
+                @foreach ($users as $user)
+                    <tr>
+
+                        <x-table-column>
+                            <div class="text-sm">
+                                <div class="font-medium text-gray-700">{{ $user->name }}</div>
+                                <div class="text-gray-500">{{ $user->email }}</div>
+                            </div>
+                        </x-table-column>
+                        <x-table-column>
+                            {{ $user->username }}
+                        </x-table-column>
+                        <x-table-column>
+                            {{ $user->grade->name }}
+                        </x-table-column>
+                        <x-table-column>
+                            student
+                        </x-table-column>
+                        <x-table-column>
+                            {{ $user->upload_count }}
+                        </x-table-column>
+                        <x-table-column>
+                            {{-- display "-" if user update at is null --}}
+                            @if ($user->updated_at)
+                                {{ $user->updated_at->diffForHumans() }}
+                            @else
+                                -
+                            @endif
+                        </x-table-column>
+                        <x-table-column>
+                            <div class="flex gap-2 items-center">
+                                <a href="{{ route('teacher.user.edit', $user->id) }}"
+                                    class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
+                                    Edit
+                                </a>
+                                <x-delete-btn :href="route('teacher.user.destroy', $user->id)" />
+                            </div>
+                        </x-table-column>
+                    </tr>
+                @endforeach
                 <tr>
+                    <x-table-column colspan="6">
 
-                    <x-table-column>
-                        <div class="text-sm">
-                            <div class="font-medium text-gray-700">{{ $user->name }}</div>
-                            <div class="text-gray-500">{{ $user->email }}</div>
-                        </div>
-                    </x-table-column>
-                    <x-table-column>
-                        {{ $user->username }}
-                    </x-table-column>
-                    <x-table-column>
-                        {{ $user->grade->name }}
-                    </x-table-column>
-                    <x-table-column>
-                        student
-                    </x-table-column>
-                    <x-table-column>
-                        {{ $user->upload_count }}
-                    </x-table-column>
-                    <x-table-column>
-                        {{-- display "-" if user update at is null --}}
-                        @if ($user->updated_at)
-                            {{ $user->updated_at->diffForHumans() }}
-                        @else
-                            -
-                        @endif
-                    </x-table-column>
-                    <x-table-column>
-                        <div class="flex gap-2 items-center">
-                            <a href="{{ route('teacher.user.edit', $user->id) }}"
-                                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
-                                Edit
-                            </a>
-                            <x-delete-btn :href="route('teacher.user.destroy', $user->id)" />
-                        </div>
+                        <div class="pagination">{{ $users->links() }}</div>
                     </x-table-column>
                 </tr>
-            @endforeach
-            <tr>
-                <x-table-column colspan="6">
-
-                    <div class="pagination">{{ $users->links() }}</div>
-                </x-table-column>
-            </tr>
-        </x-slot>
-    </x-table>
+            </x-slot>
+        </x-table>
     @endif
 </x-teacher-layout>

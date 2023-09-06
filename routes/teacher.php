@@ -35,7 +35,8 @@ Route::namespace('App\Http\Controllers\Teacher')->prefix('teacher')->name('teach
         //profile routes
         Route::get('profile', [TeacherProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('profile', [TeacherProfileController::class, 'update'])->name('profile.update');
-
+        // download user data
+        Route::get('user-data', [UserController::class, 'download'])->name('user.download');
     });
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
