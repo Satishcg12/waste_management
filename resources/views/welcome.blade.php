@@ -4,6 +4,12 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="description"
+        content="Samriddhi School offers dedicated K-12 education, catering to each student's unique needs. We celebrate diversity, fostering a passion for learning and creativity.">
+    <meta name="keywords" content="zero waste, recycling, composting, environmental education, samriddhi school">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow" />
@@ -70,7 +76,7 @@
             </p>
             <div class="buttons mt-5 ">
                 <a href="{{ route('home') }}">
-                    <button
+                    <button title="Home"
                         class="text-white text-light px-6 py-4 rounded-lg bg-orange-500 hover:bg-orange-600 shadow-lg hover:shadow-xl font-bold transition-all duration-300">
                         Our Contribution
                     </button>
@@ -320,8 +326,8 @@
                 href="https://github.com/Nishanmahat8" />
             <x-developer-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg"
                 href="#" />
-            <x-developer-card name="Riyaz Bajracharya" role="Visual Content Specialist"
-                src="/assets/team/riyaz.jpg" href="https://www.instagram.com/bajrariyaaz/" />
+            <x-developer-card name="Riyaz Bajracharya" role="Visual Content Specialist" src="/assets/team/riyaz.jpg"
+                href="https://www.instagram.com/bajrariyaaz/" />
 
 
         </div>
