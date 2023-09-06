@@ -11,7 +11,7 @@
     <meta property="og:description"
         content="Samriddhi School offers dedicated K-12 education, catering to each student's unique needs. We celebrate diversity, fostering a passion for learning and creativity." />
     <meta property="og:image" content="/assets/websiteThumbnail.png" />
-    <meta property="og:url" content="{{config('app.url')}}" />
+    <meta property="og:url" content="{{ config('app.url') }}" />
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -111,10 +111,12 @@
         <section class="mb-24 text-center md:text-left">
             <x-large-testimonial-card name="Naresh Prasad Shrestha" role="CEO/Principal"
                 src="/assets/testimonials/principal.jpg">
-                For me, a zero-waste project is an environmentally friendly project that would help our community be
-                free from waste. I learned that this is one of the most effective methods of waste management. And I am
-                happy that we are learning this at school because even at home we started segregating our waste into
-                biodegradable and non-biodegradable.
+                As the principal of Samriddhi School, I am proud to say that our Zero Waste Project is an
+                environmentally friendly initiative that helps our community become free from waste. Our students have
+                learned that this is one of the most effective methods of waste management, and they have even started
+                segregating their waste into biodegradable and non-biodegradable at home. This project is a great
+                example of how small steps can make a big difference in protecting our environment. Together, we can
+                transform the world one step at a time. From waste to wonder!
             </x-large-testimonial-card>
         </section>
         <section class=" text-center">
@@ -319,7 +321,7 @@
             <x-developer-card name="Saiyam Shrestha" role="Presentation Coordinator" src="/assets/team/saiyam.jpg"
                 href="#" />
             <x-developer-card name="Riyaz Bajracharya" role="Visual Content Specialist"
-                src="/assets/team/default.png" href="#" />
+                src="/assets/team/riyaz.jpg" href="https://www.instagram.com/bajrariyaaz/" />
 
 
         </div>

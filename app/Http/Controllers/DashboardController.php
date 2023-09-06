@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Validator;
 
 class DashboardController extends Controller
 {
@@ -36,5 +37,22 @@ class DashboardController extends Controller
             'TermsAndConditions' => true,
         ]);
         return redirect()->route('dashboard');
+    }
+
+    public function firstLogin(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'password' => 'required|confirmed|min:8',
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate);
+        }
+
+        $user = auth()->user();
+        $user->update([
+            'first_login' => false,
+            'password' => bcrypt($request->password),
+        ]);
+        return redirect()->route('dashboard')->withSuccess('Password changed successfully!');
     }
 }

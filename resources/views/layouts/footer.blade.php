@@ -8,8 +8,8 @@
                     <x-application-logo class="h-20 text-gray-900  fill-current" />
                 </a>
             </div>
-            <div class="grid grid-cols-1 gap-8 sm:gap-6 md:grid-cols-3">
-                <div class="md:flex flex-col justify-center items-center group">
+            <div class="grid grid-cols-1 gap-8 sm:gap-6 md:grid-cols-4">
+                <div class="md:flex flex-col  items-center group">
 
                     <a href="https://www.google.com/maps/place/Samriddhi+School+%2B2+Building/@27.7233712,85.299449,16.68z/data=!4m6!3m5!1s0x39eb19ef54e76055:0xdb155153575aea3a!8m2!3d27.724216!4d85.2996981!16s%2Fg%2F11f66v98n3?entry=ttu"
                     class="block">
@@ -45,11 +45,22 @@
                         </li>
                     </ul>
                 </div>
+
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase ">Partners</h2>
+                    <ul class="text-gray-500  font-medium">
+                        <li class="mb-4">
+                            <a href="https://dataspace.com.np/" class="hover:underline " title="Our hosting partner ">DATASPACE PVT. LTD.(hosting)</a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto  lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-gray-500 sm:text-center ">© 2023 <a href="#" class="hover:underline"
+            <span class="text-sm text-gray-500 sm:text-center ">© 2023 <a href="https://samriddhischool.edu.np"
+                class="hover:underline"
                     target="_blank">ZeroWaste™</a>. <a href="https://samriddhischool.edu.np" class="hover:underline"
                     target="_blank"></a>Samriddhi School</a>, Binayak Basti, Balaju, Kathmandu .
             </span>
@@ -72,7 +83,7 @@
                     </svg>
                     <span class="sr-only">Discord community</span>
                 </a> --}}
-                <a href="#" class="text-gray-500 hover:text-gray-900 ">
+                {{-- <a href="#" class="text-gray-500 hover:text-gray-900 ">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 20 17">
                         <path fill-rule="evenodd"
@@ -80,7 +91,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <span class="sr-only">Twitter page</span>
-                </a>
+                </a> --}}
                 <a href="https://github.com/Satishcg12/waste_management" class="text-gray-500 hover:text-gray-900 ">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 20 20">
@@ -90,7 +101,7 @@
                     </svg>
                     <span class="sr-only">GitHub account</span>
                 </a>
-                <a href="mailto:sung20700@gmail.com" class="text-gray-500 hover:text-gray-900 ">
+                <a href="mailto:zerowaste@samriddhischool.edu.np" class="text-gray-500 hover:text-gray-900 ">
 
                     {{-- svg icon of gmail --}}
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>

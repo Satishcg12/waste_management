@@ -27,26 +27,28 @@
 
 <body class="font-sans antialiased  bg-gray-100">
 
+    @include('sweetalert::alert')
     @if (
         !(auth()->user() &&
             auth()->user()->hasAgreedToTermsAndConditions()
         ))
         <x-terms-and-conditions />
+    @elseif (auth()->user()->first_login)
+        <x-first-login-form />
     @else
         @include('layouts.navigation')
-        @include('sweetalert::alert')
         <section class="p-4 sm:ml-64">
             @if (request()->routeIs('dashboard'))
-                <form class="relative w-full max-w-3xl mt-2 mx-auto mb-4 hidden" action="{{ url()->current() }}" method="GET"
-                    id="search-form">
+                <form class="relative w-full max-w-3xl mt-2 mx-auto mb-4 hidden" action="{{ url()->current() }}"
+                    method="GET" id="search-form">
                     <label for="search"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
                         <input type="search" id="search" name="search"
