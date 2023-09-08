@@ -86,21 +86,29 @@
     </main>
 
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10  bg-gradient-to-b to-white from-gray-100">
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/1.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/2.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/3.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/4.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/5.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/6.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/7.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/8.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/9.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/10.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/11.jpg"/>
-    <x-featured-card title="Zero Waste Project" image="/assets/featured/12.jpg"/>
 
-</div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-3 md:px-10 py-5 bg-gradient-to-b to-white from-gray-100">
+        <div class="grid gap-4">
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/1.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/2.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/3.jpg"/>
+        </div>
+        <div class="grid gap-4">
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/4.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/5.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/6.jpg"/>
+        </div>
+        <div class="grid gap-4">
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/7.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/8.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/9.jpg"/>
+        </div>
+        <div class="grid gap-4">
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/10.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/11.jpg"/>
+            <x-featured-card title="Zero Waste Project" image="/assets/featured/12.jpg"/>
+        </div>
+    </div>
 
 
 
@@ -220,7 +228,8 @@
                     students to reach their full potential, embracing unlimited human capacity. We prioritize a
                     well-rounded education with a STEAM focus, ensuring academic excellence and personal growth.
                 </div>
-                <div class="vision w-full p-4 mb-4 text-justify bg-gray-100  hover:bg-gray-200 duration-300 rounded-lg">
+                <div
+                    class="vision w-full p-4 mb-4 text-justify bg-gray-100  hover:bg-gray-200 duration-300 rounded-lg">
                     <h2 class="pb-3 text-2xl">Vision</h2>
                     We envision Samriddhi School as a dynamic educational institution, setting a benchmark for students.
                     Our goal is to create an exceptional learning environment, where students thrive in an ever-evolving
