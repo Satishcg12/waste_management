@@ -64,7 +64,7 @@
     <div id="top"></div>
     @include('layouts.publicNavigation')
 
-    <main class="  mt-5 h-[80vh] flex flex-col justify-center items-center bg-gradient-to-b from-white to-gray-200">
+    <main class="  mt-5 h-[80vh] flex flex-col justify-center items-center bg-gradient-to-b from-white to-gray-100">
         <div class="main text-center p-5 py-52 ">
             <h2 class="font-extrabold text-4xl sm:text-5xl lg:text-6xl">
                 <span class="text-blue-800">"From Waste to Wonder"</span><br>
@@ -84,31 +84,25 @@
             </div>
         </div>
     </main>
-    <section class="md:px-10 px-3 py-5 bg-gradient-to-t from-white to-gray-200">
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
-            <div class="grid gap-4 ">
-                <x-featured-card src="/assets/featured/1.jpg" />
-                <x-featured-card src="/assets/featured/2.jpg" />
-                <x-featured-card src="/assets/featured/3.jpg" />
-            </div>
-            <div class="grid gap-4">
-                <x-featured-card src="/assets/featured/4.jpg" />
-                <x-featured-card src="/assets/featured/5.jpg" />
-                <x-featured-card src="/assets/featured/6.jpg" />
-            </div>
-            <div class="grid gap-4">
-                <x-featured-card src="/assets/featured/7.jpg" />
-                <x-featured-card src="/assets/featured/8.jpg" />
-                <x-featured-card src="/assets/featured/9.jpg" />
-            </div>
-            <div class="grid gap-4">
-                <x-featured-card src="/assets/featured/10.jpg" />
-                <x-featured-card src="/assets/featured/11.jpg" />
-                <x-featured-card src="/assets/featured/12.jpg" />
-            </div>
-        </div>
-    </section>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10  bg-gradient-to-b to-white from-gray-100">
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/1.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/2.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/3.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/4.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/5.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/6.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/7.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/8.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/9.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/10.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/11.jpg"/>
+    <x-featured-card title="Zero Waste Project" image="/assets/featured/12.jpg"/>
+
+</div>
+
+
 
     <!-- Container for demo purpose -->
     <div class="container md:px-10 px-3 mx-auto">

@@ -1,4 +1,3 @@
-<div class="drop-shadow-xl border rounded-lg overflow-hidden">
-    <img class="h-full max-w-full rounded-lg" lazy="loading"
-        src="{{$src}}" alt="{{$src}}">
+<div>
+    <img class="h-auto max-w-full rounded-lg aspect-square object-cover" src="{{ $image }}" alt="{{ $title }}">
 </div>
