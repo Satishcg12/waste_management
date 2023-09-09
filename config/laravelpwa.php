@@ -59,6 +59,11 @@ return [
                 'name' => 'Teacher Login',
                 'description' => 'Here you can login',
                 'url' => '/teacher/login',
+            ],
+            [
+                'name' => 'Admin Login',
+                'description' => 'Here you can login',
+                'url' => '/admin/login',
             ]
         ],
         'custom' => []
