@@ -25,7 +25,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @laravelPWA()
+
 </head>
 <style>
     /* animate in medium screen only */
