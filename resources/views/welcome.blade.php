@@ -25,6 +25,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @laravelPWA
 </head>
 <style>
     /* animate in medium screen only */
@@ -310,7 +311,9 @@
 
     <div id="developers" class="md:px-10 py-8 flex justify-center items-center flex-wrap space-x-2">
         <a href="https://samriddhischool.edu.np" target="_blank"><img src="/assets/samriddhi-logo.jpg"
-                alt="samriddhi school" class="h-20 cursor-pointer"></a>
+                alt="samriddhi school" class="h-20 cursor-pointer">
+                <span class="hiddend">samriddhi school</span>
+            </a>
         <a href="https://kbcampus.edu.np" target="_blank"><img src="/assets/kbc-logo.png"
                 alt="Kathmandu-Business-Campus" class="h-20"></a><span> ( Owned & Managed by Samriddhi School
             )</span>

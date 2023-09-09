@@ -3,11 +3,11 @@
         class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
         <div class="relative overflow-hidden bg-cover bg-no-repeat">
             <img src="{{ $src }}" alt="{{ $name }}" class="w-full rounded-t-lg" />
-            <a href="#!">
+
                 <div
                     class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-fixed">
                 </div>
-            </a>
+
             <svg class="absolute left-0 bottom-0 text-white dark:text-neutral-700"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="currentColor"

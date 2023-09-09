@@ -23,6 +23,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- PWA -->
+    @laravelPWA
 </head>
 
 <body class="font-sans antialiased  bg-gray-100">
